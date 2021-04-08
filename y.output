@@ -1,0 +1,1651 @@
+Terminals unused in grammar
+
+    tSpace
+    tBackN
+    tBackT
+    tReturn
+    ERROR
+
+
+Grammar
+
+    0 $accept: File $end
+
+    1 $@1: %empty
+
+    2 File: $@1 Fonctions
+
+    3 Fonctions: Fonction Fonctions
+    4          | Fonction
+
+    5 Fonction: FonctionMain
+    6         | Type tVariable tPO Params tPF Body
+
+    7 FonctionMain: Type tMAIN tPO Params tPF Body
+
+    8 Params: %empty
+    9       | Param SuiteParams
+
+   10 Param: Type tVariable
+
+   11 SuiteParams: %empty
+   12            | tVirg Param SuiteParams
+
+   13 $@2: %empty
+
+   14 $@3: %empty
+
+   15 $@4: %empty
+
+   16 Body: $@2 tAO Declarations $@3 Instructions $@4 tAF
+
+   17 Declarations: %empty
+   18             | Declaration Declarations
+
+   19 $@5: %empty
+
+   20 Declaration: Type tVariable tPointVirg $@5
+
+   21 $@6: %empty
+
+   22 Declaration: Type tVariable $@6 SuiteVariables tPointVirg
+
+   23 SuiteVariables: tVirg tVariable
+
+   24 $@7: %empty
+
+   25 SuiteVariables: tVirg tVariable $@7 SuiteVariables
+
+   26 Instructions: %empty
+   27             | Instruction Instructions
+
+   28 Instruction: Affectation
+   29            | IfInstruction
+   30            | WhileInstruction
+   31            | Print
+
+   32 $@8: %empty
+
+   33 $@9: %empty
+
+   34 WhileInstruction: tWhile $@8 tPO Comparaison tPF $@9 Body
+
+   35 Print: tPrintf tPO tVariable tPF tPointVirg
+
+   36 IfInstruction: IfPattern
+
+   37 $@10: %empty
+
+   38 IfInstruction: IfPattern tElse $@10 Body
+
+   39 $@11: %empty
+
+   40 IfPattern: tIf tPO Comparaison tPF $@11 Body
+
+   41 Comparaison: Expression tLESS_THAN_OR_EQUAL_TO Expression
+   42            | Expression tLESS_THAN Expression
+   43            | Expression tGREATER_THAN_OR_EQUAL_TO Expression
+   44            | Expression tGREATER_THAN Expression
+   45            | Expression tDIFFERENT Expression
+   46            | Expression tEQUALCOMPARISON Expression
+   47            | Expression
+
+   48 $@12: %empty
+
+   49 $@13: %empty
+
+   50 Affectation: tVariable tEqu Expression $@12 $@13 SuiteAffectations tPointVirg
+   51            | tVariable tEqu Expression tPointVirg
+
+   52 SuiteAffectations: tVirg tVariable tEqu Expression
+
+   53 $@14: %empty
+
+   54 SuiteAffectations: tVirg tVariable tEqu Expression $@14 SuiteAffectations
+
+   55 $@15: %empty
+
+   56 Expression: tPO $@15 Expression tPF
+   57           | Expression tPlus Expression
+   58           | Expression tMinus Expression
+   59           | Expression tMul Expression
+   60           | Expression tDiv Expression
+   61           | tMinus Expression
+
+   62 $@16: %empty
+
+   63 Expression: tVariable $@16
+
+   64 $@17: %empty
+
+   65 Expression: Value $@17
+
+   66 $@18: %empty
+
+   67 Value: tNumber $@18
+
+   68 $@19: %empty
+
+   69 Value: tExpo $@19
+
+   70 $@20: %empty
+
+   71 Value: tDecimal $@20
+
+   72 Type: CoreType
+   73     | tConst CoreType
+
+   74 CoreType: tInt
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    error (256)
+    tMAIN (258) 7
+    tInt (259) 74
+    tConst (260) 73
+    tPlus (261) 57
+    tMinus (262) 58 61
+    tMul (263) 59
+    tDiv (264) 60
+    tEqu (265) 50 51 52 54
+    tPO (266) 6 7 34 35 40 56
+    tPF (267) 6 7 34 35 40 56
+    tAO (268) 16
+    tAF (269) 16
+    tSpace (270)
+    tBackN (271)
+    tBackT (272)
+    tVirg (273) 12 23 25 52 54
+    tPointVirg (274) 20 22 35 50 51
+    tPrintf (275) 35
+    tIf <nb> (276) 40
+    tElse (277) 38
+    tWhile <duo> (278) 34
+    tReturn (279)
+    tLESS_THAN_OR_EQUAL_TO (280) 41
+    tLESS_THAN (281) 42
+    tGREATER_THAN_OR_EQUAL_TO (282) 43
+    tGREATER_THAN (283) 44
+    tDIFFERENT (284) 45
+    tEQUALCOMPARISON (285) 46
+    tNumber <nb> (286) 67
+    tDecimal <nb> (287) 71
+    tExpo <nb> (288) 69
+    tVariable <var> (289) 6 10 20 22 23 25 35 50 51 52 54 63
+    ERROR (290)
+
+
+Nonterminals, with rules where they appear
+
+    $accept (36)
+        on left: 0
+    File (37)
+        on left: 2
+        on right: 0
+    $@1 (38)
+        on left: 1
+        on right: 2
+    Fonctions (39)
+        on left: 3 4
+        on right: 2 3
+    Fonction (40)
+        on left: 5 6
+        on right: 3 4
+    FonctionMain (41)
+        on left: 7
+        on right: 5
+    Params (42)
+        on left: 8 9
+        on right: 6 7
+    Param (43)
+        on left: 10
+        on right: 9 12
+    SuiteParams (44)
+        on left: 11 12
+        on right: 9 12
+    Body (45)
+        on left: 16
+        on right: 6 7 34 38 40
+    $@2 (46)
+        on left: 13
+        on right: 16
+    $@3 (47)
+        on left: 14
+        on right: 16
+    $@4 (48)
+        on left: 15
+        on right: 16
+    Declarations (49)
+        on left: 17 18
+        on right: 16 18
+    Declaration (50)
+        on left: 20 22
+        on right: 18
+    $@5 (51)
+        on left: 19
+        on right: 20
+    $@6 (52)
+        on left: 21
+        on right: 22
+    SuiteVariables (53)
+        on left: 23 25
+        on right: 22 25
+    $@7 (54)
+        on left: 24
+        on right: 25
+    Instructions (55)
+        on left: 26 27
+        on right: 16 27
+    Instruction (56)
+        on left: 28 29 30 31
+        on right: 27
+    WhileInstruction (57)
+        on left: 34
+        on right: 30
+    $@8 (58)
+        on left: 32
+        on right: 34
+    $@9 (59)
+        on left: 33
+        on right: 34
+    Print (60)
+        on left: 35
+        on right: 31
+    IfInstruction (61)
+        on left: 36 38
+        on right: 29
+    $@10 (62)
+        on left: 37
+        on right: 38
+    IfPattern <nb> (63)
+        on left: 40
+        on right: 36 38
+    $@11 (64)
+        on left: 39
+        on right: 40
+    Comparaison (65)
+        on left: 41 42 43 44 45 46 47
+        on right: 34 40
+    Affectation (66)
+        on left: 50 51
+        on right: 28
+    $@12 (67)
+        on left: 48
+        on right: 50
+    $@13 (68)
+        on left: 49
+        on right: 50
+    SuiteAffectations (69)
+        on left: 52 54
+        on right: 50 54
+    $@14 (70)
+        on left: 53
+        on right: 54
+    Expression (71)
+        on left: 56 57 58 59 60 61 63 65
+        on right: 41 42 43 44 45 46 47 50 51 52 54 56 57 58 59 60 61
+    $@15 (72)
+        on left: 55
+        on right: 56
+    $@16 (73)
+        on left: 62
+        on right: 63
+    $@17 (74)
+        on left: 64
+        on right: 65
+    Value <nb> (75)
+        on left: 67 69 71
+        on right: 65
+    $@18 (76)
+        on left: 66
+        on right: 67
+    $@19 (77)
+        on left: 68
+        on right: 69
+    $@20 (78)
+        on left: 70
+        on right: 71
+    Type (79)
+        on left: 72 73
+        on right: 6 7 10 20 22
+    CoreType (80)
+        on left: 74
+        on right: 72 73
+
+
+State 0
+
+    0 $accept: . File $end
+
+    $default  reduce using rule 1 ($@1)
+
+    File  go to state 1
+    $@1   go to state 2
+
+
+State 1
+
+    0 $accept: File . $end
+
+    $end  shift, and go to state 3
+
+
+State 2
+
+    2 File: $@1 . Fonctions
+
+    tInt    shift, and go to state 4
+    tConst  shift, and go to state 5
+
+    Fonctions     go to state 6
+    Fonction      go to state 7
+    FonctionMain  go to state 8
+    Type          go to state 9
+    CoreType      go to state 10
+
+
+State 3
+
+    0 $accept: File $end .
+
+    $default  accept
+
+
+State 4
+
+   74 CoreType: tInt .
+
+    $default  reduce using rule 74 (CoreType)
+
+
+State 5
+
+   73 Type: tConst . CoreType
+
+    tInt  shift, and go to state 4
+
+    CoreType  go to state 11
+
+
+State 6
+
+    2 File: $@1 Fonctions .
+
+    $default  reduce using rule 2 (File)
+
+
+State 7
+
+    3 Fonctions: Fonction . Fonctions
+    4          | Fonction .
+
+    tInt    shift, and go to state 4
+    tConst  shift, and go to state 5
+
+    $default  reduce using rule 4 (Fonctions)
+
+    Fonctions     go to state 12
+    Fonction      go to state 7
+    FonctionMain  go to state 8
+    Type          go to state 9
+    CoreType      go to state 10
+
+
+State 8
+
+    5 Fonction: FonctionMain .
+
+    $default  reduce using rule 5 (Fonction)
+
+
+State 9
+
+    6 Fonction: Type . tVariable tPO Params tPF Body
+    7 FonctionMain: Type . tMAIN tPO Params tPF Body
+
+    tMAIN      shift, and go to state 13
+    tVariable  shift, and go to state 14
+
+
+State 10
+
+   72 Type: CoreType .
+
+    $default  reduce using rule 72 (Type)
+
+
+State 11
+
+   73 Type: tConst CoreType .
+
+    $default  reduce using rule 73 (Type)
+
+
+State 12
+
+    3 Fonctions: Fonction Fonctions .
+
+    $default  reduce using rule 3 (Fonctions)
+
+
+State 13
+
+    7 FonctionMain: Type tMAIN . tPO Params tPF Body
+
+    tPO  shift, and go to state 15
+
+
+State 14
+
+    6 Fonction: Type tVariable . tPO Params tPF Body
+
+    tPO  shift, and go to state 16
+
+
+State 15
+
+    7 FonctionMain: Type tMAIN tPO . Params tPF Body
+
+    tInt    shift, and go to state 4
+    tConst  shift, and go to state 5
+
+    $default  reduce using rule 8 (Params)
+
+    Params    go to state 17
+    Param     go to state 18
+    Type      go to state 19
+    CoreType  go to state 10
+
+
+State 16
+
+    6 Fonction: Type tVariable tPO . Params tPF Body
+
+    tInt    shift, and go to state 4
+    tConst  shift, and go to state 5
+
+    $default  reduce using rule 8 (Params)
+
+    Params    go to state 20
+    Param     go to state 18
+    Type      go to state 19
+    CoreType  go to state 10
+
+
+State 17
+
+    7 FonctionMain: Type tMAIN tPO Params . tPF Body
+
+    tPF  shift, and go to state 21
+
+
+State 18
+
+    9 Params: Param . SuiteParams
+
+    tVirg  shift, and go to state 22
+
+    $default  reduce using rule 11 (SuiteParams)
+
+    SuiteParams  go to state 23
+
+
+State 19
+
+   10 Param: Type . tVariable
+
+    tVariable  shift, and go to state 24
+
+
+State 20
+
+    6 Fonction: Type tVariable tPO Params . tPF Body
+
+    tPF  shift, and go to state 25
+
+
+State 21
+
+    7 FonctionMain: Type tMAIN tPO Params tPF . Body
+
+    $default  reduce using rule 13 ($@2)
+
+    Body  go to state 26
+    $@2   go to state 27
+
+
+State 22
+
+   12 SuiteParams: tVirg . Param SuiteParams
+
+    tInt    shift, and go to state 4
+    tConst  shift, and go to state 5
+
+    Param     go to state 28
+    Type      go to state 19
+    CoreType  go to state 10
+
+
+State 23
+
+    9 Params: Param SuiteParams .
+
+    $default  reduce using rule 9 (Params)
+
+
+State 24
+
+   10 Param: Type tVariable .
+
+    $default  reduce using rule 10 (Param)
+
+
+State 25
+
+    6 Fonction: Type tVariable tPO Params tPF . Body
+
+    $default  reduce using rule 13 ($@2)
+
+    Body  go to state 29
+    $@2   go to state 27
+
+
+State 26
+
+    7 FonctionMain: Type tMAIN tPO Params tPF Body .
+
+    $default  reduce using rule 7 (FonctionMain)
+
+
+State 27
+
+   16 Body: $@2 . tAO Declarations $@3 Instructions $@4 tAF
+
+    tAO  shift, and go to state 30
+
+
+State 28
+
+   12 SuiteParams: tVirg Param . SuiteParams
+
+    tVirg  shift, and go to state 22
+
+    $default  reduce using rule 11 (SuiteParams)
+
+    SuiteParams  go to state 31
+
+
+State 29
+
+    6 Fonction: Type tVariable tPO Params tPF Body .
+
+    $default  reduce using rule 6 (Fonction)
+
+
+State 30
+
+   16 Body: $@2 tAO . Declarations $@3 Instructions $@4 tAF
+
+    tInt    shift, and go to state 4
+    tConst  shift, and go to state 5
+
+    $default  reduce using rule 17 (Declarations)
+
+    Declarations  go to state 32
+    Declaration   go to state 33
+    Type          go to state 34
+    CoreType      go to state 10
+
+
+State 31
+
+   12 SuiteParams: tVirg Param SuiteParams .
+
+    $default  reduce using rule 12 (SuiteParams)
+
+
+State 32
+
+   16 Body: $@2 tAO Declarations . $@3 Instructions $@4 tAF
+
+    $default  reduce using rule 14 ($@3)
+
+    $@3  go to state 35
+
+
+State 33
+
+   18 Declarations: Declaration . Declarations
+
+    tInt    shift, and go to state 4
+    tConst  shift, and go to state 5
+
+    $default  reduce using rule 17 (Declarations)
+
+    Declarations  go to state 36
+    Declaration   go to state 33
+    Type          go to state 34
+    CoreType      go to state 10
+
+
+State 34
+
+   20 Declaration: Type . tVariable tPointVirg $@5
+   22            | Type . tVariable $@6 SuiteVariables tPointVirg
+
+    tVariable  shift, and go to state 37
+
+
+State 35
+
+   16 Body: $@2 tAO Declarations $@3 . Instructions $@4 tAF
+
+    tPrintf    shift, and go to state 38
+    tIf        shift, and go to state 39
+    tWhile     shift, and go to state 40
+    tVariable  shift, and go to state 41
+
+    $default  reduce using rule 26 (Instructions)
+
+    Instructions      go to state 42
+    Instruction       go to state 43
+    WhileInstruction  go to state 44
+    Print             go to state 45
+    IfInstruction     go to state 46
+    IfPattern         go to state 47
+    Affectation       go to state 48
+
+
+State 36
+
+   18 Declarations: Declaration Declarations .
+
+    $default  reduce using rule 18 (Declarations)
+
+
+State 37
+
+   20 Declaration: Type tVariable . tPointVirg $@5
+   22            | Type tVariable . $@6 SuiteVariables tPointVirg
+
+    tPointVirg  shift, and go to state 49
+
+    $default  reduce using rule 21 ($@6)
+
+    $@6  go to state 50
+
+
+State 38
+
+   35 Print: tPrintf . tPO tVariable tPF tPointVirg
+
+    tPO  shift, and go to state 51
+
+
+State 39
+
+   40 IfPattern: tIf . tPO Comparaison tPF $@11 Body
+
+    tPO  shift, and go to state 52
+
+
+State 40
+
+   34 WhileInstruction: tWhile . $@8 tPO Comparaison tPF $@9 Body
+
+    $default  reduce using rule 32 ($@8)
+
+    $@8  go to state 53
+
+
+State 41
+
+   50 Affectation: tVariable . tEqu Expression $@12 $@13 SuiteAffectations tPointVirg
+   51            | tVariable . tEqu Expression tPointVirg
+
+    tEqu  shift, and go to state 54
+
+
+State 42
+
+   16 Body: $@2 tAO Declarations $@3 Instructions . $@4 tAF
+
+    $default  reduce using rule 15 ($@4)
+
+    $@4  go to state 55
+
+
+State 43
+
+   27 Instructions: Instruction . Instructions
+
+    tPrintf    shift, and go to state 38
+    tIf        shift, and go to state 39
+    tWhile     shift, and go to state 40
+    tVariable  shift, and go to state 41
+
+    $default  reduce using rule 26 (Instructions)
+
+    Instructions      go to state 56
+    Instruction       go to state 43
+    WhileInstruction  go to state 44
+    Print             go to state 45
+    IfInstruction     go to state 46
+    IfPattern         go to state 47
+    Affectation       go to state 48
+
+
+State 44
+
+   30 Instruction: WhileInstruction .
+
+    $default  reduce using rule 30 (Instruction)
+
+
+State 45
+
+   31 Instruction: Print .
+
+    $default  reduce using rule 31 (Instruction)
+
+
+State 46
+
+   29 Instruction: IfInstruction .
+
+    $default  reduce using rule 29 (Instruction)
+
+
+State 47
+
+   36 IfInstruction: IfPattern .
+   38              | IfPattern . tElse $@10 Body
+
+    tElse  shift, and go to state 57
+
+    $default  reduce using rule 36 (IfInstruction)
+
+
+State 48
+
+   28 Instruction: Affectation .
+
+    $default  reduce using rule 28 (Instruction)
+
+
+State 49
+
+   20 Declaration: Type tVariable tPointVirg . $@5
+
+    $default  reduce using rule 19 ($@5)
+
+    $@5  go to state 58
+
+
+State 50
+
+   22 Declaration: Type tVariable $@6 . SuiteVariables tPointVirg
+
+    tVirg  shift, and go to state 59
+
+    SuiteVariables  go to state 60
+
+
+State 51
+
+   35 Print: tPrintf tPO . tVariable tPF tPointVirg
+
+    tVariable  shift, and go to state 61
+
+
+State 52
+
+   40 IfPattern: tIf tPO . Comparaison tPF $@11 Body
+
+    tMinus     shift, and go to state 62
+    tPO        shift, and go to state 63
+    tNumber    shift, and go to state 64
+    tDecimal   shift, and go to state 65
+    tExpo      shift, and go to state 66
+    tVariable  shift, and go to state 67
+
+    Comparaison  go to state 68
+    Expression   go to state 69
+    Value        go to state 70
+
+
+State 53
+
+   34 WhileInstruction: tWhile $@8 . tPO Comparaison tPF $@9 Body
+
+    tPO  shift, and go to state 71
+
+
+State 54
+
+   50 Affectation: tVariable tEqu . Expression $@12 $@13 SuiteAffectations tPointVirg
+   51            | tVariable tEqu . Expression tPointVirg
+
+    tMinus     shift, and go to state 62
+    tPO        shift, and go to state 63
+    tNumber    shift, and go to state 64
+    tDecimal   shift, and go to state 65
+    tExpo      shift, and go to state 66
+    tVariable  shift, and go to state 67
+
+    Expression  go to state 72
+    Value       go to state 70
+
+
+State 55
+
+   16 Body: $@2 tAO Declarations $@3 Instructions $@4 . tAF
+
+    tAF  shift, and go to state 73
+
+
+State 56
+
+   27 Instructions: Instruction Instructions .
+
+    $default  reduce using rule 27 (Instructions)
+
+
+State 57
+
+   38 IfInstruction: IfPattern tElse . $@10 Body
+
+    $default  reduce using rule 37 ($@10)
+
+    $@10  go to state 74
+
+
+State 58
+
+   20 Declaration: Type tVariable tPointVirg $@5 .
+
+    $default  reduce using rule 20 (Declaration)
+
+
+State 59
+
+   23 SuiteVariables: tVirg . tVariable
+   25               | tVirg . tVariable $@7 SuiteVariables
+
+    tVariable  shift, and go to state 75
+
+
+State 60
+
+   22 Declaration: Type tVariable $@6 SuiteVariables . tPointVirg
+
+    tPointVirg  shift, and go to state 76
+
+
+State 61
+
+   35 Print: tPrintf tPO tVariable . tPF tPointVirg
+
+    tPF  shift, and go to state 77
+
+
+State 62
+
+   61 Expression: tMinus . Expression
+
+    tMinus     shift, and go to state 62
+    tPO        shift, and go to state 63
+    tNumber    shift, and go to state 64
+    tDecimal   shift, and go to state 65
+    tExpo      shift, and go to state 66
+    tVariable  shift, and go to state 67
+
+    Expression  go to state 78
+    Value       go to state 70
+
+
+State 63
+
+   56 Expression: tPO . $@15 Expression tPF
+
+    $default  reduce using rule 55 ($@15)
+
+    $@15  go to state 79
+
+
+State 64
+
+   67 Value: tNumber . $@18
+
+    $default  reduce using rule 66 ($@18)
+
+    $@18  go to state 80
+
+
+State 65
+
+   71 Value: tDecimal . $@20
+
+    $default  reduce using rule 70 ($@20)
+
+    $@20  go to state 81
+
+
+State 66
+
+   69 Value: tExpo . $@19
+
+    $default  reduce using rule 68 ($@19)
+
+    $@19  go to state 82
+
+
+State 67
+
+   63 Expression: tVariable . $@16
+
+    $default  reduce using rule 62 ($@16)
+
+    $@16  go to state 83
+
+
+State 68
+
+   40 IfPattern: tIf tPO Comparaison . tPF $@11 Body
+
+    tPF  shift, and go to state 84
+
+
+State 69
+
+   41 Comparaison: Expression . tLESS_THAN_OR_EQUAL_TO Expression
+   42            | Expression . tLESS_THAN Expression
+   43            | Expression . tGREATER_THAN_OR_EQUAL_TO Expression
+   44            | Expression . tGREATER_THAN Expression
+   45            | Expression . tDIFFERENT Expression
+   46            | Expression . tEQUALCOMPARISON Expression
+   47            | Expression .
+   57 Expression: Expression . tPlus Expression
+   58           | Expression . tMinus Expression
+   59           | Expression . tMul Expression
+   60           | Expression . tDiv Expression
+
+    tPlus                      shift, and go to state 85
+    tMinus                     shift, and go to state 86
+    tMul                       shift, and go to state 87
+    tDiv                       shift, and go to state 88
+    tLESS_THAN_OR_EQUAL_TO     shift, and go to state 89
+    tLESS_THAN                 shift, and go to state 90
+    tGREATER_THAN_OR_EQUAL_TO  shift, and go to state 91
+    tGREATER_THAN              shift, and go to state 92
+    tDIFFERENT                 shift, and go to state 93
+    tEQUALCOMPARISON           shift, and go to state 94
+
+    $default  reduce using rule 47 (Comparaison)
+
+
+State 70
+
+   65 Expression: Value . $@17
+
+    $default  reduce using rule 64 ($@17)
+
+    $@17  go to state 95
+
+
+State 71
+
+   34 WhileInstruction: tWhile $@8 tPO . Comparaison tPF $@9 Body
+
+    tMinus     shift, and go to state 62
+    tPO        shift, and go to state 63
+    tNumber    shift, and go to state 64
+    tDecimal   shift, and go to state 65
+    tExpo      shift, and go to state 66
+    tVariable  shift, and go to state 67
+
+    Comparaison  go to state 96
+    Expression   go to state 69
+    Value        go to state 70
+
+
+State 72
+
+   50 Affectation: tVariable tEqu Expression . $@12 $@13 SuiteAffectations tPointVirg
+   51            | tVariable tEqu Expression . tPointVirg
+   57 Expression: Expression . tPlus Expression
+   58           | Expression . tMinus Expression
+   59           | Expression . tMul Expression
+   60           | Expression . tDiv Expression
+
+    tPlus       shift, and go to state 85
+    tMinus      shift, and go to state 86
+    tMul        shift, and go to state 87
+    tDiv        shift, and go to state 88
+    tPointVirg  shift, and go to state 97
+
+    $default  reduce using rule 48 ($@12)
+
+    $@12  go to state 98
+
+
+State 73
+
+   16 Body: $@2 tAO Declarations $@3 Instructions $@4 tAF .
+
+    $default  reduce using rule 16 (Body)
+
+
+State 74
+
+   38 IfInstruction: IfPattern tElse $@10 . Body
+
+    $default  reduce using rule 13 ($@2)
+
+    Body  go to state 99
+    $@2   go to state 27
+
+
+State 75
+
+   23 SuiteVariables: tVirg tVariable .
+   25               | tVirg tVariable . $@7 SuiteVariables
+
+    tVirg     reduce using rule 24 ($@7)
+    $default  reduce using rule 23 (SuiteVariables)
+
+    $@7  go to state 100
+
+
+State 76
+
+   22 Declaration: Type tVariable $@6 SuiteVariables tPointVirg .
+
+    $default  reduce using rule 22 (Declaration)
+
+
+State 77
+
+   35 Print: tPrintf tPO tVariable tPF . tPointVirg
+
+    tPointVirg  shift, and go to state 101
+
+
+State 78
+
+   57 Expression: Expression . tPlus Expression
+   58           | Expression . tMinus Expression
+   59           | Expression . tMul Expression
+   60           | Expression . tDiv Expression
+   61           | tMinus Expression .
+
+    tMul  shift, and go to state 87
+    tDiv  shift, and go to state 88
+
+    $default  reduce using rule 61 (Expression)
+
+
+State 79
+
+   56 Expression: tPO $@15 . Expression tPF
+
+    tMinus     shift, and go to state 62
+    tPO        shift, and go to state 63
+    tNumber    shift, and go to state 64
+    tDecimal   shift, and go to state 65
+    tExpo      shift, and go to state 66
+    tVariable  shift, and go to state 67
+
+    Expression  go to state 102
+    Value       go to state 70
+
+
+State 80
+
+   67 Value: tNumber $@18 .
+
+    $default  reduce using rule 67 (Value)
+
+
+State 81
+
+   71 Value: tDecimal $@20 .
+
+    $default  reduce using rule 71 (Value)
+
+
+State 82
+
+   69 Value: tExpo $@19 .
+
+    $default  reduce using rule 69 (Value)
+
+
+State 83
+
+   63 Expression: tVariable $@16 .
+
+    $default  reduce using rule 63 (Expression)
+
+
+State 84
+
+   40 IfPattern: tIf tPO Comparaison tPF . $@11 Body
+
+    $default  reduce using rule 39 ($@11)
+
+    $@11  go to state 103
+
+
+State 85
+
+   57 Expression: Expression tPlus . Expression
+
+    tMinus     shift, and go to state 62
+    tPO        shift, and go to state 63
+    tNumber    shift, and go to state 64
+    tDecimal   shift, and go to state 65
+    tExpo      shift, and go to state 66
+    tVariable  shift, and go to state 67
+
+    Expression  go to state 104
+    Value       go to state 70
+
+
+State 86
+
+   58 Expression: Expression tMinus . Expression
+
+    tMinus     shift, and go to state 62
+    tPO        shift, and go to state 63
+    tNumber    shift, and go to state 64
+    tDecimal   shift, and go to state 65
+    tExpo      shift, and go to state 66
+    tVariable  shift, and go to state 67
+
+    Expression  go to state 105
+    Value       go to state 70
+
+
+State 87
+
+   59 Expression: Expression tMul . Expression
+
+    tMinus     shift, and go to state 62
+    tPO        shift, and go to state 63
+    tNumber    shift, and go to state 64
+    tDecimal   shift, and go to state 65
+    tExpo      shift, and go to state 66
+    tVariable  shift, and go to state 67
+
+    Expression  go to state 106
+    Value       go to state 70
+
+
+State 88
+
+   60 Expression: Expression tDiv . Expression
+
+    tMinus     shift, and go to state 62
+    tPO        shift, and go to state 63
+    tNumber    shift, and go to state 64
+    tDecimal   shift, and go to state 65
+    tExpo      shift, and go to state 66
+    tVariable  shift, and go to state 67
+
+    Expression  go to state 107
+    Value       go to state 70
+
+
+State 89
+
+   41 Comparaison: Expression tLESS_THAN_OR_EQUAL_TO . Expression
+
+    tMinus     shift, and go to state 62
+    tPO        shift, and go to state 63
+    tNumber    shift, and go to state 64
+    tDecimal   shift, and go to state 65
+    tExpo      shift, and go to state 66
+    tVariable  shift, and go to state 67
+
+    Expression  go to state 108
+    Value       go to state 70
+
+
+State 90
+
+   42 Comparaison: Expression tLESS_THAN . Expression
+
+    tMinus     shift, and go to state 62
+    tPO        shift, and go to state 63
+    tNumber    shift, and go to state 64
+    tDecimal   shift, and go to state 65
+    tExpo      shift, and go to state 66
+    tVariable  shift, and go to state 67
+
+    Expression  go to state 109
+    Value       go to state 70
+
+
+State 91
+
+   43 Comparaison: Expression tGREATER_THAN_OR_EQUAL_TO . Expression
+
+    tMinus     shift, and go to state 62
+    tPO        shift, and go to state 63
+    tNumber    shift, and go to state 64
+    tDecimal   shift, and go to state 65
+    tExpo      shift, and go to state 66
+    tVariable  shift, and go to state 67
+
+    Expression  go to state 110
+    Value       go to state 70
+
+
+State 92
+
+   44 Comparaison: Expression tGREATER_THAN . Expression
+
+    tMinus     shift, and go to state 62
+    tPO        shift, and go to state 63
+    tNumber    shift, and go to state 64
+    tDecimal   shift, and go to state 65
+    tExpo      shift, and go to state 66
+    tVariable  shift, and go to state 67
+
+    Expression  go to state 111
+    Value       go to state 70
+
+
+State 93
+
+   45 Comparaison: Expression tDIFFERENT . Expression
+
+    tMinus     shift, and go to state 62
+    tPO        shift, and go to state 63
+    tNumber    shift, and go to state 64
+    tDecimal   shift, and go to state 65
+    tExpo      shift, and go to state 66
+    tVariable  shift, and go to state 67
+
+    Expression  go to state 112
+    Value       go to state 70
+
+
+State 94
+
+   46 Comparaison: Expression tEQUALCOMPARISON . Expression
+
+    tMinus     shift, and go to state 62
+    tPO        shift, and go to state 63
+    tNumber    shift, and go to state 64
+    tDecimal   shift, and go to state 65
+    tExpo      shift, and go to state 66
+    tVariable  shift, and go to state 67
+
+    Expression  go to state 113
+    Value       go to state 70
+
+
+State 95
+
+   65 Expression: Value $@17 .
+
+    $default  reduce using rule 65 (Expression)
+
+
+State 96
+
+   34 WhileInstruction: tWhile $@8 tPO Comparaison . tPF $@9 Body
+
+    tPF  shift, and go to state 114
+
+
+State 97
+
+   51 Affectation: tVariable tEqu Expression tPointVirg .
+
+    $default  reduce using rule 51 (Affectation)
+
+
+State 98
+
+   50 Affectation: tVariable tEqu Expression $@12 . $@13 SuiteAffectations tPointVirg
+
+    $default  reduce using rule 49 ($@13)
+
+    $@13  go to state 115
+
+
+State 99
+
+   38 IfInstruction: IfPattern tElse $@10 Body .
+
+    $default  reduce using rule 38 (IfInstruction)
+
+
+State 100
+
+   25 SuiteVariables: tVirg tVariable $@7 . SuiteVariables
+
+    tVirg  shift, and go to state 59
+
+    SuiteVariables  go to state 116
+
+
+State 101
+
+   35 Print: tPrintf tPO tVariable tPF tPointVirg .
+
+    $default  reduce using rule 35 (Print)
+
+
+State 102
+
+   56 Expression: tPO $@15 Expression . tPF
+   57           | Expression . tPlus Expression
+   58           | Expression . tMinus Expression
+   59           | Expression . tMul Expression
+   60           | Expression . tDiv Expression
+
+    tPlus   shift, and go to state 85
+    tMinus  shift, and go to state 86
+    tMul    shift, and go to state 87
+    tDiv    shift, and go to state 88
+    tPF     shift, and go to state 117
+
+
+State 103
+
+   40 IfPattern: tIf tPO Comparaison tPF $@11 . Body
+
+    $default  reduce using rule 13 ($@2)
+
+    Body  go to state 118
+    $@2   go to state 27
+
+
+State 104
+
+   57 Expression: Expression . tPlus Expression
+   57           | Expression tPlus Expression .
+   58           | Expression . tMinus Expression
+   59           | Expression . tMul Expression
+   60           | Expression . tDiv Expression
+
+    tMul  shift, and go to state 87
+    tDiv  shift, and go to state 88
+
+    $default  reduce using rule 57 (Expression)
+
+
+State 105
+
+   57 Expression: Expression . tPlus Expression
+   58           | Expression . tMinus Expression
+   58           | Expression tMinus Expression .
+   59           | Expression . tMul Expression
+   60           | Expression . tDiv Expression
+
+    tMul  shift, and go to state 87
+    tDiv  shift, and go to state 88
+
+    $default  reduce using rule 58 (Expression)
+
+
+State 106
+
+   57 Expression: Expression . tPlus Expression
+   58           | Expression . tMinus Expression
+   59           | Expression . tMul Expression
+   59           | Expression tMul Expression .
+   60           | Expression . tDiv Expression
+
+    $default  reduce using rule 59 (Expression)
+
+
+State 107
+
+   57 Expression: Expression . tPlus Expression
+   58           | Expression . tMinus Expression
+   59           | Expression . tMul Expression
+   60           | Expression . tDiv Expression
+   60           | Expression tDiv Expression .
+
+    $default  reduce using rule 60 (Expression)
+
+
+State 108
+
+   41 Comparaison: Expression tLESS_THAN_OR_EQUAL_TO Expression .
+   57 Expression: Expression . tPlus Expression
+   58           | Expression . tMinus Expression
+   59           | Expression . tMul Expression
+   60           | Expression . tDiv Expression
+
+    tPlus   shift, and go to state 85
+    tMinus  shift, and go to state 86
+    tMul    shift, and go to state 87
+    tDiv    shift, and go to state 88
+
+    $default  reduce using rule 41 (Comparaison)
+
+
+State 109
+
+   42 Comparaison: Expression tLESS_THAN Expression .
+   57 Expression: Expression . tPlus Expression
+   58           | Expression . tMinus Expression
+   59           | Expression . tMul Expression
+   60           | Expression . tDiv Expression
+
+    tPlus   shift, and go to state 85
+    tMinus  shift, and go to state 86
+    tMul    shift, and go to state 87
+    tDiv    shift, and go to state 88
+
+    $default  reduce using rule 42 (Comparaison)
+
+
+State 110
+
+   43 Comparaison: Expression tGREATER_THAN_OR_EQUAL_TO Expression .
+   57 Expression: Expression . tPlus Expression
+   58           | Expression . tMinus Expression
+   59           | Expression . tMul Expression
+   60           | Expression . tDiv Expression
+
+    tPlus   shift, and go to state 85
+    tMinus  shift, and go to state 86
+    tMul    shift, and go to state 87
+    tDiv    shift, and go to state 88
+
+    $default  reduce using rule 43 (Comparaison)
+
+
+State 111
+
+   44 Comparaison: Expression tGREATER_THAN Expression .
+   57 Expression: Expression . tPlus Expression
+   58           | Expression . tMinus Expression
+   59           | Expression . tMul Expression
+   60           | Expression . tDiv Expression
+
+    tPlus   shift, and go to state 85
+    tMinus  shift, and go to state 86
+    tMul    shift, and go to state 87
+    tDiv    shift, and go to state 88
+
+    $default  reduce using rule 44 (Comparaison)
+
+
+State 112
+
+   45 Comparaison: Expression tDIFFERENT Expression .
+   57 Expression: Expression . tPlus Expression
+   58           | Expression . tMinus Expression
+   59           | Expression . tMul Expression
+   60           | Expression . tDiv Expression
+
+    tPlus   shift, and go to state 85
+    tMinus  shift, and go to state 86
+    tMul    shift, and go to state 87
+    tDiv    shift, and go to state 88
+
+    $default  reduce using rule 45 (Comparaison)
+
+
+State 113
+
+   46 Comparaison: Expression tEQUALCOMPARISON Expression .
+   57 Expression: Expression . tPlus Expression
+   58           | Expression . tMinus Expression
+   59           | Expression . tMul Expression
+   60           | Expression . tDiv Expression
+
+    tPlus   shift, and go to state 85
+    tMinus  shift, and go to state 86
+    tMul    shift, and go to state 87
+    tDiv    shift, and go to state 88
+
+    $default  reduce using rule 46 (Comparaison)
+
+
+State 114
+
+   34 WhileInstruction: tWhile $@8 tPO Comparaison tPF . $@9 Body
+
+    $default  reduce using rule 33 ($@9)
+
+    $@9  go to state 119
+
+
+State 115
+
+   50 Affectation: tVariable tEqu Expression $@12 $@13 . SuiteAffectations tPointVirg
+
+    tVirg  shift, and go to state 120
+
+    SuiteAffectations  go to state 121
+
+
+State 116
+
+   25 SuiteVariables: tVirg tVariable $@7 SuiteVariables .
+
+    $default  reduce using rule 25 (SuiteVariables)
+
+
+State 117
+
+   56 Expression: tPO $@15 Expression tPF .
+
+    $default  reduce using rule 56 (Expression)
+
+
+State 118
+
+   40 IfPattern: tIf tPO Comparaison tPF $@11 Body .
+
+    $default  reduce using rule 40 (IfPattern)
+
+
+State 119
+
+   34 WhileInstruction: tWhile $@8 tPO Comparaison tPF $@9 . Body
+
+    $default  reduce using rule 13 ($@2)
+
+    Body  go to state 122
+    $@2   go to state 27
+
+
+State 120
+
+   52 SuiteAffectations: tVirg . tVariable tEqu Expression
+   54                  | tVirg . tVariable tEqu Expression $@14 SuiteAffectations
+
+    tVariable  shift, and go to state 123
+
+
+State 121
+
+   50 Affectation: tVariable tEqu Expression $@12 $@13 SuiteAffectations . tPointVirg
+
+    tPointVirg  shift, and go to state 124
+
+
+State 122
+
+   34 WhileInstruction: tWhile $@8 tPO Comparaison tPF $@9 Body .
+
+    $default  reduce using rule 34 (WhileInstruction)
+
+
+State 123
+
+   52 SuiteAffectations: tVirg tVariable . tEqu Expression
+   54                  | tVirg tVariable . tEqu Expression $@14 SuiteAffectations
+
+    tEqu  shift, and go to state 125
+
+
+State 124
+
+   50 Affectation: tVariable tEqu Expression $@12 $@13 SuiteAffectations tPointVirg .
+
+    $default  reduce using rule 50 (Affectation)
+
+
+State 125
+
+   52 SuiteAffectations: tVirg tVariable tEqu . Expression
+   54                  | tVirg tVariable tEqu . Expression $@14 SuiteAffectations
+
+    tMinus     shift, and go to state 62
+    tPO        shift, and go to state 63
+    tNumber    shift, and go to state 64
+    tDecimal   shift, and go to state 65
+    tExpo      shift, and go to state 66
+    tVariable  shift, and go to state 67
+
+    Expression  go to state 126
+    Value       go to state 70
+
+
+State 126
+
+   52 SuiteAffectations: tVirg tVariable tEqu Expression .
+   54                  | tVirg tVariable tEqu Expression . $@14 SuiteAffectations
+   57 Expression: Expression . tPlus Expression
+   58           | Expression . tMinus Expression
+   59           | Expression . tMul Expression
+   60           | Expression . tDiv Expression
+
+    tPlus   shift, and go to state 85
+    tMinus  shift, and go to state 86
+    tMul    shift, and go to state 87
+    tDiv    shift, and go to state 88
+
+    tVirg     reduce using rule 53 ($@14)
+    $default  reduce using rule 52 (SuiteAffectations)
+
+    $@14  go to state 127
+
+
+State 127
+
+   54 SuiteAffectations: tVirg tVariable tEqu Expression $@14 . SuiteAffectations
+
+    tVirg  shift, and go to state 120
+
+    SuiteAffectations  go to state 128
+
+
+State 128
+
+   54 SuiteAffectations: tVirg tVariable tEqu Expression $@14 SuiteAffectations .
+
+    $default  reduce using rule 54 (SuiteAffectations)
