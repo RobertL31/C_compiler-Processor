@@ -1,9 +1,6 @@
 int main(){
-    int i;
-    i = 4;
-    while( i > 4){
-        printf(i);
-        i = i-1;
-    }
-    printf(i);
+    int i,j , cobra, python;
+    int koala;
+    koala = 4;
+    python = 2* koala, cobra = 3 * python;
 }

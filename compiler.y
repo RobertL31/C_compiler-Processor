@@ -10,6 +10,16 @@
 
     char instr[100];
 
+    typedef enum {
+        INT
+    } TypeValue;
+
+    typedef struct TypeInfos_s {
+        int ptr_level;
+        bool constantness;
+        TypeValue type;
+    } TypeInfos;
+
 %}
 
 %union {
@@ -17,6 +27,7 @@
     int nb;
     int duo[2];
     float fl_nb;
+    TypeInfos typeInfos;
 }
 
 
@@ -29,6 +40,8 @@
 %token tMul
 %token tDiv
 %token tEqu
+
+%token tStar
 
 %token tPO
 %token tPF
@@ -62,6 +75,10 @@
 
 %type <nb> IfPattern
 
+
+%type <typeInfos> Type
+%type <typeInfos> CoreType
+%type <nb> PointerStars
 
 
 %token <var> tVariable
@@ -398,14 +415,20 @@ Value:
     ;
 
 Type:
-        CoreType
+        CoreType {$$ = $1;}
     |
-        tConst CoreType
+        tConst CoreType { $$ = {.type = $2.type, .ptr_level = $2.ptr_level, .constantness = true}; }
     ;
 
 CoreType:
-        tInt
+        tInt PointerStars {$$= {.type = INT, .ptr_level = $2, .constantness = false}; }
     ;
+
+PointerStars:
+        /*None*/ {$$=0;}
+    |
+        tStar PointerStars {$$ = 1 + $2;}
+;
 
 %%
 

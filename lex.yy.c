@@ -351,8 +351,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 34
-#define YY_END_OF_BUFFER 35
+#define YY_NUM_RULES 35
+#define YY_END_OF_BUFFER 36
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -362,13 +362,13 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[71] =
     {   0,
-        0,    0,   35,   33,   14,   13,   12,   33,    8,    9,
-        5,    3,   15,    4,   30,    6,   29,   16,   24,    7,
-       26,   32,   31,   32,   32,   32,   32,   32,   32,   32,
-       10,   11,   27,   30,   30,   29,   31,   23,   28,   25,
-       32,   31,   32,   32,   19,   32,   32,   32,   32,   32,
-       32,   32,    2,   32,   32,   32,   32,   32,   20,   17,
-       32,   32,   32,    1,   32,   32,   21,   18,   22,    0
+        0,    0,   36,   34,   14,   13,   12,   34,    8,    9,
+        5,    3,   15,    4,   31,    6,   30,   16,   24,    7,
+       26,   33,   32,   33,   33,   33,   33,   33,   33,   33,
+       10,   11,   27,   31,   31,   30,   32,   23,   28,   25,
+       33,   32,   33,   33,   19,   33,   33,   33,   33,   33,
+       33,   33,    2,   33,   33,   33,   33,   33,   20,   17,
+       33,   33,   33,    1,   33,   33,   21,   18,   22,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -918,39 +918,44 @@ YY_RULE_SETUP
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 50 "compiler.l"
-{	get_yylval(IS_NUMBER);
-					return tNumber;}	
+#line 49 "compiler.l"
+{return tStar;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 52 "compiler.l"
-{	get_yylval(IS_DECIMAL);
-					return tDecimal;}
+#line 51 "compiler.l"
+{	get_yylval(IS_NUMBER);
+					return tNumber;}	
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 54 "compiler.l"
-{	get_yylval(IS_STRING);
-					return tExpo;}
+#line 53 "compiler.l"
+{	get_yylval(IS_DECIMAL);
+					return tDecimal;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 57 "compiler.l"
-{ get_yylval(IS_STRING);
-						return tVariable;}
+#line 55 "compiler.l"
+{	get_yylval(IS_STRING);
+					return tExpo;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 60 "compiler.l"
-{printf("\nEEEERRRRRRRROOOORRRR\n");}
+#line 58 "compiler.l"
+{ get_yylval(IS_STRING);
+						return tVariable;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 62 "compiler.l"
+#line 61 "compiler.l"
+{printf("\nEEEERRRRRRRROOOORRRR\n");}
+	YY_BREAK
+case 35:
+YY_RULE_SETUP
+#line 63 "compiler.l"
 ECHO;
 	YY_BREAK
-#line 954 "lex.yy.c"
+#line 959 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1955,7 +1960,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 62 "compiler.l"
+#line 63 "compiler.l"
 
 
 

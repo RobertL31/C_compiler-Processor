@@ -1,13 +1,13 @@
-Terminals unused in grammar
+Terminaux inutilisés dans la grammaire
 
-    tSpace
-    tBackN
-    tBackT
-    tReturn
-    ERROR
+   tSpace
+   tBackN
+   tBackT
+   tReturn
+   ERROR
 
 
-Grammar
+Grammaire
 
     0 $accept: File $end
 
@@ -135,830 +135,822 @@ Grammar
    72 Type: CoreType
    73     | tConst CoreType
 
-   74 CoreType: tInt
+   74 CoreType: tInt PointerStars
+
+   75 PointerStars: %empty
+   76             | tStar PointerStars
 
 
-Terminals, with rules where they appear
+Terminaux, suivis des règles où ils apparaissent
 
-    $end (0) 0
-    error (256)
-    tMAIN (258) 7
-    tInt (259) 74
-    tConst (260) 73
-    tPlus (261) 57
-    tMinus (262) 58 61
-    tMul (263) 59
-    tDiv (264) 60
-    tEqu (265) 50 51 52 54
-    tPO (266) 6 7 34 35 40 56
-    tPF (267) 6 7 34 35 40 56
-    tAO (268) 16
-    tAF (269) 16
-    tSpace (270)
-    tBackN (271)
-    tBackT (272)
-    tVirg (273) 12 23 25 52 54
-    tPointVirg (274) 20 22 35 50 51
-    tPrintf (275) 35
-    tIf <nb> (276) 40
-    tElse (277) 38
-    tWhile <duo> (278) 34
-    tReturn (279)
-    tLESS_THAN_OR_EQUAL_TO (280) 41
-    tLESS_THAN (281) 42
-    tGREATER_THAN_OR_EQUAL_TO (282) 43
-    tGREATER_THAN (283) 44
-    tDIFFERENT (284) 45
-    tEQUALCOMPARISON (285) 46
-    tNumber <nb> (286) 67
-    tDecimal <nb> (287) 71
-    tExpo <nb> (288) 69
-    tVariable <var> (289) 6 10 20 22 23 25 35 50 51 52 54 63
-    ERROR (290)
-
-
-Nonterminals, with rules where they appear
-
-    $accept (36)
-        on left: 0
-    File (37)
-        on left: 2
-        on right: 0
-    $@1 (38)
-        on left: 1
-        on right: 2
-    Fonctions (39)
-        on left: 3 4
-        on right: 2 3
-    Fonction (40)
-        on left: 5 6
-        on right: 3 4
-    FonctionMain (41)
-        on left: 7
-        on right: 5
-    Params (42)
-        on left: 8 9
-        on right: 6 7
-    Param (43)
-        on left: 10
-        on right: 9 12
-    SuiteParams (44)
-        on left: 11 12
-        on right: 9 12
-    Body (45)
-        on left: 16
-        on right: 6 7 34 38 40
-    $@2 (46)
-        on left: 13
-        on right: 16
-    $@3 (47)
-        on left: 14
-        on right: 16
-    $@4 (48)
-        on left: 15
-        on right: 16
-    Declarations (49)
-        on left: 17 18
-        on right: 16 18
-    Declaration (50)
-        on left: 20 22
-        on right: 18
-    $@5 (51)
-        on left: 19
-        on right: 20
-    $@6 (52)
-        on left: 21
-        on right: 22
-    SuiteVariables (53)
-        on left: 23 25
-        on right: 22 25
-    $@7 (54)
-        on left: 24
-        on right: 25
-    Instructions (55)
-        on left: 26 27
-        on right: 16 27
-    Instruction (56)
-        on left: 28 29 30 31
-        on right: 27
-    WhileInstruction (57)
-        on left: 34
-        on right: 30
-    $@8 (58)
-        on left: 32
-        on right: 34
-    $@9 (59)
-        on left: 33
-        on right: 34
-    Print (60)
-        on left: 35
-        on right: 31
-    IfInstruction (61)
-        on left: 36 38
-        on right: 29
-    $@10 (62)
-        on left: 37
-        on right: 38
-    IfPattern <nb> (63)
-        on left: 40
-        on right: 36 38
-    $@11 (64)
-        on left: 39
-        on right: 40
-    Comparaison (65)
-        on left: 41 42 43 44 45 46 47
-        on right: 34 40
-    Affectation (66)
-        on left: 50 51
-        on right: 28
-    $@12 (67)
-        on left: 48
-        on right: 50
-    $@13 (68)
-        on left: 49
-        on right: 50
-    SuiteAffectations (69)
-        on left: 52 54
-        on right: 50 54
-    $@14 (70)
-        on left: 53
-        on right: 54
-    Expression (71)
-        on left: 56 57 58 59 60 61 63 65
-        on right: 41 42 43 44 45 46 47 50 51 52 54 56 57 58 59 60 61
-    $@15 (72)
-        on left: 55
-        on right: 56
-    $@16 (73)
-        on left: 62
-        on right: 63
-    $@17 (74)
-        on left: 64
-        on right: 65
-    Value <nb> (75)
-        on left: 67 69 71
-        on right: 65
-    $@18 (76)
-        on left: 66
-        on right: 67
-    $@19 (77)
-        on left: 68
-        on right: 69
-    $@20 (78)
-        on left: 70
-        on right: 71
-    Type (79)
-        on left: 72 73
-        on right: 6 7 10 20 22
-    CoreType (80)
-        on left: 74
-        on right: 72 73
+$end (0) 0
+error (256)
+tMAIN (258) 7
+tInt (259) 74
+tConst (260) 73
+tPlus (261) 57
+tMinus (262) 58 61
+tMul (263) 59
+tDiv (264) 60
+tEqu (265) 50 51 52 54
+tStar (266) 76
+tPO (267) 6 7 34 35 40 56
+tPF (268) 6 7 34 35 40 56
+tAO (269) 16
+tAF (270) 16
+tSpace (271)
+tBackN (272)
+tBackT (273)
+tVirg (274) 12 23 25 52 54
+tPointVirg (275) 20 22 35 50 51
+tPrintf (276) 35
+tIf (277) 40
+tElse (278) 38
+tWhile (279) 34
+tReturn (280)
+tLESS_THAN_OR_EQUAL_TO (281) 41
+tLESS_THAN (282) 42
+tGREATER_THAN_OR_EQUAL_TO (283) 43
+tGREATER_THAN (284) 44
+tDIFFERENT (285) 45
+tEQUALCOMPARISON (286) 46
+tNumber (287) 67
+tDecimal (288) 71
+tExpo (289) 69
+tVariable (290) 6 10 20 22 23 25 35 50 51 52 54 63
+ERROR (291)
 
 
-State 0
+Non-terminaux, suivis des règles où ils apparaissent
+
+$accept (37)
+    à gauche: 0
+File (38)
+    à gauche: 2, à droite: 0
+$@1 (39)
+    à gauche: 1, à droite: 2
+Fonctions (40)
+    à gauche: 3 4, à droite: 2 3
+Fonction (41)
+    à gauche: 5 6, à droite: 3 4
+FonctionMain (42)
+    à gauche: 7, à droite: 5
+Params (43)
+    à gauche: 8 9, à droite: 6 7
+Param (44)
+    à gauche: 10, à droite: 9 12
+SuiteParams (45)
+    à gauche: 11 12, à droite: 9 12
+Body (46)
+    à gauche: 16, à droite: 6 7 34 38 40
+$@2 (47)
+    à gauche: 13, à droite: 16
+$@3 (48)
+    à gauche: 14, à droite: 16
+$@4 (49)
+    à gauche: 15, à droite: 16
+Declarations (50)
+    à gauche: 17 18, à droite: 16 18
+Declaration (51)
+    à gauche: 20 22, à droite: 18
+$@5 (52)
+    à gauche: 19, à droite: 20
+$@6 (53)
+    à gauche: 21, à droite: 22
+SuiteVariables (54)
+    à gauche: 23 25, à droite: 22 25
+$@7 (55)
+    à gauche: 24, à droite: 25
+Instructions (56)
+    à gauche: 26 27, à droite: 16 27
+Instruction (57)
+    à gauche: 28 29 30 31, à droite: 27
+WhileInstruction (58)
+    à gauche: 34, à droite: 30
+$@8 (59)
+    à gauche: 32, à droite: 34
+$@9 (60)
+    à gauche: 33, à droite: 34
+Print (61)
+    à gauche: 35, à droite: 31
+IfInstruction (62)
+    à gauche: 36 38, à droite: 29
+$@10 (63)
+    à gauche: 37, à droite: 38
+IfPattern (64)
+    à gauche: 40, à droite: 36 38
+$@11 (65)
+    à gauche: 39, à droite: 40
+Comparaison (66)
+    à gauche: 41 42 43 44 45 46 47, à droite: 34 40
+Affectation (67)
+    à gauche: 50 51, à droite: 28
+$@12 (68)
+    à gauche: 48, à droite: 50
+$@13 (69)
+    à gauche: 49, à droite: 50
+SuiteAffectations (70)
+    à gauche: 52 54, à droite: 50 54
+$@14 (71)
+    à gauche: 53, à droite: 54
+Expression (72)
+    à gauche: 56 57 58 59 60 61 63 65, à droite: 41 42 43 44 45 46
+    47 50 51 52 54 56 57 58 59 60 61
+$@15 (73)
+    à gauche: 55, à droite: 56
+$@16 (74)
+    à gauche: 62, à droite: 63
+$@17 (75)
+    à gauche: 64, à droite: 65
+Value (76)
+    à gauche: 67 69 71, à droite: 65
+$@18 (77)
+    à gauche: 66, à droite: 67
+$@19 (78)
+    à gauche: 68, à droite: 69
+$@20 (79)
+    à gauche: 70, à droite: 71
+Type (80)
+    à gauche: 72 73, à droite: 6 7 10 20 22
+CoreType (81)
+    à gauche: 74, à droite: 72 73
+PointerStars (82)
+    à gauche: 75 76, à droite: 74 76
+
+
+État 0
 
     0 $accept: . File $end
 
-    $default  reduce using rule 1 ($@1)
+    $défaut  réduction par utilisation de la règle 1 ($@1)
 
-    File  go to state 1
-    $@1   go to state 2
+    File  aller à l'état 1
+    $@1   aller à l'état 2
 
 
-State 1
+État 1
 
     0 $accept: File . $end
 
-    $end  shift, and go to state 3
+    $end  décalage et aller à l'état 3
 
 
-State 2
+État 2
 
     2 File: $@1 . Fonctions
 
-    tInt    shift, and go to state 4
-    tConst  shift, and go to state 5
+    tInt    décalage et aller à l'état 4
+    tConst  décalage et aller à l'état 5
 
-    Fonctions     go to state 6
-    Fonction      go to state 7
-    FonctionMain  go to state 8
-    Type          go to state 9
-    CoreType      go to state 10
+    Fonctions     aller à l'état 6
+    Fonction      aller à l'état 7
+    FonctionMain  aller à l'état 8
+    Type          aller à l'état 9
+    CoreType      aller à l'état 10
 
 
-State 3
+État 3
 
     0 $accept: File $end .
 
-    $default  accept
+    $défaut  accepter
 
 
-State 4
+État 4
 
-   74 CoreType: tInt .
+   74 CoreType: tInt . PointerStars
 
-    $default  reduce using rule 74 (CoreType)
+    tStar  décalage et aller à l'état 11
+
+    $défaut  réduction par utilisation de la règle 75 (PointerStars)
+
+    PointerStars  aller à l'état 12
 
 
-State 5
+État 5
 
    73 Type: tConst . CoreType
 
-    tInt  shift, and go to state 4
+    tInt  décalage et aller à l'état 4
 
-    CoreType  go to state 11
+    CoreType  aller à l'état 13
 
 
-State 6
+État 6
 
     2 File: $@1 Fonctions .
 
-    $default  reduce using rule 2 (File)
+    $défaut  réduction par utilisation de la règle 2 (File)
 
 
-State 7
+État 7
 
     3 Fonctions: Fonction . Fonctions
     4          | Fonction .
 
-    tInt    shift, and go to state 4
-    tConst  shift, and go to state 5
+    tInt    décalage et aller à l'état 4
+    tConst  décalage et aller à l'état 5
 
-    $default  reduce using rule 4 (Fonctions)
+    $défaut  réduction par utilisation de la règle 4 (Fonctions)
 
-    Fonctions     go to state 12
-    Fonction      go to state 7
-    FonctionMain  go to state 8
-    Type          go to state 9
-    CoreType      go to state 10
+    Fonctions     aller à l'état 14
+    Fonction      aller à l'état 7
+    FonctionMain  aller à l'état 8
+    Type          aller à l'état 9
+    CoreType      aller à l'état 10
 
 
-State 8
+État 8
 
     5 Fonction: FonctionMain .
 
-    $default  reduce using rule 5 (Fonction)
+    $défaut  réduction par utilisation de la règle 5 (Fonction)
 
 
-State 9
+État 9
 
     6 Fonction: Type . tVariable tPO Params tPF Body
     7 FonctionMain: Type . tMAIN tPO Params tPF Body
 
-    tMAIN      shift, and go to state 13
-    tVariable  shift, and go to state 14
+    tMAIN      décalage et aller à l'état 15
+    tVariable  décalage et aller à l'état 16
 
 
-State 10
+État 10
 
    72 Type: CoreType .
 
-    $default  reduce using rule 72 (Type)
+    $défaut  réduction par utilisation de la règle 72 (Type)
 
 
-State 11
+État 11
+
+   76 PointerStars: tStar . PointerStars
+
+    tStar  décalage et aller à l'état 11
+
+    $défaut  réduction par utilisation de la règle 75 (PointerStars)
+
+    PointerStars  aller à l'état 17
+
+
+État 12
+
+   74 CoreType: tInt PointerStars .
+
+    $défaut  réduction par utilisation de la règle 74 (CoreType)
+
+
+État 13
 
    73 Type: tConst CoreType .
 
-    $default  reduce using rule 73 (Type)
+    $défaut  réduction par utilisation de la règle 73 (Type)
 
 
-State 12
+État 14
 
     3 Fonctions: Fonction Fonctions .
 
-    $default  reduce using rule 3 (Fonctions)
+    $défaut  réduction par utilisation de la règle 3 (Fonctions)
 
 
-State 13
+État 15
 
     7 FonctionMain: Type tMAIN . tPO Params tPF Body
 
-    tPO  shift, and go to state 15
+    tPO  décalage et aller à l'état 18
 
 
-State 14
+État 16
 
     6 Fonction: Type tVariable . tPO Params tPF Body
 
-    tPO  shift, and go to state 16
+    tPO  décalage et aller à l'état 19
 
 
-State 15
+État 17
+
+   76 PointerStars: tStar PointerStars .
+
+    $défaut  réduction par utilisation de la règle 76 (PointerStars)
+
+
+État 18
 
     7 FonctionMain: Type tMAIN tPO . Params tPF Body
 
-    tInt    shift, and go to state 4
-    tConst  shift, and go to state 5
+    tInt    décalage et aller à l'état 4
+    tConst  décalage et aller à l'état 5
 
-    $default  reduce using rule 8 (Params)
+    $défaut  réduction par utilisation de la règle 8 (Params)
 
-    Params    go to state 17
-    Param     go to state 18
-    Type      go to state 19
-    CoreType  go to state 10
+    Params    aller à l'état 20
+    Param     aller à l'état 21
+    Type      aller à l'état 22
+    CoreType  aller à l'état 10
 
 
-State 16
+État 19
 
     6 Fonction: Type tVariable tPO . Params tPF Body
 
-    tInt    shift, and go to state 4
-    tConst  shift, and go to state 5
+    tInt    décalage et aller à l'état 4
+    tConst  décalage et aller à l'état 5
 
-    $default  reduce using rule 8 (Params)
+    $défaut  réduction par utilisation de la règle 8 (Params)
 
-    Params    go to state 20
-    Param     go to state 18
-    Type      go to state 19
-    CoreType  go to state 10
+    Params    aller à l'état 23
+    Param     aller à l'état 21
+    Type      aller à l'état 22
+    CoreType  aller à l'état 10
 
 
-State 17
+État 20
 
     7 FonctionMain: Type tMAIN tPO Params . tPF Body
 
-    tPF  shift, and go to state 21
+    tPF  décalage et aller à l'état 24
 
 
-State 18
+État 21
 
     9 Params: Param . SuiteParams
 
-    tVirg  shift, and go to state 22
+    tVirg  décalage et aller à l'état 25
 
-    $default  reduce using rule 11 (SuiteParams)
+    $défaut  réduction par utilisation de la règle 11 (SuiteParams)
 
-    SuiteParams  go to state 23
+    SuiteParams  aller à l'état 26
 
 
-State 19
+État 22
 
    10 Param: Type . tVariable
 
-    tVariable  shift, and go to state 24
+    tVariable  décalage et aller à l'état 27
 
 
-State 20
+État 23
 
     6 Fonction: Type tVariable tPO Params . tPF Body
 
-    tPF  shift, and go to state 25
+    tPF  décalage et aller à l'état 28
 
 
-State 21
+État 24
 
     7 FonctionMain: Type tMAIN tPO Params tPF . Body
 
-    $default  reduce using rule 13 ($@2)
+    $défaut  réduction par utilisation de la règle 13 ($@2)
 
-    Body  go to state 26
-    $@2   go to state 27
+    Body  aller à l'état 29
+    $@2   aller à l'état 30
 
 
-State 22
+État 25
 
    12 SuiteParams: tVirg . Param SuiteParams
 
-    tInt    shift, and go to state 4
-    tConst  shift, and go to state 5
+    tInt    décalage et aller à l'état 4
+    tConst  décalage et aller à l'état 5
 
-    Param     go to state 28
-    Type      go to state 19
-    CoreType  go to state 10
+    Param     aller à l'état 31
+    Type      aller à l'état 22
+    CoreType  aller à l'état 10
 
 
-State 23
+État 26
 
     9 Params: Param SuiteParams .
 
-    $default  reduce using rule 9 (Params)
+    $défaut  réduction par utilisation de la règle 9 (Params)
 
 
-State 24
+État 27
 
    10 Param: Type tVariable .
 
-    $default  reduce using rule 10 (Param)
+    $défaut  réduction par utilisation de la règle 10 (Param)
 
 
-State 25
+État 28
 
     6 Fonction: Type tVariable tPO Params tPF . Body
 
-    $default  reduce using rule 13 ($@2)
+    $défaut  réduction par utilisation de la règle 13 ($@2)
 
-    Body  go to state 29
-    $@2   go to state 27
+    Body  aller à l'état 32
+    $@2   aller à l'état 30
 
 
-State 26
+État 29
 
     7 FonctionMain: Type tMAIN tPO Params tPF Body .
 
-    $default  reduce using rule 7 (FonctionMain)
+    $défaut  réduction par utilisation de la règle 7 (FonctionMain)
 
 
-State 27
+État 30
 
    16 Body: $@2 . tAO Declarations $@3 Instructions $@4 tAF
 
-    tAO  shift, and go to state 30
+    tAO  décalage et aller à l'état 33
 
 
-State 28
+État 31
 
    12 SuiteParams: tVirg Param . SuiteParams
 
-    tVirg  shift, and go to state 22
+    tVirg  décalage et aller à l'état 25
 
-    $default  reduce using rule 11 (SuiteParams)
+    $défaut  réduction par utilisation de la règle 11 (SuiteParams)
 
-    SuiteParams  go to state 31
+    SuiteParams  aller à l'état 34
 
 
-State 29
+État 32
 
     6 Fonction: Type tVariable tPO Params tPF Body .
 
-    $default  reduce using rule 6 (Fonction)
+    $défaut  réduction par utilisation de la règle 6 (Fonction)
 
 
-State 30
+État 33
 
    16 Body: $@2 tAO . Declarations $@3 Instructions $@4 tAF
 
-    tInt    shift, and go to state 4
-    tConst  shift, and go to state 5
+    tInt    décalage et aller à l'état 4
+    tConst  décalage et aller à l'état 5
 
-    $default  reduce using rule 17 (Declarations)
+    $défaut  réduction par utilisation de la règle 17 (Declarations)
 
-    Declarations  go to state 32
-    Declaration   go to state 33
-    Type          go to state 34
-    CoreType      go to state 10
+    Declarations  aller à l'état 35
+    Declaration   aller à l'état 36
+    Type          aller à l'état 37
+    CoreType      aller à l'état 10
 
 
-State 31
+État 34
 
    12 SuiteParams: tVirg Param SuiteParams .
 
-    $default  reduce using rule 12 (SuiteParams)
+    $défaut  réduction par utilisation de la règle 12 (SuiteParams)
 
 
-State 32
+État 35
 
    16 Body: $@2 tAO Declarations . $@3 Instructions $@4 tAF
 
-    $default  reduce using rule 14 ($@3)
+    $défaut  réduction par utilisation de la règle 14 ($@3)
 
-    $@3  go to state 35
+    $@3  aller à l'état 38
 
 
-State 33
+État 36
 
    18 Declarations: Declaration . Declarations
 
-    tInt    shift, and go to state 4
-    tConst  shift, and go to state 5
+    tInt    décalage et aller à l'état 4
+    tConst  décalage et aller à l'état 5
 
-    $default  reduce using rule 17 (Declarations)
+    $défaut  réduction par utilisation de la règle 17 (Declarations)
 
-    Declarations  go to state 36
-    Declaration   go to state 33
-    Type          go to state 34
-    CoreType      go to state 10
+    Declarations  aller à l'état 39
+    Declaration   aller à l'état 36
+    Type          aller à l'état 37
+    CoreType      aller à l'état 10
 
 
-State 34
+État 37
 
    20 Declaration: Type . tVariable tPointVirg $@5
    22            | Type . tVariable $@6 SuiteVariables tPointVirg
 
-    tVariable  shift, and go to state 37
+    tVariable  décalage et aller à l'état 40
 
 
-State 35
+État 38
 
    16 Body: $@2 tAO Declarations $@3 . Instructions $@4 tAF
 
-    tPrintf    shift, and go to state 38
-    tIf        shift, and go to state 39
-    tWhile     shift, and go to state 40
-    tVariable  shift, and go to state 41
+    tPrintf    décalage et aller à l'état 41
+    tIf        décalage et aller à l'état 42
+    tWhile     décalage et aller à l'état 43
+    tVariable  décalage et aller à l'état 44
 
-    $default  reduce using rule 26 (Instructions)
+    $défaut  réduction par utilisation de la règle 26 (Instructions)
 
-    Instructions      go to state 42
-    Instruction       go to state 43
-    WhileInstruction  go to state 44
-    Print             go to state 45
-    IfInstruction     go to state 46
-    IfPattern         go to state 47
-    Affectation       go to state 48
+    Instructions      aller à l'état 45
+    Instruction       aller à l'état 46
+    WhileInstruction  aller à l'état 47
+    Print             aller à l'état 48
+    IfInstruction     aller à l'état 49
+    IfPattern         aller à l'état 50
+    Affectation       aller à l'état 51
 
 
-State 36
+État 39
 
    18 Declarations: Declaration Declarations .
 
-    $default  reduce using rule 18 (Declarations)
+    $défaut  réduction par utilisation de la règle 18 (Declarations)
 
 
-State 37
+État 40
 
    20 Declaration: Type tVariable . tPointVirg $@5
    22            | Type tVariable . $@6 SuiteVariables tPointVirg
 
-    tPointVirg  shift, and go to state 49
+    tPointVirg  décalage et aller à l'état 52
 
-    $default  reduce using rule 21 ($@6)
+    $défaut  réduction par utilisation de la règle 21 ($@6)
 
-    $@6  go to state 50
+    $@6  aller à l'état 53
 
 
-State 38
+État 41
 
    35 Print: tPrintf . tPO tVariable tPF tPointVirg
 
-    tPO  shift, and go to state 51
+    tPO  décalage et aller à l'état 54
 
 
-State 39
+État 42
 
    40 IfPattern: tIf . tPO Comparaison tPF $@11 Body
 
-    tPO  shift, and go to state 52
+    tPO  décalage et aller à l'état 55
 
 
-State 40
+État 43
 
    34 WhileInstruction: tWhile . $@8 tPO Comparaison tPF $@9 Body
 
-    $default  reduce using rule 32 ($@8)
+    $défaut  réduction par utilisation de la règle 32 ($@8)
 
-    $@8  go to state 53
+    $@8  aller à l'état 56
 
 
-State 41
+État 44
 
    50 Affectation: tVariable . tEqu Expression $@12 $@13 SuiteAffectations tPointVirg
    51            | tVariable . tEqu Expression tPointVirg
 
-    tEqu  shift, and go to state 54
+    tEqu  décalage et aller à l'état 57
 
 
-State 42
+État 45
 
    16 Body: $@2 tAO Declarations $@3 Instructions . $@4 tAF
 
-    $default  reduce using rule 15 ($@4)
+    $défaut  réduction par utilisation de la règle 15 ($@4)
 
-    $@4  go to state 55
+    $@4  aller à l'état 58
 
 
-State 43
+État 46
 
    27 Instructions: Instruction . Instructions
 
-    tPrintf    shift, and go to state 38
-    tIf        shift, and go to state 39
-    tWhile     shift, and go to state 40
-    tVariable  shift, and go to state 41
+    tPrintf    décalage et aller à l'état 41
+    tIf        décalage et aller à l'état 42
+    tWhile     décalage et aller à l'état 43
+    tVariable  décalage et aller à l'état 44
 
-    $default  reduce using rule 26 (Instructions)
+    $défaut  réduction par utilisation de la règle 26 (Instructions)
 
-    Instructions      go to state 56
-    Instruction       go to state 43
-    WhileInstruction  go to state 44
-    Print             go to state 45
-    IfInstruction     go to state 46
-    IfPattern         go to state 47
-    Affectation       go to state 48
+    Instructions      aller à l'état 59
+    Instruction       aller à l'état 46
+    WhileInstruction  aller à l'état 47
+    Print             aller à l'état 48
+    IfInstruction     aller à l'état 49
+    IfPattern         aller à l'état 50
+    Affectation       aller à l'état 51
 
 
-State 44
+État 47
 
    30 Instruction: WhileInstruction .
 
-    $default  reduce using rule 30 (Instruction)
+    $défaut  réduction par utilisation de la règle 30 (Instruction)
 
 
-State 45
+État 48
 
    31 Instruction: Print .
 
-    $default  reduce using rule 31 (Instruction)
+    $défaut  réduction par utilisation de la règle 31 (Instruction)
 
 
-State 46
+État 49
 
    29 Instruction: IfInstruction .
 
-    $default  reduce using rule 29 (Instruction)
+    $défaut  réduction par utilisation de la règle 29 (Instruction)
 
 
-State 47
+État 50
 
    36 IfInstruction: IfPattern .
    38              | IfPattern . tElse $@10 Body
 
-    tElse  shift, and go to state 57
+    tElse  décalage et aller à l'état 60
 
-    $default  reduce using rule 36 (IfInstruction)
+    $défaut  réduction par utilisation de la règle 36 (IfInstruction)
 
 
-State 48
+État 51
 
    28 Instruction: Affectation .
 
-    $default  reduce using rule 28 (Instruction)
+    $défaut  réduction par utilisation de la règle 28 (Instruction)
 
 
-State 49
+État 52
 
    20 Declaration: Type tVariable tPointVirg . $@5
 
-    $default  reduce using rule 19 ($@5)
+    $défaut  réduction par utilisation de la règle 19 ($@5)
 
-    $@5  go to state 58
+    $@5  aller à l'état 61
 
 
-State 50
+État 53
 
    22 Declaration: Type tVariable $@6 . SuiteVariables tPointVirg
 
-    tVirg  shift, and go to state 59
+    tVirg  décalage et aller à l'état 62
 
-    SuiteVariables  go to state 60
+    SuiteVariables  aller à l'état 63
 
 
-State 51
+État 54
 
    35 Print: tPrintf tPO . tVariable tPF tPointVirg
 
-    tVariable  shift, and go to state 61
+    tVariable  décalage et aller à l'état 64
 
 
-State 52
+État 55
 
    40 IfPattern: tIf tPO . Comparaison tPF $@11 Body
 
-    tMinus     shift, and go to state 62
-    tPO        shift, and go to state 63
-    tNumber    shift, and go to state 64
-    tDecimal   shift, and go to state 65
-    tExpo      shift, and go to state 66
-    tVariable  shift, and go to state 67
+    tMinus     décalage et aller à l'état 65
+    tPO        décalage et aller à l'état 66
+    tNumber    décalage et aller à l'état 67
+    tDecimal   décalage et aller à l'état 68
+    tExpo      décalage et aller à l'état 69
+    tVariable  décalage et aller à l'état 70
 
-    Comparaison  go to state 68
-    Expression   go to state 69
-    Value        go to state 70
+    Comparaison  aller à l'état 71
+    Expression   aller à l'état 72
+    Value        aller à l'état 73
 
 
-State 53
+État 56
 
    34 WhileInstruction: tWhile $@8 . tPO Comparaison tPF $@9 Body
 
-    tPO  shift, and go to state 71
+    tPO  décalage et aller à l'état 74
 
 
-State 54
+État 57
 
    50 Affectation: tVariable tEqu . Expression $@12 $@13 SuiteAffectations tPointVirg
    51            | tVariable tEqu . Expression tPointVirg
 
-    tMinus     shift, and go to state 62
-    tPO        shift, and go to state 63
-    tNumber    shift, and go to state 64
-    tDecimal   shift, and go to state 65
-    tExpo      shift, and go to state 66
-    tVariable  shift, and go to state 67
+    tMinus     décalage et aller à l'état 65
+    tPO        décalage et aller à l'état 66
+    tNumber    décalage et aller à l'état 67
+    tDecimal   décalage et aller à l'état 68
+    tExpo      décalage et aller à l'état 69
+    tVariable  décalage et aller à l'état 70
 
-    Expression  go to state 72
-    Value       go to state 70
+    Expression  aller à l'état 75
+    Value       aller à l'état 73
 
 
-State 55
+État 58
 
    16 Body: $@2 tAO Declarations $@3 Instructions $@4 . tAF
 
-    tAF  shift, and go to state 73
+    tAF  décalage et aller à l'état 76
 
 
-State 56
+État 59
 
    27 Instructions: Instruction Instructions .
 
-    $default  reduce using rule 27 (Instructions)
+    $défaut  réduction par utilisation de la règle 27 (Instructions)
 
 
-State 57
+État 60
 
    38 IfInstruction: IfPattern tElse . $@10 Body
 
-    $default  reduce using rule 37 ($@10)
+    $défaut  réduction par utilisation de la règle 37 ($@10)
 
-    $@10  go to state 74
+    $@10  aller à l'état 77
 
 
-State 58
+État 61
 
    20 Declaration: Type tVariable tPointVirg $@5 .
 
-    $default  reduce using rule 20 (Declaration)
+    $défaut  réduction par utilisation de la règle 20 (Declaration)
 
 
-State 59
+État 62
 
    23 SuiteVariables: tVirg . tVariable
    25               | tVirg . tVariable $@7 SuiteVariables
 
-    tVariable  shift, and go to state 75
+    tVariable  décalage et aller à l'état 78
 
 
-State 60
+État 63
 
    22 Declaration: Type tVariable $@6 SuiteVariables . tPointVirg
 
-    tPointVirg  shift, and go to state 76
+    tPointVirg  décalage et aller à l'état 79
 
 
-State 61
+État 64
 
    35 Print: tPrintf tPO tVariable . tPF tPointVirg
 
-    tPF  shift, and go to state 77
+    tPF  décalage et aller à l'état 80
 
 
-State 62
+État 65
 
    61 Expression: tMinus . Expression
 
-    tMinus     shift, and go to state 62
-    tPO        shift, and go to state 63
-    tNumber    shift, and go to state 64
-    tDecimal   shift, and go to state 65
-    tExpo      shift, and go to state 66
-    tVariable  shift, and go to state 67
+    tMinus     décalage et aller à l'état 65
+    tPO        décalage et aller à l'état 66
+    tNumber    décalage et aller à l'état 67
+    tDecimal   décalage et aller à l'état 68
+    tExpo      décalage et aller à l'état 69
+    tVariable  décalage et aller à l'état 70
 
-    Expression  go to state 78
-    Value       go to state 70
+    Expression  aller à l'état 81
+    Value       aller à l'état 73
 
 
-State 63
+État 66
 
    56 Expression: tPO . $@15 Expression tPF
 
-    $default  reduce using rule 55 ($@15)
+    $défaut  réduction par utilisation de la règle 55 ($@15)
 
-    $@15  go to state 79
+    $@15  aller à l'état 82
 
 
-State 64
+État 67
 
    67 Value: tNumber . $@18
 
-    $default  reduce using rule 66 ($@18)
+    $défaut  réduction par utilisation de la règle 66 ($@18)
 
-    $@18  go to state 80
+    $@18  aller à l'état 83
 
 
-State 65
+État 68
 
    71 Value: tDecimal . $@20
 
-    $default  reduce using rule 70 ($@20)
+    $défaut  réduction par utilisation de la règle 70 ($@20)
 
-    $@20  go to state 81
+    $@20  aller à l'état 84
 
 
-State 66
+État 69
 
    69 Value: tExpo . $@19
 
-    $default  reduce using rule 68 ($@19)
+    $défaut  réduction par utilisation de la règle 68 ($@19)
 
-    $@19  go to state 82
+    $@19  aller à l'état 85
 
 
-State 67
+État 70
 
    63 Expression: tVariable . $@16
 
-    $default  reduce using rule 62 ($@16)
+    $défaut  réduction par utilisation de la règle 62 ($@16)
 
-    $@16  go to state 83
+    $@16  aller à l'état 86
 
 
-State 68
+État 71
 
    40 IfPattern: tIf tPO Comparaison . tPF $@11 Body
 
-    tPF  shift, and go to state 84
+    tPF  décalage et aller à l'état 87
 
 
-State 69
+État 72
 
    41 Comparaison: Expression . tLESS_THAN_OR_EQUAL_TO Expression
    42            | Expression . tLESS_THAN Expression
@@ -972,46 +964,46 @@ State 69
    59           | Expression . tMul Expression
    60           | Expression . tDiv Expression
 
-    tPlus                      shift, and go to state 85
-    tMinus                     shift, and go to state 86
-    tMul                       shift, and go to state 87
-    tDiv                       shift, and go to state 88
-    tLESS_THAN_OR_EQUAL_TO     shift, and go to state 89
-    tLESS_THAN                 shift, and go to state 90
-    tGREATER_THAN_OR_EQUAL_TO  shift, and go to state 91
-    tGREATER_THAN              shift, and go to state 92
-    tDIFFERENT                 shift, and go to state 93
-    tEQUALCOMPARISON           shift, and go to state 94
+    tPlus                      décalage et aller à l'état 88
+    tMinus                     décalage et aller à l'état 89
+    tMul                       décalage et aller à l'état 90
+    tDiv                       décalage et aller à l'état 91
+    tLESS_THAN_OR_EQUAL_TO     décalage et aller à l'état 92
+    tLESS_THAN                 décalage et aller à l'état 93
+    tGREATER_THAN_OR_EQUAL_TO  décalage et aller à l'état 94
+    tGREATER_THAN              décalage et aller à l'état 95
+    tDIFFERENT                 décalage et aller à l'état 96
+    tEQUALCOMPARISON           décalage et aller à l'état 97
 
-    $default  reduce using rule 47 (Comparaison)
+    $défaut  réduction par utilisation de la règle 47 (Comparaison)
 
 
-State 70
+État 73
 
    65 Expression: Value . $@17
 
-    $default  reduce using rule 64 ($@17)
+    $défaut  réduction par utilisation de la règle 64 ($@17)
 
-    $@17  go to state 95
+    $@17  aller à l'état 98
 
 
-State 71
+État 74
 
    34 WhileInstruction: tWhile $@8 tPO . Comparaison tPF $@9 Body
 
-    tMinus     shift, and go to state 62
-    tPO        shift, and go to state 63
-    tNumber    shift, and go to state 64
-    tDecimal   shift, and go to state 65
-    tExpo      shift, and go to state 66
-    tVariable  shift, and go to state 67
+    tMinus     décalage et aller à l'état 65
+    tPO        décalage et aller à l'état 66
+    tNumber    décalage et aller à l'état 67
+    tDecimal   décalage et aller à l'état 68
+    tExpo      décalage et aller à l'état 69
+    tVariable  décalage et aller à l'état 70
 
-    Comparaison  go to state 96
-    Expression   go to state 69
-    Value        go to state 70
+    Comparaison  aller à l'état 99
+    Expression   aller à l'état 72
+    Value        aller à l'état 73
 
 
-State 72
+État 75
 
    50 Affectation: tVariable tEqu Expression . $@12 $@13 SuiteAffectations tPointVirg
    51            | tVariable tEqu Expression . tPointVirg
@@ -1020,60 +1012,60 @@ State 72
    59           | Expression . tMul Expression
    60           | Expression . tDiv Expression
 
-    tPlus       shift, and go to state 85
-    tMinus      shift, and go to state 86
-    tMul        shift, and go to state 87
-    tDiv        shift, and go to state 88
-    tPointVirg  shift, and go to state 97
+    tPlus       décalage et aller à l'état 88
+    tMinus      décalage et aller à l'état 89
+    tMul        décalage et aller à l'état 90
+    tDiv        décalage et aller à l'état 91
+    tPointVirg  décalage et aller à l'état 100
 
-    $default  reduce using rule 48 ($@12)
+    $défaut  réduction par utilisation de la règle 48 ($@12)
 
-    $@12  go to state 98
+    $@12  aller à l'état 101
 
 
-State 73
+État 76
 
    16 Body: $@2 tAO Declarations $@3 Instructions $@4 tAF .
 
-    $default  reduce using rule 16 (Body)
+    $défaut  réduction par utilisation de la règle 16 (Body)
 
 
-State 74
+État 77
 
    38 IfInstruction: IfPattern tElse $@10 . Body
 
-    $default  reduce using rule 13 ($@2)
+    $défaut  réduction par utilisation de la règle 13 ($@2)
 
-    Body  go to state 99
-    $@2   go to state 27
+    Body  aller à l'état 102
+    $@2   aller à l'état 30
 
 
-State 75
+État 78
 
    23 SuiteVariables: tVirg tVariable .
    25               | tVirg tVariable . $@7 SuiteVariables
 
-    tVirg     reduce using rule 24 ($@7)
-    $default  reduce using rule 23 (SuiteVariables)
+    tVirg     réduction par utilisation de la règle 24 ($@7)
+    $défaut  réduction par utilisation de la règle 23 (SuiteVariables)
 
-    $@7  go to state 100
+    $@7  aller à l'état 103
 
 
-State 76
+État 79
 
    22 Declaration: Type tVariable $@6 SuiteVariables tPointVirg .
 
-    $default  reduce using rule 22 (Declaration)
+    $défaut  réduction par utilisation de la règle 22 (Declaration)
 
 
-State 77
+État 80
 
    35 Print: tPrintf tPO tVariable tPF . tPointVirg
 
-    tPointVirg  shift, and go to state 101
+    tPointVirg  décalage et aller à l'état 104
 
 
-State 78
+État 81
 
    57 Expression: Expression . tPlus Expression
    58           | Expression . tMinus Expression
@@ -1081,268 +1073,268 @@ State 78
    60           | Expression . tDiv Expression
    61           | tMinus Expression .
 
-    tMul  shift, and go to state 87
-    tDiv  shift, and go to state 88
+    tMul  décalage et aller à l'état 90
+    tDiv  décalage et aller à l'état 91
 
-    $default  reduce using rule 61 (Expression)
+    $défaut  réduction par utilisation de la règle 61 (Expression)
 
 
-State 79
+État 82
 
    56 Expression: tPO $@15 . Expression tPF
 
-    tMinus     shift, and go to state 62
-    tPO        shift, and go to state 63
-    tNumber    shift, and go to state 64
-    tDecimal   shift, and go to state 65
-    tExpo      shift, and go to state 66
-    tVariable  shift, and go to state 67
+    tMinus     décalage et aller à l'état 65
+    tPO        décalage et aller à l'état 66
+    tNumber    décalage et aller à l'état 67
+    tDecimal   décalage et aller à l'état 68
+    tExpo      décalage et aller à l'état 69
+    tVariable  décalage et aller à l'état 70
 
-    Expression  go to state 102
-    Value       go to state 70
+    Expression  aller à l'état 105
+    Value       aller à l'état 73
 
 
-State 80
+État 83
 
    67 Value: tNumber $@18 .
 
-    $default  reduce using rule 67 (Value)
+    $défaut  réduction par utilisation de la règle 67 (Value)
 
 
-State 81
+État 84
 
    71 Value: tDecimal $@20 .
 
-    $default  reduce using rule 71 (Value)
+    $défaut  réduction par utilisation de la règle 71 (Value)
 
 
-State 82
+État 85
 
    69 Value: tExpo $@19 .
 
-    $default  reduce using rule 69 (Value)
+    $défaut  réduction par utilisation de la règle 69 (Value)
 
 
-State 83
+État 86
 
    63 Expression: tVariable $@16 .
 
-    $default  reduce using rule 63 (Expression)
+    $défaut  réduction par utilisation de la règle 63 (Expression)
 
 
-State 84
+État 87
 
    40 IfPattern: tIf tPO Comparaison tPF . $@11 Body
 
-    $default  reduce using rule 39 ($@11)
+    $défaut  réduction par utilisation de la règle 39 ($@11)
 
-    $@11  go to state 103
+    $@11  aller à l'état 106
 
 
-State 85
+État 88
 
    57 Expression: Expression tPlus . Expression
 
-    tMinus     shift, and go to state 62
-    tPO        shift, and go to state 63
-    tNumber    shift, and go to state 64
-    tDecimal   shift, and go to state 65
-    tExpo      shift, and go to state 66
-    tVariable  shift, and go to state 67
+    tMinus     décalage et aller à l'état 65
+    tPO        décalage et aller à l'état 66
+    tNumber    décalage et aller à l'état 67
+    tDecimal   décalage et aller à l'état 68
+    tExpo      décalage et aller à l'état 69
+    tVariable  décalage et aller à l'état 70
 
-    Expression  go to state 104
-    Value       go to state 70
+    Expression  aller à l'état 107
+    Value       aller à l'état 73
 
 
-State 86
+État 89
 
    58 Expression: Expression tMinus . Expression
 
-    tMinus     shift, and go to state 62
-    tPO        shift, and go to state 63
-    tNumber    shift, and go to state 64
-    tDecimal   shift, and go to state 65
-    tExpo      shift, and go to state 66
-    tVariable  shift, and go to state 67
+    tMinus     décalage et aller à l'état 65
+    tPO        décalage et aller à l'état 66
+    tNumber    décalage et aller à l'état 67
+    tDecimal   décalage et aller à l'état 68
+    tExpo      décalage et aller à l'état 69
+    tVariable  décalage et aller à l'état 70
 
-    Expression  go to state 105
-    Value       go to state 70
+    Expression  aller à l'état 108
+    Value       aller à l'état 73
 
 
-State 87
+État 90
 
    59 Expression: Expression tMul . Expression
 
-    tMinus     shift, and go to state 62
-    tPO        shift, and go to state 63
-    tNumber    shift, and go to state 64
-    tDecimal   shift, and go to state 65
-    tExpo      shift, and go to state 66
-    tVariable  shift, and go to state 67
+    tMinus     décalage et aller à l'état 65
+    tPO        décalage et aller à l'état 66
+    tNumber    décalage et aller à l'état 67
+    tDecimal   décalage et aller à l'état 68
+    tExpo      décalage et aller à l'état 69
+    tVariable  décalage et aller à l'état 70
 
-    Expression  go to state 106
-    Value       go to state 70
+    Expression  aller à l'état 109
+    Value       aller à l'état 73
 
 
-State 88
+État 91
 
    60 Expression: Expression tDiv . Expression
 
-    tMinus     shift, and go to state 62
-    tPO        shift, and go to state 63
-    tNumber    shift, and go to state 64
-    tDecimal   shift, and go to state 65
-    tExpo      shift, and go to state 66
-    tVariable  shift, and go to state 67
+    tMinus     décalage et aller à l'état 65
+    tPO        décalage et aller à l'état 66
+    tNumber    décalage et aller à l'état 67
+    tDecimal   décalage et aller à l'état 68
+    tExpo      décalage et aller à l'état 69
+    tVariable  décalage et aller à l'état 70
 
-    Expression  go to state 107
-    Value       go to state 70
+    Expression  aller à l'état 110
+    Value       aller à l'état 73
 
 
-State 89
+État 92
 
    41 Comparaison: Expression tLESS_THAN_OR_EQUAL_TO . Expression
 
-    tMinus     shift, and go to state 62
-    tPO        shift, and go to state 63
-    tNumber    shift, and go to state 64
-    tDecimal   shift, and go to state 65
-    tExpo      shift, and go to state 66
-    tVariable  shift, and go to state 67
+    tMinus     décalage et aller à l'état 65
+    tPO        décalage et aller à l'état 66
+    tNumber    décalage et aller à l'état 67
+    tDecimal   décalage et aller à l'état 68
+    tExpo      décalage et aller à l'état 69
+    tVariable  décalage et aller à l'état 70
 
-    Expression  go to state 108
-    Value       go to state 70
+    Expression  aller à l'état 111
+    Value       aller à l'état 73
 
 
-State 90
+État 93
 
    42 Comparaison: Expression tLESS_THAN . Expression
 
-    tMinus     shift, and go to state 62
-    tPO        shift, and go to state 63
-    tNumber    shift, and go to state 64
-    tDecimal   shift, and go to state 65
-    tExpo      shift, and go to state 66
-    tVariable  shift, and go to state 67
+    tMinus     décalage et aller à l'état 65
+    tPO        décalage et aller à l'état 66
+    tNumber    décalage et aller à l'état 67
+    tDecimal   décalage et aller à l'état 68
+    tExpo      décalage et aller à l'état 69
+    tVariable  décalage et aller à l'état 70
 
-    Expression  go to state 109
-    Value       go to state 70
+    Expression  aller à l'état 112
+    Value       aller à l'état 73
 
 
-State 91
+État 94
 
    43 Comparaison: Expression tGREATER_THAN_OR_EQUAL_TO . Expression
 
-    tMinus     shift, and go to state 62
-    tPO        shift, and go to state 63
-    tNumber    shift, and go to state 64
-    tDecimal   shift, and go to state 65
-    tExpo      shift, and go to state 66
-    tVariable  shift, and go to state 67
+    tMinus     décalage et aller à l'état 65
+    tPO        décalage et aller à l'état 66
+    tNumber    décalage et aller à l'état 67
+    tDecimal   décalage et aller à l'état 68
+    tExpo      décalage et aller à l'état 69
+    tVariable  décalage et aller à l'état 70
 
-    Expression  go to state 110
-    Value       go to state 70
+    Expression  aller à l'état 113
+    Value       aller à l'état 73
 
 
-State 92
+État 95
 
    44 Comparaison: Expression tGREATER_THAN . Expression
 
-    tMinus     shift, and go to state 62
-    tPO        shift, and go to state 63
-    tNumber    shift, and go to state 64
-    tDecimal   shift, and go to state 65
-    tExpo      shift, and go to state 66
-    tVariable  shift, and go to state 67
+    tMinus     décalage et aller à l'état 65
+    tPO        décalage et aller à l'état 66
+    tNumber    décalage et aller à l'état 67
+    tDecimal   décalage et aller à l'état 68
+    tExpo      décalage et aller à l'état 69
+    tVariable  décalage et aller à l'état 70
 
-    Expression  go to state 111
-    Value       go to state 70
+    Expression  aller à l'état 114
+    Value       aller à l'état 73
 
 
-State 93
+État 96
 
    45 Comparaison: Expression tDIFFERENT . Expression
 
-    tMinus     shift, and go to state 62
-    tPO        shift, and go to state 63
-    tNumber    shift, and go to state 64
-    tDecimal   shift, and go to state 65
-    tExpo      shift, and go to state 66
-    tVariable  shift, and go to state 67
+    tMinus     décalage et aller à l'état 65
+    tPO        décalage et aller à l'état 66
+    tNumber    décalage et aller à l'état 67
+    tDecimal   décalage et aller à l'état 68
+    tExpo      décalage et aller à l'état 69
+    tVariable  décalage et aller à l'état 70
 
-    Expression  go to state 112
-    Value       go to state 70
+    Expression  aller à l'état 115
+    Value       aller à l'état 73
 
 
-State 94
+État 97
 
    46 Comparaison: Expression tEQUALCOMPARISON . Expression
 
-    tMinus     shift, and go to state 62
-    tPO        shift, and go to state 63
-    tNumber    shift, and go to state 64
-    tDecimal   shift, and go to state 65
-    tExpo      shift, and go to state 66
-    tVariable  shift, and go to state 67
+    tMinus     décalage et aller à l'état 65
+    tPO        décalage et aller à l'état 66
+    tNumber    décalage et aller à l'état 67
+    tDecimal   décalage et aller à l'état 68
+    tExpo      décalage et aller à l'état 69
+    tVariable  décalage et aller à l'état 70
 
-    Expression  go to state 113
-    Value       go to state 70
+    Expression  aller à l'état 116
+    Value       aller à l'état 73
 
 
-State 95
+État 98
 
    65 Expression: Value $@17 .
 
-    $default  reduce using rule 65 (Expression)
+    $défaut  réduction par utilisation de la règle 65 (Expression)
 
 
-State 96
+État 99
 
    34 WhileInstruction: tWhile $@8 tPO Comparaison . tPF $@9 Body
 
-    tPF  shift, and go to state 114
+    tPF  décalage et aller à l'état 117
 
 
-State 97
+État 100
 
    51 Affectation: tVariable tEqu Expression tPointVirg .
 
-    $default  reduce using rule 51 (Affectation)
+    $défaut  réduction par utilisation de la règle 51 (Affectation)
 
 
-State 98
+État 101
 
    50 Affectation: tVariable tEqu Expression $@12 . $@13 SuiteAffectations tPointVirg
 
-    $default  reduce using rule 49 ($@13)
+    $défaut  réduction par utilisation de la règle 49 ($@13)
 
-    $@13  go to state 115
+    $@13  aller à l'état 118
 
 
-State 99
+État 102
 
    38 IfInstruction: IfPattern tElse $@10 Body .
 
-    $default  reduce using rule 38 (IfInstruction)
+    $défaut  réduction par utilisation de la règle 38 (IfInstruction)
 
 
-State 100
+État 103
 
    25 SuiteVariables: tVirg tVariable $@7 . SuiteVariables
 
-    tVirg  shift, and go to state 59
+    tVirg  décalage et aller à l'état 62
 
-    SuiteVariables  go to state 116
+    SuiteVariables  aller à l'état 119
 
 
-State 101
+État 104
 
    35 Print: tPrintf tPO tVariable tPF tPointVirg .
 
-    $default  reduce using rule 35 (Print)
+    $défaut  réduction par utilisation de la règle 35 (Print)
 
 
-State 102
+État 105
 
    56 Expression: tPO $@15 Expression . tPF
    57           | Expression . tPlus Expression
@@ -1350,24 +1342,24 @@ State 102
    59           | Expression . tMul Expression
    60           | Expression . tDiv Expression
 
-    tPlus   shift, and go to state 85
-    tMinus  shift, and go to state 86
-    tMul    shift, and go to state 87
-    tDiv    shift, and go to state 88
-    tPF     shift, and go to state 117
+    tPlus   décalage et aller à l'état 88
+    tMinus  décalage et aller à l'état 89
+    tMul    décalage et aller à l'état 90
+    tDiv    décalage et aller à l'état 91
+    tPF     décalage et aller à l'état 120
 
 
-State 103
+État 106
 
    40 IfPattern: tIf tPO Comparaison tPF $@11 . Body
 
-    $default  reduce using rule 13 ($@2)
+    $défaut  réduction par utilisation de la règle 13 ($@2)
 
-    Body  go to state 118
-    $@2   go to state 27
+    Body  aller à l'état 121
+    $@2   aller à l'état 30
 
 
-State 104
+État 107
 
    57 Expression: Expression . tPlus Expression
    57           | Expression tPlus Expression .
@@ -1375,13 +1367,13 @@ State 104
    59           | Expression . tMul Expression
    60           | Expression . tDiv Expression
 
-    tMul  shift, and go to state 87
-    tDiv  shift, and go to state 88
+    tMul  décalage et aller à l'état 90
+    tDiv  décalage et aller à l'état 91
 
-    $default  reduce using rule 57 (Expression)
+    $défaut  réduction par utilisation de la règle 57 (Expression)
 
 
-State 105
+État 108
 
    57 Expression: Expression . tPlus Expression
    58           | Expression . tMinus Expression
@@ -1389,13 +1381,13 @@ State 105
    59           | Expression . tMul Expression
    60           | Expression . tDiv Expression
 
-    tMul  shift, and go to state 87
-    tDiv  shift, and go to state 88
+    tMul  décalage et aller à l'état 90
+    tDiv  décalage et aller à l'état 91
 
-    $default  reduce using rule 58 (Expression)
+    $défaut  réduction par utilisation de la règle 58 (Expression)
 
 
-State 106
+État 109
 
    57 Expression: Expression . tPlus Expression
    58           | Expression . tMinus Expression
@@ -1403,10 +1395,10 @@ State 106
    59           | Expression tMul Expression .
    60           | Expression . tDiv Expression
 
-    $default  reduce using rule 59 (Expression)
+    $défaut  réduction par utilisation de la règle 59 (Expression)
 
 
-State 107
+État 110
 
    57 Expression: Expression . tPlus Expression
    58           | Expression . tMinus Expression
@@ -1414,10 +1406,10 @@ State 107
    60           | Expression . tDiv Expression
    60           | Expression tDiv Expression .
 
-    $default  reduce using rule 60 (Expression)
+    $défaut  réduction par utilisation de la règle 60 (Expression)
 
 
-State 108
+État 111
 
    41 Comparaison: Expression tLESS_THAN_OR_EQUAL_TO Expression .
    57 Expression: Expression . tPlus Expression
@@ -1425,15 +1417,15 @@ State 108
    59           | Expression . tMul Expression
    60           | Expression . tDiv Expression
 
-    tPlus   shift, and go to state 85
-    tMinus  shift, and go to state 86
-    tMul    shift, and go to state 87
-    tDiv    shift, and go to state 88
+    tPlus   décalage et aller à l'état 88
+    tMinus  décalage et aller à l'état 89
+    tMul    décalage et aller à l'état 90
+    tDiv    décalage et aller à l'état 91
 
-    $default  reduce using rule 41 (Comparaison)
+    $défaut  réduction par utilisation de la règle 41 (Comparaison)
 
 
-State 109
+État 112
 
    42 Comparaison: Expression tLESS_THAN Expression .
    57 Expression: Expression . tPlus Expression
@@ -1441,15 +1433,15 @@ State 109
    59           | Expression . tMul Expression
    60           | Expression . tDiv Expression
 
-    tPlus   shift, and go to state 85
-    tMinus  shift, and go to state 86
-    tMul    shift, and go to state 87
-    tDiv    shift, and go to state 88
+    tPlus   décalage et aller à l'état 88
+    tMinus  décalage et aller à l'état 89
+    tMul    décalage et aller à l'état 90
+    tDiv    décalage et aller à l'état 91
 
-    $default  reduce using rule 42 (Comparaison)
+    $défaut  réduction par utilisation de la règle 42 (Comparaison)
 
 
-State 110
+État 113
 
    43 Comparaison: Expression tGREATER_THAN_OR_EQUAL_TO Expression .
    57 Expression: Expression . tPlus Expression
@@ -1457,15 +1449,15 @@ State 110
    59           | Expression . tMul Expression
    60           | Expression . tDiv Expression
 
-    tPlus   shift, and go to state 85
-    tMinus  shift, and go to state 86
-    tMul    shift, and go to state 87
-    tDiv    shift, and go to state 88
+    tPlus   décalage et aller à l'état 88
+    tMinus  décalage et aller à l'état 89
+    tMul    décalage et aller à l'état 90
+    tDiv    décalage et aller à l'état 91
 
-    $default  reduce using rule 43 (Comparaison)
+    $défaut  réduction par utilisation de la règle 43 (Comparaison)
 
 
-State 111
+État 114
 
    44 Comparaison: Expression tGREATER_THAN Expression .
    57 Expression: Expression . tPlus Expression
@@ -1473,15 +1465,15 @@ State 111
    59           | Expression . tMul Expression
    60           | Expression . tDiv Expression
 
-    tPlus   shift, and go to state 85
-    tMinus  shift, and go to state 86
-    tMul    shift, and go to state 87
-    tDiv    shift, and go to state 88
+    tPlus   décalage et aller à l'état 88
+    tMinus  décalage et aller à l'état 89
+    tMul    décalage et aller à l'état 90
+    tDiv    décalage et aller à l'état 91
 
-    $default  reduce using rule 44 (Comparaison)
+    $défaut  réduction par utilisation de la règle 44 (Comparaison)
 
 
-State 112
+État 115
 
    45 Comparaison: Expression tDIFFERENT Expression .
    57 Expression: Expression . tPlus Expression
@@ -1489,15 +1481,15 @@ State 112
    59           | Expression . tMul Expression
    60           | Expression . tDiv Expression
 
-    tPlus   shift, and go to state 85
-    tMinus  shift, and go to state 86
-    tMul    shift, and go to state 87
-    tDiv    shift, and go to state 88
+    tPlus   décalage et aller à l'état 88
+    tMinus  décalage et aller à l'état 89
+    tMul    décalage et aller à l'état 90
+    tDiv    décalage et aller à l'état 91
 
-    $default  reduce using rule 45 (Comparaison)
+    $défaut  réduction par utilisation de la règle 45 (Comparaison)
 
 
-State 113
+État 116
 
    46 Comparaison: Expression tEQUALCOMPARISON Expression .
    57 Expression: Expression . tPlus Expression
@@ -1505,117 +1497,117 @@ State 113
    59           | Expression . tMul Expression
    60           | Expression . tDiv Expression
 
-    tPlus   shift, and go to state 85
-    tMinus  shift, and go to state 86
-    tMul    shift, and go to state 87
-    tDiv    shift, and go to state 88
+    tPlus   décalage et aller à l'état 88
+    tMinus  décalage et aller à l'état 89
+    tMul    décalage et aller à l'état 90
+    tDiv    décalage et aller à l'état 91
 
-    $default  reduce using rule 46 (Comparaison)
+    $défaut  réduction par utilisation de la règle 46 (Comparaison)
 
 
-State 114
+État 117
 
    34 WhileInstruction: tWhile $@8 tPO Comparaison tPF . $@9 Body
 
-    $default  reduce using rule 33 ($@9)
+    $défaut  réduction par utilisation de la règle 33 ($@9)
 
-    $@9  go to state 119
+    $@9  aller à l'état 122
 
 
-State 115
+État 118
 
    50 Affectation: tVariable tEqu Expression $@12 $@13 . SuiteAffectations tPointVirg
 
-    tVirg  shift, and go to state 120
+    tVirg  décalage et aller à l'état 123
 
-    SuiteAffectations  go to state 121
+    SuiteAffectations  aller à l'état 124
 
 
-State 116
+État 119
 
    25 SuiteVariables: tVirg tVariable $@7 SuiteVariables .
 
-    $default  reduce using rule 25 (SuiteVariables)
+    $défaut  réduction par utilisation de la règle 25 (SuiteVariables)
 
 
-State 117
+État 120
 
    56 Expression: tPO $@15 Expression tPF .
 
-    $default  reduce using rule 56 (Expression)
+    $défaut  réduction par utilisation de la règle 56 (Expression)
 
 
-State 118
+État 121
 
    40 IfPattern: tIf tPO Comparaison tPF $@11 Body .
 
-    $default  reduce using rule 40 (IfPattern)
+    $défaut  réduction par utilisation de la règle 40 (IfPattern)
 
 
-State 119
+État 122
 
    34 WhileInstruction: tWhile $@8 tPO Comparaison tPF $@9 . Body
 
-    $default  reduce using rule 13 ($@2)
+    $défaut  réduction par utilisation de la règle 13 ($@2)
 
-    Body  go to state 122
-    $@2   go to state 27
+    Body  aller à l'état 125
+    $@2   aller à l'état 30
 
 
-State 120
+État 123
 
    52 SuiteAffectations: tVirg . tVariable tEqu Expression
    54                  | tVirg . tVariable tEqu Expression $@14 SuiteAffectations
 
-    tVariable  shift, and go to state 123
+    tVariable  décalage et aller à l'état 126
 
 
-State 121
+État 124
 
    50 Affectation: tVariable tEqu Expression $@12 $@13 SuiteAffectations . tPointVirg
 
-    tPointVirg  shift, and go to state 124
+    tPointVirg  décalage et aller à l'état 127
 
 
-State 122
+État 125
 
    34 WhileInstruction: tWhile $@8 tPO Comparaison tPF $@9 Body .
 
-    $default  reduce using rule 34 (WhileInstruction)
+    $défaut  réduction par utilisation de la règle 34 (WhileInstruction)
 
 
-State 123
+État 126
 
    52 SuiteAffectations: tVirg tVariable . tEqu Expression
    54                  | tVirg tVariable . tEqu Expression $@14 SuiteAffectations
 
-    tEqu  shift, and go to state 125
+    tEqu  décalage et aller à l'état 128
 
 
-State 124
+État 127
 
    50 Affectation: tVariable tEqu Expression $@12 $@13 SuiteAffectations tPointVirg .
 
-    $default  reduce using rule 50 (Affectation)
+    $défaut  réduction par utilisation de la règle 50 (Affectation)
 
 
-State 125
+État 128
 
    52 SuiteAffectations: tVirg tVariable tEqu . Expression
    54                  | tVirg tVariable tEqu . Expression $@14 SuiteAffectations
 
-    tMinus     shift, and go to state 62
-    tPO        shift, and go to state 63
-    tNumber    shift, and go to state 64
-    tDecimal   shift, and go to state 65
-    tExpo      shift, and go to state 66
-    tVariable  shift, and go to state 67
+    tMinus     décalage et aller à l'état 65
+    tPO        décalage et aller à l'état 66
+    tNumber    décalage et aller à l'état 67
+    tDecimal   décalage et aller à l'état 68
+    tExpo      décalage et aller à l'état 69
+    tVariable  décalage et aller à l'état 70
 
-    Expression  go to state 126
-    Value       go to state 70
+    Expression  aller à l'état 129
+    Value       aller à l'état 73
 
 
-State 126
+État 129
 
    52 SuiteAffectations: tVirg tVariable tEqu Expression .
    54                  | tVirg tVariable tEqu Expression . $@14 SuiteAffectations
@@ -1624,28 +1616,28 @@ State 126
    59           | Expression . tMul Expression
    60           | Expression . tDiv Expression
 
-    tPlus   shift, and go to state 85
-    tMinus  shift, and go to state 86
-    tMul    shift, and go to state 87
-    tDiv    shift, and go to state 88
+    tPlus   décalage et aller à l'état 88
+    tMinus  décalage et aller à l'état 89
+    tMul    décalage et aller à l'état 90
+    tDiv    décalage et aller à l'état 91
 
-    tVirg     reduce using rule 53 ($@14)
-    $default  reduce using rule 52 (SuiteAffectations)
+    tVirg     réduction par utilisation de la règle 53 ($@14)
+    $défaut  réduction par utilisation de la règle 52 (SuiteAffectations)
 
-    $@14  go to state 127
+    $@14  aller à l'état 130
 
 
-State 127
+État 130
 
    54 SuiteAffectations: tVirg tVariable tEqu Expression $@14 . SuiteAffectations
 
-    tVirg  shift, and go to state 120
+    tVirg  décalage et aller à l'état 123
 
-    SuiteAffectations  go to state 128
+    SuiteAffectations  aller à l'état 131
 
 
-State 128
+État 131
 
    54 SuiteAffectations: tVirg tVariable tEqu Expression $@14 SuiteAffectations .
 
-    $default  reduce using rule 54 (SuiteAffectations)
+    $défaut  réduction par utilisation de la règle 54 (SuiteAffectations)
