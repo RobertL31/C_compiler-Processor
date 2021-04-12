@@ -20,6 +20,7 @@ void delete_symbol_table();
 void delete_temp_table();
 
 bool check_symbol (char *name);
+bool is_constant(char *name);
 char *type_to_string(TypeValue tv);
 
 

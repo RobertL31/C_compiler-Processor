@@ -297,23 +297,28 @@ Comparaison:
  
 
 Affectation:
-        tVariable tEqu Expression {printf("Parsed an affectation\n");}{
-                                        printf("on parse la variable %s\n",$1);
-                                        if(check_symbol($1)){
-                                            
-                                            int adr_var = get_symbol_adress($1);
-                                            int adr_result = pop_temp_table();
-                                            sprintf(instr, "COP %d %d", adr_var, adr_result);
-                                            write_in_array(instr);
-                                        } else{
-                                            fprintf(stderr,"Undeclared variable %s\n", $1);
-                                            exit(1);
-                                        }
+        tVariable tEqu Expression {
+                                    if (is_constant($1)){
+                                        fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
                                     }
+                                    printf("Parsed an affectation\n");
+                                    printf("on parse la variable %s\n",$1);
+                                    if(check_symbol($1)){
+                                        int adr_var = get_symbol_adress($1);
+                                        int adr_result = pop_temp_table();
+                                        sprintf(instr, "COP %d %d", adr_var, adr_result);
+                                        write_in_array(instr);
+                                    } else {
+                                        fprintf(stderr,"FATAL ERROR - Undeclared variable %s\n", $1);
+                                        exit(1);
+                                    }
+                                }
             SuiteAffectations tPointVirg
     |
         tVariable tEqu Expression tPointVirg {
-                                            
+                                                if (is_constant($1)){
+                                                    fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
+                                                }
                                                 if(check_symbol($1)){
                                                     int adr_var = get_symbol_adress($1);
                                                     int adr_result = pop_temp_table();
@@ -328,6 +333,9 @@ Affectation:
 
 SuiteAffectations:
         tVirg tVariable tEqu Expression {
+                                            if (is_constant($2)){
+                                                fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
+                                            }
                                             if(check_symbol($2)){
                                                 int adr_var = get_symbol_adress($2);
                                                 int adr_result = pop_temp_table();
@@ -340,6 +348,9 @@ SuiteAffectations:
                                         }
     |
         tVirg tVariable tEqu Expression {
+                                            if (is_constant($2)){
+                                                fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
+                                            }
                                             if(check_symbol($2)){
                                                 int adr_var = get_symbol_adress($2);
                                                 int adr_result = pop_temp_table();

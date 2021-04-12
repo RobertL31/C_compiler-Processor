@@ -158,13 +158,21 @@ int get_symbol_adress (char *name_symbol){
 
 
 
-
 bool check_symbol (char *name){
     for(int i=symbolTable->head-1;i>=0; i--){
         if (strcmp(name, symbolTable->table[i]->name) == 0)
             return true;
     }
     return false;
+}
+
+bool is_constant(char *name){
+    for(int i=symbolTable->head-1;i>=0; i--){
+        if (strcmp(name, symbolTable->table[i]->name) == 0)
+            return symbolTable->table[i]->typeInfos.constantness;
+            
+    }
+    fprintf(stderr,"ERROR - checked constantness of non existing symbol\n");
 }
 
 
