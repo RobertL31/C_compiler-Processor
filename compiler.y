@@ -369,38 +369,43 @@ Expression:
         tPO {printf("tPO\n");}Expression tPF {printf(" tPF\n");}
     |
         Expression tPlus Expression {
-                                                        int adr1 = pop_temp_table();
-                                                        int adr2 = pop_temp_table();
-                                                        int dest = queryAdress_temp_table();
-                                                        sprintf(instr, "ADD %d %d %d",dest, adr1, adr2 );
-                                                        write_in_array(instr);
-                                                    }
+                                        int adr1 = pop_temp_table();
+                                        int adr2 = pop_temp_table();
+                                        int dest = queryAdress_temp_table();
+                                        sprintf(instr, "ADD %d %d %d",dest, adr1, adr2 );
+                                        write_in_array(instr);
+                                    }
     |
         Expression tMinus Expression {
-                                                        int adr1 = pop_temp_table();
-                                                        int adr2 = pop_temp_table();
-                                                        int dest = queryAdress_temp_table();
-                                                        sprintf(instr, "SOU %d %d %d",dest, adr2, adr1 );
-                                                        write_in_array(instr);
-                                                    }
+                                        int adr1 = pop_temp_table();
+                                        int adr2 = pop_temp_table();
+                                        int dest = queryAdress_temp_table();
+                                        sprintf(instr, "SOU %d %d %d",dest, adr2, adr1 );
+                                        write_in_array(instr);
+                                    }
     |
         Expression tMul Expression {
-                                                        int adr1 = pop_temp_table();
-                                                        int adr2 = pop_temp_table();
-                                                        int dest = queryAdress_temp_table();
-                                                        sprintf(instr, "MUL %d %d %d",dest, adr1, adr2 );
-                                                        write_in_array(instr);
-                                                    }
+                                        int adr1 = pop_temp_table();
+                                        int adr2 = pop_temp_table();
+                                        int dest = queryAdress_temp_table();
+                                        sprintf(instr, "MUL %d %d %d",dest, adr1, adr2 );
+                                        write_in_array(instr);
+                                    }
     |
         Expression tDiv Expression {
-                                                        int adr1 = pop_temp_table();
-                                                        int adr2 = pop_temp_table();
-                                                        int dest = queryAdress_temp_table();
-                                                        sprintf(instr, "DIV %d %d %d",dest, adr2, adr1 );
-                                                        write_in_array(instr);
-                                                    }
+                                        int adr1 = pop_temp_table();
+                                        int adr2 = pop_temp_table();
+                                        int dest = queryAdress_temp_table();
+                                        sprintf(instr, "DIV %d %d %d",dest, adr2, adr1 );
+                                        write_in_array(instr);
+                                    }
     |
-        tMinus Expression {printf("-num\n");} 
+        tMinus Expression {
+                            int adr1 = pop_temp_table();
+                            int dest = queryAdress_temp_table();
+                            sprintf(instr,"SOU %d 0 %d", dest, adr1);
+                            write_in_array(instr);
+                        } 
     |
         tVariable {printf("on est dans une expression avec une variable%s",$1);} {
                                         int dest = queryAdress_temp_table();
@@ -428,6 +433,7 @@ Type:
         CoreType {$$ = $1;}
     |
         tConst CoreType { TypeInfos ans = {.type = $2.type, .ptr_level = $2.ptr_level, .constantness = true};
+                            // Single line declaration, such as $$ = {...} doesnt work
                           $$ = ans; }
     ;
 
