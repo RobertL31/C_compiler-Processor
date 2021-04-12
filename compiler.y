@@ -10,6 +10,9 @@
     void yyerror(char*);
 
     char instr[100];
+    TypeInfos g_typeInfos;
+    // That variable is used in the case of int i,j,k
+    // To be able getting the type for j and k.
 
 %}
 
@@ -46,6 +49,7 @@
 %token tVirg
 %token tPointVirg
 
+%token tEsper
 
 %token tPrintf
 
@@ -139,17 +143,20 @@ Declarations:
     ;
 
 Declaration:
-        Type tVariable tPointVirg {add_symbol($2);}
+        Type tVariable tPointVirg {add_symbol($2,$1);}
         {printf("Parsed a declaration\n");}
     |   
-        Type tVariable {add_symbol($2);} SuiteVariables tPointVirg
+        Type tVariable {add_symbol($2,$1);
+                        g_typeInfos = $1;
+                        } 
+        SuiteVariables tPointVirg
         {printf("Parsed a (multiple) declaration\n");}
     ;
 
 SuiteVariables:
-        tVirg tVariable {add_symbol($2);}
+        tVirg tVariable {add_symbol($2,g_typeInfos);}
     |
-        tVirg tVariable {add_symbol($2);} SuiteVariables
+        tVirg tVariable {add_symbol($2,g_typeInfos);} SuiteVariables
     ;
 
 
@@ -415,7 +422,7 @@ Type:
 
 CoreType:
         tInt PointerStars {TypeInfos ans = {.type = INT, .ptr_level = $2, .constantness = false}; 
-                          $$ = ans; }
+                          $$ = ans;}
     ;
 
 PointerStars:

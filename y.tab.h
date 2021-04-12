@@ -66,22 +66,23 @@ extern int yydebug;
     tBackT = 272,
     tVirg = 273,
     tPointVirg = 274,
-    tPrintf = 275,
-    tIf = 276,
-    tElse = 277,
-    tWhile = 278,
-    tReturn = 279,
-    tLESS_THAN_OR_EQUAL_TO = 280,
-    tLESS_THAN = 281,
-    tGREATER_THAN_OR_EQUAL_TO = 282,
-    tGREATER_THAN = 283,
-    tDIFFERENT = 284,
-    tEQUALCOMPARISON = 285,
-    tNumber = 286,
-    tDecimal = 287,
-    tExpo = 288,
-    tVariable = 289,
-    ERROR = 290
+    tEsper = 275,
+    tPrintf = 276,
+    tIf = 277,
+    tElse = 278,
+    tWhile = 279,
+    tReturn = 280,
+    tLESS_THAN_OR_EQUAL_TO = 281,
+    tLESS_THAN = 282,
+    tGREATER_THAN_OR_EQUAL_TO = 283,
+    tGREATER_THAN = 284,
+    tDIFFERENT = 285,
+    tEQUALCOMPARISON = 286,
+    tNumber = 287,
+    tDecimal = 288,
+    tExpo = 289,
+    tVariable = 290,
+    ERROR = 291
   };
 #endif
 /* Tokens.  */
@@ -102,28 +103,29 @@ extern int yydebug;
 #define tBackT 272
 #define tVirg 273
 #define tPointVirg 274
-#define tPrintf 275
-#define tIf 276
-#define tElse 277
-#define tWhile 278
-#define tReturn 279
-#define tLESS_THAN_OR_EQUAL_TO 280
-#define tLESS_THAN 281
-#define tGREATER_THAN_OR_EQUAL_TO 282
-#define tGREATER_THAN 283
-#define tDIFFERENT 284
-#define tEQUALCOMPARISON 285
-#define tNumber 286
-#define tDecimal 287
-#define tExpo 288
-#define tVariable 289
-#define ERROR 290
+#define tEsper 275
+#define tPrintf 276
+#define tIf 277
+#define tElse 278
+#define tWhile 279
+#define tReturn 280
+#define tLESS_THAN_OR_EQUAL_TO 281
+#define tLESS_THAN 282
+#define tGREATER_THAN_OR_EQUAL_TO 283
+#define tGREATER_THAN 284
+#define tDIFFERENT 285
+#define tEQUALCOMPARISON 286
+#define tNumber 287
+#define tDecimal 288
+#define tExpo 289
+#define tVariable 290
+#define ERROR 291
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 18 "compiler.y"
+#line 21 "compiler.y"
 
     char * var;
     int nb;
@@ -131,7 +133,7 @@ union YYSTYPE
     float fl_nb;
     TypeInfos typeInfos;
 
-#line 135 "y.tab.h"
+#line 137 "y.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

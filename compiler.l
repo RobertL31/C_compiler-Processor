@@ -32,6 +32,8 @@ int				{return tInt;}
 ","				{return tVirg;}
 ";"				{return tPointVirg;}
 
+"&"				{return tEsper;}
+
 main 			{return tMAIN;}	
 printf			{return tPrintf;}
 

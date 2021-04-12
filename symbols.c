@@ -12,6 +12,7 @@
 typedef struct s_symbol{
     char * name;
     int depth;
+    TypeInfos typeInfos;
 } Symbol;
 
 //structure pour la table temporaire
@@ -107,11 +108,12 @@ int queryAdress_temp_table(){
 
 }
 
-void add_symbol(char* name){
+void add_symbol(char* name, TypeInfos typeInfos){
     
     Symbol* sym = malloc(sizeof(Symbol));
     sym->name = name;
     sym->depth = actualDepth;
+    sym->typeInfos = typeInfos;
 
     // Adding symbol to the first available space (head) of the table
     symbolTable->table[symbolTable->head] = sym; 
@@ -130,8 +132,8 @@ void depth_decrease(){
     
     // while the last element of the table is is deaper than actual depth
     while( symbolTable->table[symbolTable->head-1]->depth > actualDepth){
-        free(symbolTable->table[symbolTable->head]);
         symbolTable->head--;
+        free(symbolTable->table[symbolTable->head]);
         if( empty_table() ) break;
     }
 }
@@ -154,10 +156,7 @@ int get_symbol_adress (char *name_symbol){
     return -1;
 }
 
-void display_symbol(Symbol *s){
-    printf("| Name : %s\n", s->name);
-    printf("| Depth : %d\n", s->depth);
-}
+
 
 
 bool check_symbol (char *name){
@@ -169,6 +168,15 @@ bool check_symbol (char *name){
 }
 
 
+void display_symbol(Symbol *s){
+    printf("| Name : %s\n", s->name);
+    printf("| Depth : %d\n", s->depth);
+    printf("| Type : %s\n", type_to_string(s->typeInfos.type) );
+    printf("| Ptr_level : %d\n", s->typeInfos.ptr_level);
+    printf("| Constant : ");
+        printf((s->typeInfos.constantness ? "Yes\n":"No\n"));
+
+}
 
 void display_symbol_table(){
     printf("---------------------\n");
@@ -179,4 +187,13 @@ void display_symbol_table(){
     }
 }
 
+
+char *type_to_string(TypeValue tv){
+    switch(tv){
+        case INT:
+            return "INT";
+        default:
+            return "Unknown type";
+    }
+}
 

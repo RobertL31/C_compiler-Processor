@@ -3,6 +3,7 @@ Terminals unused in grammar
     tSpace
     tBackN
     tBackT
+    tEsper
     tReturn
     ERROR
 
@@ -162,161 +163,162 @@ Terminals, with rules where they appear
     tBackT (272)
     tVirg (273) 12 23 25 52 54
     tPointVirg (274) 20 22 35 50 51
-    tPrintf (275) 35
-    tIf <nb> (276) 40
-    tElse (277) 38
-    tWhile <duo> (278) 34
-    tReturn (279)
-    tLESS_THAN_OR_EQUAL_TO (280) 41
-    tLESS_THAN (281) 42
-    tGREATER_THAN_OR_EQUAL_TO (282) 43
-    tGREATER_THAN (283) 44
-    tDIFFERENT (284) 45
-    tEQUALCOMPARISON (285) 46
-    tNumber <nb> (286) 67
-    tDecimal <nb> (287) 71
-    tExpo <nb> (288) 69
-    tVariable <var> (289) 6 10 20 22 23 25 35 50 51 52 54 63
-    ERROR (290)
+    tEsper (275)
+    tPrintf (276) 35
+    tIf <nb> (277) 40
+    tElse (278) 38
+    tWhile <duo> (279) 34
+    tReturn (280)
+    tLESS_THAN_OR_EQUAL_TO (281) 41
+    tLESS_THAN (282) 42
+    tGREATER_THAN_OR_EQUAL_TO (283) 43
+    tGREATER_THAN (284) 44
+    tDIFFERENT (285) 45
+    tEQUALCOMPARISON (286) 46
+    tNumber <nb> (287) 67
+    tDecimal <nb> (288) 71
+    tExpo <nb> (289) 69
+    tVariable <var> (290) 6 10 20 22 23 25 35 50 51 52 54 63
+    ERROR (291)
 
 
 Nonterminals, with rules where they appear
 
-    $accept (36)
+    $accept (37)
         on left: 0
-    File (37)
+    File (38)
         on left: 2
         on right: 0
-    $@1 (38)
+    $@1 (39)
         on left: 1
         on right: 2
-    Fonctions (39)
+    Fonctions (40)
         on left: 3 4
         on right: 2 3
-    Fonction (40)
+    Fonction (41)
         on left: 5 6
         on right: 3 4
-    FonctionMain (41)
+    FonctionMain (42)
         on left: 7
         on right: 5
-    Params (42)
+    Params (43)
         on left: 8 9
         on right: 6 7
-    Param (43)
+    Param (44)
         on left: 10
         on right: 9 12
-    SuiteParams (44)
+    SuiteParams (45)
         on left: 11 12
         on right: 9 12
-    Body (45)
+    Body (46)
         on left: 16
         on right: 6 7 34 38 40
-    $@2 (46)
+    $@2 (47)
         on left: 13
         on right: 16
-    $@3 (47)
+    $@3 (48)
         on left: 14
         on right: 16
-    $@4 (48)
+    $@4 (49)
         on left: 15
         on right: 16
-    Declarations (49)
+    Declarations (50)
         on left: 17 18
         on right: 16 18
-    Declaration (50)
+    Declaration (51)
         on left: 20 22
         on right: 18
-    $@5 (51)
+    $@5 (52)
         on left: 19
         on right: 20
-    $@6 (52)
+    $@6 (53)
         on left: 21
         on right: 22
-    SuiteVariables (53)
+    SuiteVariables (54)
         on left: 23 25
         on right: 22 25
-    $@7 (54)
+    $@7 (55)
         on left: 24
         on right: 25
-    Instructions (55)
+    Instructions (56)
         on left: 26 27
         on right: 16 27
-    Instruction (56)
+    Instruction (57)
         on left: 28 29 30 31
         on right: 27
-    WhileInstruction (57)
+    WhileInstruction (58)
         on left: 34
         on right: 30
-    $@8 (58)
+    $@8 (59)
         on left: 32
         on right: 34
-    $@9 (59)
+    $@9 (60)
         on left: 33
         on right: 34
-    Print (60)
+    Print (61)
         on left: 35
         on right: 31
-    IfInstruction (61)
+    IfInstruction (62)
         on left: 36 38
         on right: 29
-    $@10 (62)
+    $@10 (63)
         on left: 37
         on right: 38
-    IfPattern <nb> (63)
+    IfPattern <nb> (64)
         on left: 40
         on right: 36 38
-    $@11 (64)
+    $@11 (65)
         on left: 39
         on right: 40
-    Comparaison (65)
+    Comparaison (66)
         on left: 41 42 43 44 45 46 47
         on right: 34 40
-    Affectation (66)
+    Affectation (67)
         on left: 50 51
         on right: 28
-    $@12 (67)
+    $@12 (68)
         on left: 48
         on right: 50
-    $@13 (68)
+    $@13 (69)
         on left: 49
         on right: 50
-    SuiteAffectations (69)
+    SuiteAffectations (70)
         on left: 52 54
         on right: 50 54
-    $@14 (70)
+    $@14 (71)
         on left: 53
         on right: 54
-    Expression (71)
+    Expression (72)
         on left: 56 57 58 59 60 61 63 65
         on right: 41 42 43 44 45 46 47 50 51 52 54 56 57 58 59 60 61
-    $@15 (72)
+    $@15 (73)
         on left: 55
         on right: 56
-    $@16 (73)
+    $@16 (74)
         on left: 62
         on right: 63
-    $@17 (74)
+    $@17 (75)
         on left: 64
         on right: 65
-    Value <nb> (75)
+    Value <nb> (76)
         on left: 67 69 71
         on right: 65
-    $@18 (76)
+    $@18 (77)
         on left: 66
         on right: 67
-    $@19 (77)
+    $@19 (78)
         on left: 68
         on right: 69
-    $@20 (78)
+    $@20 (79)
         on left: 70
         on right: 71
-    Type <typeInfos> (79)
+    Type <typeInfos> (80)
         on left: 72 73
         on right: 6 7 10 20 22
-    CoreType <typeInfos> (80)
+    CoreType <typeInfos> (81)
         on left: 74
         on right: 72 73
-    PointerStars <nb> (81)
+    PointerStars <nb> (82)
         on left: 75 76
         on right: 74 76
 
