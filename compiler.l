@@ -1,4 +1,5 @@
 %{
+	#include "global.h"
 	#include "y.tab.h"
 	#include "symbols.h"
     typedef enum {
@@ -46,7 +47,6 @@ return          {return tReturn;}
 "!="		    {return tDIFFERENT; }
 "=="		    {return tEQUALCOMPARISON; }
 
-"*"				{return tStar;}
 
 [0-9]+ 			{	get_yylval(IS_NUMBER);
 					return tNumber;}	

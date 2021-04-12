@@ -2,6 +2,7 @@
     #include <stdio.h>
     #include <stdlib.h>
 
+    #include "global.h"
     #include "symbols.h"
     #include "assembly.h"
     
@@ -10,17 +11,9 @@
 
     char instr[100];
 
-    typedef enum {
-        INT
-    } TypeValue;
-
-    typedef struct TypeInfos_s {
-        int ptr_level;
-        bool constantness;
-        TypeValue type;
-    } TypeInfos;
-
 %}
+
+
 
 %union {
     char * var;
@@ -41,7 +34,6 @@
 %token tDiv
 %token tEqu
 
-%token tStar
 
 %token tPO
 %token tPF
@@ -417,17 +409,19 @@ Value:
 Type:
         CoreType {$$ = $1;}
     |
-        tConst CoreType { $$ = {.type = $2.type, .ptr_level = $2.ptr_level, .constantness = true}; }
+        tConst CoreType { TypeInfos ans = {.type = $2.type, .ptr_level = $2.ptr_level, .constantness = true};
+                          $$ = ans; }
     ;
 
 CoreType:
-        tInt PointerStars {$$= {.type = INT, .ptr_level = $2, .constantness = false}; }
+        tInt PointerStars {TypeInfos ans = {.type = INT, .ptr_level = $2, .constantness = false}; 
+                          $$ = ans; }
     ;
 
 PointerStars:
         /*None*/ {$$=0;}
     |
-        tStar PointerStars {$$ = 1 + $2;}
+        tMul PointerStars {$$ = 1 + $2;}
 ;
 
 %%

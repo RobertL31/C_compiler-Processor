@@ -351,8 +351,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 35
-#define YY_END_OF_BUFFER 36
+#define YY_NUM_RULES 34
+#define YY_END_OF_BUFFER 35
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -362,13 +362,13 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[71] =
     {   0,
-        0,    0,   36,   34,   14,   13,   12,   34,    8,    9,
-        5,    3,   15,    4,   31,    6,   30,   16,   24,    7,
-       26,   33,   32,   33,   33,   33,   33,   33,   33,   33,
-       10,   11,   27,   31,   31,   30,   32,   23,   28,   25,
-       33,   32,   33,   33,   19,   33,   33,   33,   33,   33,
-       33,   33,    2,   33,   33,   33,   33,   33,   20,   17,
-       33,   33,   33,    1,   33,   33,   21,   18,   22,    0
+        0,    0,   35,   33,   14,   13,   12,   33,    8,    9,
+        5,    3,   15,    4,   30,    6,   29,   16,   24,    7,
+       26,   32,   31,   32,   32,   32,   32,   32,   32,   32,
+       10,   11,   27,   30,   30,   29,   31,   23,   28,   25,
+       32,   31,   32,   32,   19,   32,   32,   32,   32,   32,
+       32,   32,    2,   32,   32,   32,   32,   32,   20,   17,
+       32,   32,   32,    1,   32,   32,   21,   18,   22,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -487,6 +487,7 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "compiler.l"
 #line 2 "compiler.l"
+	#include "global.h"
 	#include "y.tab.h"
 	#include "symbols.h"
     typedef enum {
@@ -496,8 +497,8 @@ char *yytext;
 	} UNION_TYPE;
 
 	void get_yylval(UNION_TYPE a);
-#line 500 "lex.yy.c"
 #line 501 "lex.yy.c"
+#line 502 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -714,9 +715,9 @@ YY_DECL
 		}
 
 	{
-#line 14 "compiler.l"
+#line 15 "compiler.l"
 
-#line 720 "lex.yy.c"
+#line 721 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -775,187 +776,182 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 15 "compiler.l"
+#line 16 "compiler.l"
 {return tConst;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 16 "compiler.l"
+#line 17 "compiler.l"
 {return tInt;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 17 "compiler.l"
+#line 18 "compiler.l"
 {return tPlus;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 18 "compiler.l"
+#line 19 "compiler.l"
 {return tMinus;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 19 "compiler.l"
+#line 20 "compiler.l"
 {return tMul;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 20 "compiler.l"
+#line 21 "compiler.l"
 {return tDiv;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 21 "compiler.l"
+#line 22 "compiler.l"
 {return tEqu;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 22 "compiler.l"
+#line 23 "compiler.l"
 {return tPO;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 23 "compiler.l"
+#line 24 "compiler.l"
 {return tPF;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 24 "compiler.l"
+#line 25 "compiler.l"
 {	depth_increase();
 					return tAO;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 26 "compiler.l"
+#line 27 "compiler.l"
 {	depth_decrease();
 					return tAF;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 28 "compiler.l"
+#line 29 "compiler.l"
 {/*return tSpace;*/}
 	YY_BREAK
 case 13:
 /* rule 13 can match eol */
 YY_RULE_SETUP
-#line 29 "compiler.l"
+#line 30 "compiler.l"
 {/*return tBackN;*/}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 30 "compiler.l"
+#line 31 "compiler.l"
 {/*return tBackT;*/}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 31 "compiler.l"
+#line 32 "compiler.l"
 {return tVirg;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 32 "compiler.l"
+#line 33 "compiler.l"
 {return tPointVirg;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 34 "compiler.l"
+#line 35 "compiler.l"
 {return tMAIN;}	
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 35 "compiler.l"
+#line 36 "compiler.l"
 {return tPrintf;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 38 "compiler.l"
+#line 39 "compiler.l"
 {return tIf;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 39 "compiler.l"
+#line 40 "compiler.l"
 {return tElse;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 40 "compiler.l"
+#line 41 "compiler.l"
 {return tWhile;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 41 "compiler.l"
+#line 42 "compiler.l"
 {return tReturn;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 42 "compiler.l"
+#line 43 "compiler.l"
 {return tLESS_THAN_OR_EQUAL_TO; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 43 "compiler.l"
+#line 44 "compiler.l"
 {return tLESS_THAN; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 44 "compiler.l"
+#line 45 "compiler.l"
 {return tGREATER_THAN_OR_EQUAL_TO; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 45 "compiler.l"
+#line 46 "compiler.l"
 {return tGREATER_THAN; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 46 "compiler.l"
+#line 47 "compiler.l"
 {return tDIFFERENT; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 47 "compiler.l"
+#line 48 "compiler.l"
 {return tEQUALCOMPARISON; }
 	YY_BREAK
 case 29:
-YY_RULE_SETUP
-#line 49 "compiler.l"
-{return tStar;}
-	YY_BREAK
-case 30:
 YY_RULE_SETUP
 #line 51 "compiler.l"
 {	get_yylval(IS_NUMBER);
 					return tNumber;}	
 	YY_BREAK
-case 31:
+case 30:
 YY_RULE_SETUP
 #line 53 "compiler.l"
 {	get_yylval(IS_DECIMAL);
 					return tDecimal;}
 	YY_BREAK
-case 32:
+case 31:
 YY_RULE_SETUP
 #line 55 "compiler.l"
 {	get_yylval(IS_STRING);
 					return tExpo;}
 	YY_BREAK
-case 33:
+case 32:
 YY_RULE_SETUP
 #line 58 "compiler.l"
 { get_yylval(IS_STRING);
 						return tVariable;}
 	YY_BREAK
-case 34:
+case 33:
 YY_RULE_SETUP
 #line 61 "compiler.l"
 {printf("\nEEEERRRRRRRROOOORRRR\n");}
 	YY_BREAK
-case 35:
+case 34:
 YY_RULE_SETUP
 #line 63 "compiler.l"
 ECHO;
 	YY_BREAK
-#line 959 "lex.yy.c"
+#line 955 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
