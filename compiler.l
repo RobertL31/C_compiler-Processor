@@ -48,7 +48,8 @@ return          {return tReturn;}
 ">"		        {return tGREATER_THAN; }
 "!="		    {return tDIFFERENT; }
 "=="		    {return tEQUALCOMPARISON; }
-
+"/*"			{return tOpenC;}
+"*/"			{return tCloseC;}
 
 [0-9]+ 			{	get_yylval(IS_NUMBER);
 					return tNumber;}	
@@ -56,6 +57,7 @@ return          {return tReturn;}
 					return tDecimal;}
 [0-9]*\^[0-9]*	{	get_yylval(IS_STRING);
 					return tExpo;}
+
 
 [a-zA-Z][0-9A-Za-z_]*	{ get_yylval(IS_STRING);
 						return tVariable;}

@@ -42,6 +42,10 @@
 %token tPF
 %token tAO
 %token tAF
+%token tOpenC
+%token tCloseC
+%token tMot
+
 
 %token tSpace
 %token tBackN
@@ -96,6 +100,8 @@ File:
     ;
 
 Fonctions:
+        BodyComments Fonctions
+    |
         Fonction Fonctions
     | 
         Fonction
@@ -135,11 +141,23 @@ Body:
         {printf("Finished Body\n");}
     ;
 
-
+BodyComments:
+        tOpenC Comments tCloseC {printf("Parsed a comment\n");}
+    ;
+Comments:
+        /*None*/
+    |
+        Comment Comments
+    ;
+Comment:
+        tVariable
+    ;
 Declarations:
         /*None*/
     |
-        Declaration Declarations   
+        Declaration Declarations
+    |
+        BodyComments Declarations
     ;
 
 Declaration:
@@ -164,6 +182,8 @@ Instructions:
         /*None*/
     |
         Instruction Instructions
+    |
+        BodyComments Instructions
     ;
 
 
