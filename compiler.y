@@ -181,7 +181,8 @@ Instruction:
 WhileInstruction:
     tWhile {
                 int line_number = get_line_number();
-                $1[0] = line_number;
+                $1[0] = line_number+1;
+                // $1[0] now contains the start line of the compare statement evaluation
             }      
     tPO Comparaison tPF {
                                     int compare_result_adress = pop_temp_table();
@@ -194,8 +195,8 @@ WhileInstruction:
             int line_number = get_line_number();
             patch($1[1], line_number+2);
             // + 2 because we want it to jump after the following JMP instruction
-            sprintf(instr,"JMP %d", $1[1] - $1[0]);
-            // $1[0]-$1[1] because we want to jump back to the start of compare statement evaluation,
+            sprintf(instr,"JMP %d", $1[0]);
+            // $1[0] because we want to jump back to the start of compare statement evaluation,
             // that is the current line when tWhile is parsed.
             write_in_array(instr);
         }

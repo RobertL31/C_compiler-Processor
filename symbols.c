@@ -7,7 +7,7 @@
 #include "symbols.h"
 
 #define SYMBOL_TABLE_SIZE 100
-#define TEMP_TABLE_SIZE 200
+#define TEMP_TABLE_SIZE 10
 
 typedef struct s_symbol{
     char * name;

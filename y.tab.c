@@ -598,11 +598,11 @@ static const yytype_int16 yyrline[] =
        0,    94,    94,    94,    99,   101,   105,   107,   111,   115,
      118,   123,   126,   129,   133,   134,   134,   133,   139,   142,
      146,   146,   149,   149,   157,   159,   159,   163,   166,   171,
-     173,   175,   177,   182,   186,   182,   206,   221,   229,   229,
-     244,   244,   257,   265,   286,   296,   312,   321,   337,   359,
-     359,   377,   394,   409,   409,   428,   428,   430,   438,   446,
-     454,   462,   474,   474,   481,   481,   489,   489,   491,   491,
-     493,   493,   497,   499,   505,   510,   512
+     173,   175,   177,   182,   187,   182,   207,   222,   230,   230,
+     245,   245,   258,   266,   287,   297,   313,   322,   338,   360,
+     360,   378,   395,   410,   410,   429,   429,   431,   439,   447,
+     455,   463,   475,   475,   482,   482,   490,   490,   492,   492,
+     494,   494,   498,   500,   506,   511,   513
 };
 #endif
 
@@ -1566,13 +1566,14 @@ yyreduce:
 #line 182 "compiler.y"
            {
                 int line_number = get_line_number();
-                (yyvsp[0].duo)[0] = line_number;
+                (yyvsp[0].duo)[0] = line_number+1;
+                // $1[0] now contains the start line of the compare statement evaluation
             }
-#line 1572 "y.tab.c"
+#line 1573 "y.tab.c"
     break;
 
   case 34:
-#line 186 "compiler.y"
+#line 187 "compiler.y"
                         {
                                     int compare_result_adress = pop_temp_table();
                                     sprintf(instr,"JMF %d", compare_result_adress);
@@ -1580,25 +1581,25 @@ yyreduce:
                                     (yyvsp[-4].duo)[1] = line_index;
                                     // and we suppose the compare statement to be one assembly line only
                                 }
-#line 1584 "y.tab.c"
+#line 1585 "y.tab.c"
     break;
 
   case 35:
-#line 193 "compiler.y"
+#line 194 "compiler.y"
          {
             int line_number = get_line_number();
             patch((yyvsp[-6].duo)[1], line_number+2);
             // + 2 because we want it to jump after the following JMP instruction
-            sprintf(instr,"JMP %d", (yyvsp[-6].duo)[1] - (yyvsp[-6].duo)[0]);
-            // $1[0]-$1[1] because we want to jump back to the start of compare statement evaluation,
+            sprintf(instr,"JMP %d", (yyvsp[-6].duo)[0]);
+            // $1[0] because we want to jump back to the start of compare statement evaluation,
             // that is the current line when tWhile is parsed.
             write_in_array(instr);
         }
-#line 1598 "y.tab.c"
+#line 1599 "y.tab.c"
     break;
 
   case 36:
-#line 206 "compiler.y"
+#line 207 "compiler.y"
                                          {
                                             if(check_symbol((yyvsp[-2].var))){
                                                 int adr_var = get_symbol_adress((yyvsp[-2].var));
@@ -1609,11 +1610,11 @@ yyreduce:
                                                 exit(1);
                                             }
                                         }
-#line 1613 "y.tab.c"
+#line 1614 "y.tab.c"
     break;
 
   case 37:
-#line 221 "compiler.y"
+#line 222 "compiler.y"
                   {
                     //That part can't be managed in IfPattern because we don't 
                     // know about if there is a else or not (line_number +1 / 2)
@@ -1621,11 +1622,11 @@ yyreduce:
                     patch((yyvsp[0].nb), line_number+1);
                     // + 1 is here because we want jmf to jump to the instruction after the if body end.
                     }
-#line 1625 "y.tab.c"
+#line 1626 "y.tab.c"
     break;
 
   case 38:
-#line 229 "compiler.y"
+#line 230 "compiler.y"
                         {
                             int line_number = get_line_number();
                             patch((yyvsp[-1].nb), line_number+2);
@@ -1633,20 +1634,20 @@ yyreduce:
                             int line_index = write_in_array(instr);
                             (yyvsp[-1].nb) = line_index;
                         }
-#line 1637 "y.tab.c"
+#line 1638 "y.tab.c"
     break;
 
   case 39:
-#line 236 "compiler.y"
+#line 237 "compiler.y"
              {
                 int line_number = get_line_number();
                 patch((yyvsp[-3].nb), line_number+1);
             }
-#line 1646 "y.tab.c"
+#line 1647 "y.tab.c"
     break;
 
   case 40:
-#line 244 "compiler.y"
+#line 245 "compiler.y"
                                 {
                                     int compare_result_adress = pop_temp_table();
                                     sprintf(instr,"JMF %d", compare_result_adress);
@@ -1655,17 +1656,17 @@ yyreduce:
                                     // IfPattern return where is the if instruction, in case of else
                                     // We stock the value of line, so that we can patch the correct if statement when body is parsed.
                                 }
-#line 1659 "y.tab.c"
+#line 1660 "y.tab.c"
     break;
 
   case 41:
-#line 252 "compiler.y"
+#line 253 "compiler.y"
              {(yyval.nb) = (yyvsp[-5].nb);}
-#line 1665 "y.tab.c"
+#line 1666 "y.tab.c"
     break;
 
   case 42:
-#line 257 "compiler.y"
+#line 258 "compiler.y"
                                                    {
                                                         int adr1 = pop_temp_table();
                                                         int adr2 = pop_temp_table();
@@ -1673,11 +1674,11 @@ yyreduce:
                                                         sprintf(instr,"EQU %d %d %d", adr_result, adr2, adr1);
                                                         write_in_array(instr);
                                                     }
-#line 1677 "y.tab.c"
+#line 1678 "y.tab.c"
     break;
 
   case 43:
-#line 265 "compiler.y"
+#line 266 "compiler.y"
                                              {
                                                 // Each time, we consider !a to be 1-a, due to the fact boolean are just 0 and 1
                                                 int adr1 = pop_temp_table();
@@ -1698,11 +1699,11 @@ yyreduce:
                                                 sprintf(instr,"SOU %d %d %d", adr_final_result, adr_of_1, adr_temp_result);
                                                 write_in_array(instr);
                                             }
-#line 1702 "y.tab.c"
+#line 1703 "y.tab.c"
     break;
 
   case 44:
-#line 286 "compiler.y"
+#line 287 "compiler.y"
                                                 {
                                                     int adr1 = pop_temp_table();
                                                     int adr2 = pop_temp_table();
@@ -1712,11 +1713,11 @@ yyreduce:
                                                     // So that, a > b produces a stack with b on top.
                                                     write_in_array(instr);
                                                 }
-#line 1716 "y.tab.c"
+#line 1717 "y.tab.c"
     break;
 
   case 45:
-#line 296 "compiler.y"
+#line 297 "compiler.y"
                                                          {
                                                             int adr1 = pop_temp_table();
                                                             int adr2 = pop_temp_table();
@@ -1732,11 +1733,11 @@ yyreduce:
                                                             sprintf(instr,"SOU %d %d %d", adr_final_result, adr_of_1, adr_temp_result);
                                                             write_in_array(instr);
                                                         }
-#line 1736 "y.tab.c"
+#line 1737 "y.tab.c"
     break;
 
   case 46:
-#line 312 "compiler.y"
+#line 313 "compiler.y"
                                              {
                                                 int adr1 = pop_temp_table();
                                                 int adr2 = pop_temp_table();
@@ -1745,11 +1746,11 @@ yyreduce:
                                                 write_in_array(instr);
                         
                                             }
-#line 1749 "y.tab.c"
+#line 1750 "y.tab.c"
     break;
 
   case 47:
-#line 321 "compiler.y"
+#line 322 "compiler.y"
                                                             {
                                                                 int adr1 = pop_temp_table();
                                                                 int adr2 = pop_temp_table();
@@ -1765,11 +1766,11 @@ yyreduce:
                                                                 sprintf(instr,"SOU %d %d %d", adr_final_result, adr_of_1, adr_temp_result);
                                                                 write_in_array(instr);
                                                             }
-#line 1769 "y.tab.c"
+#line 1770 "y.tab.c"
     break;
 
   case 48:
-#line 337 "compiler.y"
+#line 338 "compiler.y"
                        {
                             // Just Expression is something like if(i).
                             // We consider the condition to be true if i != 0
@@ -1787,11 +1788,11 @@ yyreduce:
                             sprintf(instr,"SOU %d %d %d", adr_final_result, adr_of_1, adr_temp_result);
                             write_in_array(instr);
                         }
-#line 1791 "y.tab.c"
+#line 1792 "y.tab.c"
     break;
 
   case 49:
-#line 359 "compiler.y"
+#line 360 "compiler.y"
                                   {
                                     printf("Parsed an affectation\n");
                                     printf("on parse la variable %s\n",(yyvsp[-2].var));
@@ -1808,11 +1809,11 @@ yyreduce:
                                         exit(1);
                                     }
                                 }
-#line 1812 "y.tab.c"
+#line 1813 "y.tab.c"
     break;
 
   case 51:
-#line 377 "compiler.y"
+#line 378 "compiler.y"
                                              {
                                                 if(check_symbol((yyvsp[-3].var))){
                                                     if (is_constant((yyvsp[-3].var))){
@@ -1827,11 +1828,11 @@ yyreduce:
                                                         exit(1);
                                                     }
                                             }
-#line 1831 "y.tab.c"
+#line 1832 "y.tab.c"
     break;
 
   case 52:
-#line 394 "compiler.y"
+#line 395 "compiler.y"
                                         {
                                             if(check_symbol((yyvsp[-2].var))){
                                                 if (is_constant((yyvsp[-2].var))){
@@ -1846,11 +1847,11 @@ yyreduce:
                                                 exit(1);
                                             }
                                         }
-#line 1850 "y.tab.c"
+#line 1851 "y.tab.c"
     break;
 
   case 53:
-#line 409 "compiler.y"
+#line 410 "compiler.y"
                                         {
                                             if(check_symbol((yyvsp[-2].var))){
                                                 if (is_constant((yyvsp[-2].var))){
@@ -1865,23 +1866,23 @@ yyreduce:
                                                 exit(1);
                                             }
                                         }
-#line 1869 "y.tab.c"
+#line 1870 "y.tab.c"
     break;
 
   case 55:
-#line 428 "compiler.y"
+#line 429 "compiler.y"
             {printf("tPO\n");}
-#line 1875 "y.tab.c"
+#line 1876 "y.tab.c"
     break;
 
   case 56:
-#line 428 "compiler.y"
+#line 429 "compiler.y"
                                              {printf(" tPF\n");}
-#line 1881 "y.tab.c"
+#line 1882 "y.tab.c"
     break;
 
   case 57:
-#line 430 "compiler.y"
+#line 431 "compiler.y"
                                     {
                                         int adr1 = pop_temp_table();
                                         int adr2 = pop_temp_table();
@@ -1889,11 +1890,11 @@ yyreduce:
                                         sprintf(instr, "ADD %d %d %d",dest, adr1, adr2 );
                                         write_in_array(instr);
                                     }
-#line 1893 "y.tab.c"
+#line 1894 "y.tab.c"
     break;
 
   case 58:
-#line 438 "compiler.y"
+#line 439 "compiler.y"
                                      {
                                         int adr1 = pop_temp_table();
                                         int adr2 = pop_temp_table();
@@ -1901,11 +1902,11 @@ yyreduce:
                                         sprintf(instr, "SOU %d %d %d",dest, adr2, adr1 );
                                         write_in_array(instr);
                                     }
-#line 1905 "y.tab.c"
+#line 1906 "y.tab.c"
     break;
 
   case 59:
-#line 446 "compiler.y"
+#line 447 "compiler.y"
                                    {
                                         int adr1 = pop_temp_table();
                                         int adr2 = pop_temp_table();
@@ -1913,11 +1914,11 @@ yyreduce:
                                         sprintf(instr, "MUL %d %d %d",dest, adr1, adr2 );
                                         write_in_array(instr);
                                     }
-#line 1917 "y.tab.c"
+#line 1918 "y.tab.c"
     break;
 
   case 60:
-#line 454 "compiler.y"
+#line 455 "compiler.y"
                                    {
                                         int adr1 = pop_temp_table();
                                         int adr2 = pop_temp_table();
@@ -1925,11 +1926,11 @@ yyreduce:
                                         sprintf(instr, "DIV %d %d %d",dest, adr2, adr1 );
                                         write_in_array(instr);
                                     }
-#line 1929 "y.tab.c"
+#line 1930 "y.tab.c"
     break;
 
   case 61:
-#line 462 "compiler.y"
+#line 463 "compiler.y"
                           {
                             int adr1 = pop_temp_table();
                             int dest = queryAdress_temp_table();
@@ -1941,113 +1942,113 @@ yyreduce:
                             sprintf(instr,"SOU %d %d %d", dest, adr_of_0, adr1);
                             write_in_array(instr);
                         }
-#line 1945 "y.tab.c"
+#line 1946 "y.tab.c"
     break;
 
   case 62:
-#line 474 "compiler.y"
+#line 475 "compiler.y"
                   {printf("on est dans une expression avec une variable%s",(yyvsp[0].var));}
-#line 1951 "y.tab.c"
+#line 1952 "y.tab.c"
     break;
 
   case 63:
-#line 474 "compiler.y"
+#line 475 "compiler.y"
                                                                                  {
                                         int dest = queryAdress_temp_table();
                                         int sym_adr = get_symbol_adress((yyvsp[-1].var));
                                         sprintf(instr, "COP %d @%d", dest, sym_adr);
                                         write_in_array(instr);
                                         }
-#line 1962 "y.tab.c"
+#line 1963 "y.tab.c"
     break;
 
   case 64:
-#line 481 "compiler.y"
+#line 482 "compiler.y"
               {printf("on est dans une expression %d\n",(yyvsp[0].nb));}
-#line 1968 "y.tab.c"
+#line 1969 "y.tab.c"
     break;
 
   case 65:
-#line 481 "compiler.y"
+#line 482 "compiler.y"
                                                               {
                                     int adr = queryAdress_temp_table();
                                     sprintf(instr, "AFC %d %d", adr, (yyvsp[-1].nb) );
                                     write_in_array(instr);
                                 }
-#line 1978 "y.tab.c"
+#line 1979 "y.tab.c"
     break;
 
   case 66:
-#line 489 "compiler.y"
+#line 490 "compiler.y"
                 {printf("Parsed number, value is %d\n",(yyvsp[0].nb));}
-#line 1984 "y.tab.c"
+#line 1985 "y.tab.c"
     break;
 
   case 67:
-#line 489 "compiler.y"
+#line 490 "compiler.y"
                                                              {(yyval.nb)=(yyvsp[-1].nb);}
-#line 1990 "y.tab.c"
+#line 1991 "y.tab.c"
     break;
 
   case 68:
-#line 491 "compiler.y"
+#line 492 "compiler.y"
               {printf("Parsed number, value is %d\n",(yyvsp[0].nb));}
-#line 1996 "y.tab.c"
+#line 1997 "y.tab.c"
     break;
 
   case 69:
-#line 491 "compiler.y"
+#line 492 "compiler.y"
                                                            {(yyval.nb)=(yyvsp[-1].nb);}
-#line 2002 "y.tab.c"
+#line 2003 "y.tab.c"
     break;
 
   case 70:
-#line 493 "compiler.y"
+#line 494 "compiler.y"
                  {printf("Parsed number, value is %d\n",(yyvsp[0].nb));}
-#line 2008 "y.tab.c"
+#line 2009 "y.tab.c"
     break;
 
   case 71:
-#line 493 "compiler.y"
+#line 494 "compiler.y"
                                                               {(yyval.nb)=(yyvsp[-1].nb);}
-#line 2014 "y.tab.c"
+#line 2015 "y.tab.c"
     break;
 
   case 72:
-#line 497 "compiler.y"
+#line 498 "compiler.y"
                  {(yyval.typeInfos) = (yyvsp[0].typeInfos);}
-#line 2020 "y.tab.c"
+#line 2021 "y.tab.c"
     break;
 
   case 73:
-#line 499 "compiler.y"
+#line 500 "compiler.y"
                         { TypeInfos ans = {.type = (yyvsp[0].typeInfos).type, .ptr_level = (yyvsp[0].typeInfos).ptr_level, .constantness = true};
                             // Single line declaration, such as $$ = {...} doesnt work
                           (yyval.typeInfos) = ans; }
-#line 2028 "y.tab.c"
+#line 2029 "y.tab.c"
     break;
 
   case 74:
-#line 505 "compiler.y"
+#line 506 "compiler.y"
                           {TypeInfos ans = {.type = INT, .ptr_level = (yyvsp[0].nb), .constantness = false}; 
                           (yyval.typeInfos) = ans;}
-#line 2035 "y.tab.c"
+#line 2036 "y.tab.c"
     break;
 
   case 75:
-#line 510 "compiler.y"
+#line 511 "compiler.y"
                  {(yyval.nb)=0;}
-#line 2041 "y.tab.c"
+#line 2042 "y.tab.c"
     break;
 
   case 76:
-#line 512 "compiler.y"
+#line 513 "compiler.y"
                           {(yyval.nb) = 1 + (yyvsp[0].nb);}
-#line 2047 "y.tab.c"
+#line 2048 "y.tab.c"
     break;
 
 
-#line 2051 "y.tab.c"
+#line 2052 "y.tab.c"
 
       default: break;
     }
@@ -2279,7 +2280,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 515 "compiler.y"
+#line 516 "compiler.y"
 
 
 void yyerror(char * str){

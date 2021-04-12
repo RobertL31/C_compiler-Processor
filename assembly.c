@@ -4,7 +4,7 @@
 #include <string.h>
 
 
-#define INSTR_TABLE_SIZE 10000
+#define INSTR_TABLE_SIZE 9999
 
 #define MAX_LINE_SIZE 50
 
