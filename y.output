@@ -83,12 +83,12 @@ Grammar
 
    40 IfPattern: tIf tPO Comparaison tPF $@11 Body
 
-   41 Comparaison: Expression tLESS_THAN_OR_EQUAL_TO Expression
-   42            | Expression tLESS_THAN Expression
-   43            | Expression tGREATER_THAN_OR_EQUAL_TO Expression
-   44            | Expression tGREATER_THAN Expression
-   45            | Expression tDIFFERENT Expression
-   46            | Expression tEQUALCOMPARISON Expression
+   41 Comparaison: Expression tEQUALCOMPARISON Expression
+   42            | Expression tDIFFERENT Expression
+   43            | Expression tGREATER_THAN Expression
+   44            | Expression tLESS_THAN_OR_EQUAL_TO Expression
+   45            | Expression tLESS_THAN Expression
+   46            | Expression tGREATER_THAN_OR_EQUAL_TO Expression
    47            | Expression
 
    48 $@12: %empty
@@ -167,12 +167,12 @@ Terminals, with rules where they appear
     tElse (278) 38
     tWhile <duo> (279) 34
     tReturn (280)
-    tLESS_THAN_OR_EQUAL_TO (281) 41
-    tLESS_THAN (282) 42
-    tGREATER_THAN_OR_EQUAL_TO (283) 43
-    tGREATER_THAN (284) 44
-    tDIFFERENT (285) 45
-    tEQUALCOMPARISON (286) 46
+    tLESS_THAN_OR_EQUAL_TO (281) 44
+    tLESS_THAN (282) 45
+    tGREATER_THAN_OR_EQUAL_TO (283) 46
+    tGREATER_THAN (284) 43
+    tDIFFERENT (285) 42
+    tEQUALCOMPARISON (286) 41
     tNumber <nb> (287) 66
     tDecimal <nb> (288) 70
     tExpo <nb> (289) 68
@@ -992,12 +992,12 @@ State 71
 
 State 72
 
-   41 Comparaison: Expression . tLESS_THAN_OR_EQUAL_TO Expression
-   42            | Expression . tLESS_THAN Expression
-   43            | Expression . tGREATER_THAN_OR_EQUAL_TO Expression
-   44            | Expression . tGREATER_THAN Expression
-   45            | Expression . tDIFFERENT Expression
-   46            | Expression . tEQUALCOMPARISON Expression
+   41 Comparaison: Expression . tEQUALCOMPARISON Expression
+   42            | Expression . tDIFFERENT Expression
+   43            | Expression . tGREATER_THAN Expression
+   44            | Expression . tLESS_THAN_OR_EQUAL_TO Expression
+   45            | Expression . tLESS_THAN Expression
+   46            | Expression . tGREATER_THAN_OR_EQUAL_TO Expression
    47            | Expression .
    56 Expression: Expression . tPlus Expression
    57           | Expression . tMinus Expression
@@ -1233,7 +1233,7 @@ State 91
 
 State 92
 
-   41 Comparaison: Expression tLESS_THAN_OR_EQUAL_TO . Expression
+   44 Comparaison: Expression tLESS_THAN_OR_EQUAL_TO . Expression
 
     tMinus     shift, and go to state 65
     tPO        shift, and go to state 66
@@ -1248,7 +1248,7 @@ State 92
 
 State 93
 
-   42 Comparaison: Expression tLESS_THAN . Expression
+   45 Comparaison: Expression tLESS_THAN . Expression
 
     tMinus     shift, and go to state 65
     tPO        shift, and go to state 66
@@ -1263,7 +1263,7 @@ State 93
 
 State 94
 
-   43 Comparaison: Expression tGREATER_THAN_OR_EQUAL_TO . Expression
+   46 Comparaison: Expression tGREATER_THAN_OR_EQUAL_TO . Expression
 
     tMinus     shift, and go to state 65
     tPO        shift, and go to state 66
@@ -1278,7 +1278,7 @@ State 94
 
 State 95
 
-   44 Comparaison: Expression tGREATER_THAN . Expression
+   43 Comparaison: Expression tGREATER_THAN . Expression
 
     tMinus     shift, and go to state 65
     tPO        shift, and go to state 66
@@ -1293,7 +1293,7 @@ State 95
 
 State 96
 
-   45 Comparaison: Expression tDIFFERENT . Expression
+   42 Comparaison: Expression tDIFFERENT . Expression
 
     tMinus     shift, and go to state 65
     tPO        shift, and go to state 66
@@ -1308,7 +1308,7 @@ State 96
 
 State 97
 
-   46 Comparaison: Expression tEQUALCOMPARISON . Expression
+   41 Comparaison: Expression tEQUALCOMPARISON . Expression
 
     tMinus     shift, and go to state 65
     tPO        shift, and go to state 66
@@ -1451,55 +1451,7 @@ State 110
 
 State 111
 
-   41 Comparaison: Expression tLESS_THAN_OR_EQUAL_TO Expression .
-   56 Expression: Expression . tPlus Expression
-   57           | Expression . tMinus Expression
-   58           | Expression . tMul Expression
-   59           | Expression . tDiv Expression
-
-    tPlus   shift, and go to state 88
-    tMinus  shift, and go to state 89
-    tMul    shift, and go to state 90
-    tDiv    shift, and go to state 91
-
-    $default  reduce using rule 41 (Comparaison)
-
-
-State 112
-
-   42 Comparaison: Expression tLESS_THAN Expression .
-   56 Expression: Expression . tPlus Expression
-   57           | Expression . tMinus Expression
-   58           | Expression . tMul Expression
-   59           | Expression . tDiv Expression
-
-    tPlus   shift, and go to state 88
-    tMinus  shift, and go to state 89
-    tMul    shift, and go to state 90
-    tDiv    shift, and go to state 91
-
-    $default  reduce using rule 42 (Comparaison)
-
-
-State 113
-
-   43 Comparaison: Expression tGREATER_THAN_OR_EQUAL_TO Expression .
-   56 Expression: Expression . tPlus Expression
-   57           | Expression . tMinus Expression
-   58           | Expression . tMul Expression
-   59           | Expression . tDiv Expression
-
-    tPlus   shift, and go to state 88
-    tMinus  shift, and go to state 89
-    tMul    shift, and go to state 90
-    tDiv    shift, and go to state 91
-
-    $default  reduce using rule 43 (Comparaison)
-
-
-State 114
-
-   44 Comparaison: Expression tGREATER_THAN Expression .
+   44 Comparaison: Expression tLESS_THAN_OR_EQUAL_TO Expression .
    56 Expression: Expression . tPlus Expression
    57           | Expression . tMinus Expression
    58           | Expression . tMul Expression
@@ -1513,9 +1465,9 @@ State 114
     $default  reduce using rule 44 (Comparaison)
 
 
-State 115
+State 112
 
-   45 Comparaison: Expression tDIFFERENT Expression .
+   45 Comparaison: Expression tLESS_THAN Expression .
    56 Expression: Expression . tPlus Expression
    57           | Expression . tMinus Expression
    58           | Expression . tMul Expression
@@ -1529,9 +1481,9 @@ State 115
     $default  reduce using rule 45 (Comparaison)
 
 
-State 116
+State 113
 
-   46 Comparaison: Expression tEQUALCOMPARISON Expression .
+   46 Comparaison: Expression tGREATER_THAN_OR_EQUAL_TO Expression .
    56 Expression: Expression . tPlus Expression
    57           | Expression . tMinus Expression
    58           | Expression . tMul Expression
@@ -1543,6 +1495,54 @@ State 116
     tDiv    shift, and go to state 91
 
     $default  reduce using rule 46 (Comparaison)
+
+
+State 114
+
+   43 Comparaison: Expression tGREATER_THAN Expression .
+   56 Expression: Expression . tPlus Expression
+   57           | Expression . tMinus Expression
+   58           | Expression . tMul Expression
+   59           | Expression . tDiv Expression
+
+    tPlus   shift, and go to state 88
+    tMinus  shift, and go to state 89
+    tMul    shift, and go to state 90
+    tDiv    shift, and go to state 91
+
+    $default  reduce using rule 43 (Comparaison)
+
+
+State 115
+
+   42 Comparaison: Expression tDIFFERENT Expression .
+   56 Expression: Expression . tPlus Expression
+   57           | Expression . tMinus Expression
+   58           | Expression . tMul Expression
+   59           | Expression . tDiv Expression
+
+    tPlus   shift, and go to state 88
+    tMinus  shift, and go to state 89
+    tMul    shift, and go to state 90
+    tDiv    shift, and go to state 91
+
+    $default  reduce using rule 42 (Comparaison)
+
+
+State 116
+
+   41 Comparaison: Expression tEQUALCOMPARISON Expression .
+   56 Expression: Expression . tPlus Expression
+   57           | Expression . tMinus Expression
+   58           | Expression . tMul Expression
+   59           | Expression . tDiv Expression
+
+    tPlus   shift, and go to state 88
+    tMinus  shift, and go to state 89
+    tMul    shift, and go to state 90
+    tDiv    shift, and go to state 91
+
+    $default  reduce using rule 41 (Comparaison)
 
 
 State 117

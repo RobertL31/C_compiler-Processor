@@ -254,56 +254,115 @@ IfPattern:
 ;
 
 Comparaison:
-            Expression tLESS_THAN_OR_EQUAL_TO Expression {/*
+            Expression tEQUALCOMPARISON Expression {
+                                                        int adr1 = pop_temp_table();
+                                                        int adr2 = pop_temp_table();
+                                                        int adr_result = queryAdress_temp_table();
+                                                        sprintf(instr,"EQU %d %d %d", adr_result, adr2, adr1);
+                                                        write_in_array(instr);
+                                                    }
+        |
+            Expression tDIFFERENT Expression {
+                                                // Each time, we consider !a to be 1-a, due to the fact boolean are just 0 and 1
+                                                int adr1 = pop_temp_table();
+                                                int adr2 = pop_temp_table();
+                                                int adr_temp_result = queryAdress_temp_table();
+                                                sprintf(instr, "EQU %d %d %d", adr_temp_result, adr2, adr1);
+                                                write_in_array(instr);
+                                                adr_temp_result = pop_temp_table();
+                                                int adr_final_result = queryAdress_temp_table();
+                                                // As every instruction is working on memory adress, we have to position a 1 somewhere.
+                                                // We're querying the adress to position a 1, then AFC a 1 on it.
+                                                int adr_of_1 = queryAdress_temp_table();
+                                                // That instruction can seem to be useless, but it allows the adress of the one
+                                                // To be removed from the temp_table
+                                                adr_of_1 = pop_temp_table();
+                                                sprintf(instr, "AFC %d 1", adr_of_1);
+                                                write_in_array(instr);
+                                                sprintf(instr,"SOU %d %d %d", adr_final_result, adr_of_1, adr_temp_result);
+                                                write_in_array(instr);
+                                            }
+        |
+            Expression tGREATER_THAN Expression {
+                                                    int adr1 = pop_temp_table();
+                                                    int adr2 = pop_temp_table();
+                                                    int adr_result = queryAdress_temp_table();
+                                                    sprintf(instr,"SUP %d %d %d", adr_result, adr2, adr1);
+                                                    // adr2 then adr1 because the first popped is the last encountered
+                                                    // So that, a > b produces a stack with b on top.
+                                                    write_in_array(instr);
+                                                }
+        |
+            Expression tLESS_THAN_OR_EQUAL_TO Expression {
                                                             int adr1 = pop_temp_table();
                                                             int adr2 = pop_temp_table();
-                                                            int adr_result = queryAdress_temp_table();
-                                                            sprintf(instr,"INF %d %d %d",adr_result, adr1, adr2);*/
+                                                            int adr_temp_result = queryAdress_temp_table();
+                                                            sprintf(instr, "SUP %d %d %d", adr_temp_result, adr2, adr1);
+                                                            write_in_array(instr);
+                                                            adr_temp_result = pop_temp_table();
+                                                            int adr_final_result = queryAdress_temp_table();
+                                                            int adr_of_1 = queryAdress_temp_table();
+                                                            adr_of_1 = pop_temp_table();
+                                                            sprintf(instr, "AFC %d 1", adr_of_1);
+                                                            write_in_array(instr);
+                                                            sprintf(instr,"SOU %d %d %d", adr_final_result, adr_of_1, adr_temp_result);
+                                                            write_in_array(instr);
                                                         }
         |
             Expression tLESS_THAN Expression {
-                                                            int adr1 = pop_temp_table();
-                                                            int adr2 = pop_temp_table();
-                                                            int adr_result = queryAdress_temp_table();
-                                                            sprintf(instr,"INF %d %d %d", adr_result, adr2, adr1);
-                                                            // adr2 then adr1 because the first popped is the last encountered
-                                                            write_in_array(instr);
-                                    
-                                                        }
+                                                int adr1 = pop_temp_table();
+                                                int adr2 = pop_temp_table();
+                                                int adr_result = queryAdress_temp_table();
+                                                sprintf(instr,"INF %d %d %d", adr_result, adr2, adr1);
+                                                write_in_array(instr);
+                        
+                                            }
         |
-            Expression tGREATER_THAN_OR_EQUAL_TO Expression
+            Expression tGREATER_THAN_OR_EQUAL_TO Expression {
+                                                                int adr1 = pop_temp_table();
+                                                                int adr2 = pop_temp_table();
+                                                                int adr_temp_result = queryAdress_temp_table();
+                                                                sprintf(instr, "INF %d %d %d", adr_temp_result, adr2, adr1);
+                                                                write_in_array(instr);
+                                                                adr_temp_result = pop_temp_table();
+                                                                int adr_final_result = queryAdress_temp_table();
+                                                                int adr_of_1 = queryAdress_temp_table();
+                                                                adr_of_1 = pop_temp_table();
+                                                                sprintf(instr, "AFC %d 1", adr_of_1);
+                                                                write_in_array(instr);
+                                                                sprintf(instr,"SOU %d %d %d", adr_final_result, adr_of_1, adr_temp_result);
+                                                                write_in_array(instr);
+                                                            }
         |
-            Expression tGREATER_THAN Expression {
-                                                            int adr1 = pop_temp_table();
-                                                            int adr2 = pop_temp_table();
-                                                            int adr_result = queryAdress_temp_table();
-                                                            sprintf(instr,"SUP %d %d %d", adr_result, adr2, adr1);
-                                                            write_in_array(instr);
-                                                        }
-        |
-            Expression tDIFFERENT Expression
-        |
-            Expression tEQUALCOMPARISON Expression {
-                                                            int adr1 = pop_temp_table();
-                                                            int adr2 = pop_temp_table();
-                                                            int adr_result = queryAdress_temp_table();
-                                                            sprintf(instr,"EQU %d %d %d", adr_result, adr2, adr1);
-                                                            write_in_array(instr);
-                                                        }
-        |
-            Expression
+            Expression {
+                            // Just Expression is something like if(i).
+                            // We consider the condition to be true if i != 0
+                            // We just take again the code from 'tDIFFERENT' section
+                            int adr1 = pop_temp_table();
+                            int adr_temp_result = queryAdress_temp_table();
+                            sprintf(instr, "EQU %d 0 %d", adr_temp_result, adr1);
+                            write_in_array(instr);
+                            adr_temp_result = pop_temp_table();
+                            int adr_final_result = queryAdress_temp_table();
+                            int adr_of_1 = queryAdress_temp_table();
+                            adr_of_1 = pop_temp_table();
+                            sprintf(instr, "AFC %d 1", adr_of_1);
+                            write_in_array(instr);
+                            sprintf(instr,"SOU %d %d %d", adr_final_result, adr_of_1, adr_temp_result);
+                            write_in_array(instr);
+                        }
 ;
 
  
 
 Affectation:
         tVariable tEqu Expression {
-                                    if (is_constant($1)){
-                                        fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
-                                    }
                                     printf("Parsed an affectation\n");
                                     printf("on parse la variable %s\n",$1);
                                     if(check_symbol($1)){
+                                        if (is_constant($1)){
+                                            fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
+                                        }
                                         int adr_var = get_symbol_adress($1);
                                         int adr_result = pop_temp_table();
                                         sprintf(instr, "COP %d %d", adr_var, adr_result);
@@ -316,10 +375,10 @@ Affectation:
             SuiteAffectations tPointVirg
     |
         tVariable tEqu Expression tPointVirg {
-                                                if (is_constant($1)){
-                                                    fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
-                                                }
                                                 if(check_symbol($1)){
+                                                    if (is_constant($1)){
+                                                        fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
+                                                    }
                                                     int adr_var = get_symbol_adress($1);
                                                     int adr_result = pop_temp_table();
                                                     sprintf(instr, "COP %d %d", adr_var, adr_result);
@@ -333,10 +392,10 @@ Affectation:
 
 SuiteAffectations:
         tVirg tVariable tEqu Expression {
-                                            if (is_constant($2)){
-                                                fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
-                                            }
                                             if(check_symbol($2)){
+                                                if (is_constant($2)){
+                                                    fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
+                                                }
                                                 int adr_var = get_symbol_adress($2);
                                                 int adr_result = pop_temp_table();
                                                 sprintf(instr, "COP %d %d", adr_var, adr_result);
@@ -348,10 +407,10 @@ SuiteAffectations:
                                         }
     |
         tVirg tVariable tEqu Expression {
-                                            if (is_constant($2)){
-                                                fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
-                                            }
                                             if(check_symbol($2)){
+                                                if (is_constant($2)){
+                                                    fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
+                                                }
                                                 int adr_var = get_symbol_adress($2);
                                                 int adr_result = pop_temp_table();
                                                 sprintf(instr, "COP %d %d", adr_var, adr_result);
@@ -403,7 +462,12 @@ Expression:
         tMinus Expression {
                             int adr1 = pop_temp_table();
                             int dest = queryAdress_temp_table();
-                            sprintf(instr,"SOU %d 0 %d", dest, adr1);
+                            // As in Comparaisons, we have to position a 0 somewhere.
+                            int adr_of_0 = queryAdress_temp_table();
+                            adr_of_0 = pop_temp_table();
+                            sprintf(instr,"AFC %d 0", adr_of_0);
+                            write_in_array(instr);
+                            sprintf(instr,"SOU %d %d %d", dest, adr_of_0, adr1);
                             write_in_array(instr);
                         } 
     |
@@ -414,7 +478,7 @@ Expression:
                                         write_in_array(instr);
                                         }
     |
-        Value {printf("on est dans une expression %d",$1);} {
+        Value {printf("on est dans une expression %d\n",$1);} {
                                     int adr = queryAdress_temp_table();
                                     sprintf(instr, "AFC %d %d", adr, $1 );
                                     write_in_array(instr);
@@ -460,7 +524,7 @@ int main(){
     init_instr_tab();
     if (yyparse() == 0){
         printf("Analyse reussie\n");}
-    printf("fini!!!");
+    printf("fini!!!\n");
     write_in_file();
     delete_instr_tab();
     delete_symbol_table();

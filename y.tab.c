@@ -599,10 +599,10 @@ static const yytype_int16 yyrline[] =
      118,   123,   126,   129,   133,   134,   134,   133,   139,   142,
      146,   146,   149,   149,   157,   159,   159,   163,   166,   171,
      173,   175,   177,   182,   186,   182,   206,   221,   229,   229,
-     244,   244,   257,   264,   274,   276,   284,   286,   294,   300,
-     300,   318,   335,   350,   350,   369,   369,   371,   379,   387,
-     395,   403,   410,   410,   417,   417,   425,   425,   427,   427,
-     429,   429,   433,   435,   441,   446,   448
+     244,   244,   257,   265,   286,   296,   312,   321,   337,   359,
+     359,   377,   394,   409,   409,   428,   428,   430,   438,   446,
+     454,   462,   474,   474,   481,   481,   489,   489,   491,   491,
+     493,   493,   497,   499,   505,   510,   512
 };
 #endif
 
@@ -686,7 +686,7 @@ static const yytype_int8 yydefact[] =
        0,    61,     0,    67,    71,    69,    63,    40,     0,     0,
        0,     0,     0,     0,     0,     0,     0,     0,    65,     0,
       51,     0,    39,     0,    36,     0,    14,    57,    58,    59,
-      60,    42,    43,    44,    45,    46,    47,    34,     0,     0,
+      60,    45,    46,    47,    44,    43,    42,    34,     0,     0,
       26,    56,    41,    14,     0,    50,    35,     0,    52,     0,
       54
 };
@@ -1666,62 +1666,139 @@ yyreduce:
 
   case 42:
 #line 257 "compiler.y"
-                                                         {/*
-                                                            int adr1 = pop_temp_table();
-                                                            int adr2 = pop_temp_table();
-                                                            int adr_result = queryAdress_temp_table();
-                                                            sprintf(instr,"INF %d %d %d",adr_result, adr1, adr2);*/
-                                                        }
-#line 1676 "y.tab.c"
+                                                   {
+                                                        int adr1 = pop_temp_table();
+                                                        int adr2 = pop_temp_table();
+                                                        int adr_result = queryAdress_temp_table();
+                                                        sprintf(instr,"EQU %d %d %d", adr_result, adr2, adr1);
+                                                        write_in_array(instr);
+                                                    }
+#line 1677 "y.tab.c"
     break;
 
   case 43:
-#line 264 "compiler.y"
+#line 265 "compiler.y"
                                              {
-                                                            int adr1 = pop_temp_table();
-                                                            int adr2 = pop_temp_table();
-                                                            int adr_result = queryAdress_temp_table();
-                                                            sprintf(instr,"INF %d %d %d", adr_result, adr2, adr1);
-                                                            // adr2 then adr1 because the first popped is the last encountered
-                                                            write_in_array(instr);
-                                    
-                                                        }
-#line 1690 "y.tab.c"
-    break;
-
-  case 45:
-#line 276 "compiler.y"
-                                                {
-                                                            int adr1 = pop_temp_table();
-                                                            int adr2 = pop_temp_table();
-                                                            int adr_result = queryAdress_temp_table();
-                                                            sprintf(instr,"SUP %d %d %d", adr_result, adr2, adr1);
-                                                            write_in_array(instr);
-                                                        }
+                                                // Each time, we consider !a to be 1-a, due to the fact boolean are just 0 and 1
+                                                int adr1 = pop_temp_table();
+                                                int adr2 = pop_temp_table();
+                                                int adr_temp_result = queryAdress_temp_table();
+                                                sprintf(instr, "EQU %d %d %d", adr_temp_result, adr2, adr1);
+                                                write_in_array(instr);
+                                                adr_temp_result = pop_temp_table();
+                                                int adr_final_result = queryAdress_temp_table();
+                                                // As every instruction is working on memory adress, we have to position a 1 somewhere.
+                                                // We're querying the adress to position a 1, then AFC a 1 on it.
+                                                int adr_of_1 = queryAdress_temp_table();
+                                                // That instruction can seem to be useless, but it allows the adress of the one
+                                                // To be removed from the temp_table
+                                                adr_of_1 = pop_temp_table();
+                                                sprintf(instr, "AFC %d 1", adr_of_1);
+                                                write_in_array(instr);
+                                                sprintf(instr,"SOU %d %d %d", adr_final_result, adr_of_1, adr_temp_result);
+                                                write_in_array(instr);
+                                            }
 #line 1702 "y.tab.c"
     break;
 
-  case 47:
+  case 44:
 #line 286 "compiler.y"
-                                                   {
+                                                {
+                                                    int adr1 = pop_temp_table();
+                                                    int adr2 = pop_temp_table();
+                                                    int adr_result = queryAdress_temp_table();
+                                                    sprintf(instr,"SUP %d %d %d", adr_result, adr2, adr1);
+                                                    // adr2 then adr1 because the first popped is the last encountered
+                                                    // So that, a > b produces a stack with b on top.
+                                                    write_in_array(instr);
+                                                }
+#line 1716 "y.tab.c"
+    break;
+
+  case 45:
+#line 296 "compiler.y"
+                                                         {
                                                             int adr1 = pop_temp_table();
                                                             int adr2 = pop_temp_table();
-                                                            int adr_result = queryAdress_temp_table();
-                                                            sprintf(instr,"EQU %d %d %d", adr_result, adr2, adr1);
+                                                            int adr_temp_result = queryAdress_temp_table();
+                                                            sprintf(instr, "SUP %d %d %d", adr_temp_result, adr2, adr1);
+                                                            write_in_array(instr);
+                                                            adr_temp_result = pop_temp_table();
+                                                            int adr_final_result = queryAdress_temp_table();
+                                                            int adr_of_1 = queryAdress_temp_table();
+                                                            adr_of_1 = pop_temp_table();
+                                                            sprintf(instr, "AFC %d 1", adr_of_1);
+                                                            write_in_array(instr);
+                                                            sprintf(instr,"SOU %d %d %d", adr_final_result, adr_of_1, adr_temp_result);
                                                             write_in_array(instr);
                                                         }
-#line 1714 "y.tab.c"
+#line 1736 "y.tab.c"
+    break;
+
+  case 46:
+#line 312 "compiler.y"
+                                             {
+                                                int adr1 = pop_temp_table();
+                                                int adr2 = pop_temp_table();
+                                                int adr_result = queryAdress_temp_table();
+                                                sprintf(instr,"INF %d %d %d", adr_result, adr2, adr1);
+                                                write_in_array(instr);
+                        
+                                            }
+#line 1749 "y.tab.c"
+    break;
+
+  case 47:
+#line 321 "compiler.y"
+                                                            {
+                                                                int adr1 = pop_temp_table();
+                                                                int adr2 = pop_temp_table();
+                                                                int adr_temp_result = queryAdress_temp_table();
+                                                                sprintf(instr, "INF %d %d %d", adr_temp_result, adr2, adr1);
+                                                                write_in_array(instr);
+                                                                adr_temp_result = pop_temp_table();
+                                                                int adr_final_result = queryAdress_temp_table();
+                                                                int adr_of_1 = queryAdress_temp_table();
+                                                                adr_of_1 = pop_temp_table();
+                                                                sprintf(instr, "AFC %d 1", adr_of_1);
+                                                                write_in_array(instr);
+                                                                sprintf(instr,"SOU %d %d %d", adr_final_result, adr_of_1, adr_temp_result);
+                                                                write_in_array(instr);
+                                                            }
+#line 1769 "y.tab.c"
+    break;
+
+  case 48:
+#line 337 "compiler.y"
+                       {
+                            // Just Expression is something like if(i).
+                            // We consider the condition to be true if i != 0
+                            // We just take again the code from 'tDIFFERENT' section
+                            int adr1 = pop_temp_table();
+                            int adr_temp_result = queryAdress_temp_table();
+                            sprintf(instr, "EQU %d 0 %d", adr_temp_result, adr1);
+                            write_in_array(instr);
+                            adr_temp_result = pop_temp_table();
+                            int adr_final_result = queryAdress_temp_table();
+                            int adr_of_1 = queryAdress_temp_table();
+                            adr_of_1 = pop_temp_table();
+                            sprintf(instr, "AFC %d 1", adr_of_1);
+                            write_in_array(instr);
+                            sprintf(instr,"SOU %d %d %d", adr_final_result, adr_of_1, adr_temp_result);
+                            write_in_array(instr);
+                        }
+#line 1791 "y.tab.c"
     break;
 
   case 49:
-#line 300 "compiler.y"
+#line 359 "compiler.y"
                                   {
-                                    if (is_constant((yyvsp[-2].var))){
-                                        fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
-                                    }
                                     printf("Parsed an affectation\n");
                                     printf("on parse la variable %s\n",(yyvsp[-2].var));
                                     if(check_symbol((yyvsp[-2].var))){
+                                        if (is_constant((yyvsp[-2].var))){
+                                            fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
+                                        }
                                         int adr_var = get_symbol_adress((yyvsp[-2].var));
                                         int adr_result = pop_temp_table();
                                         sprintf(instr, "COP %d %d", adr_var, adr_result);
@@ -1731,16 +1808,16 @@ yyreduce:
                                         exit(1);
                                     }
                                 }
-#line 1735 "y.tab.c"
+#line 1812 "y.tab.c"
     break;
 
   case 51:
-#line 318 "compiler.y"
+#line 377 "compiler.y"
                                              {
-                                                if (is_constant((yyvsp[-3].var))){
-                                                    fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
-                                                }
                                                 if(check_symbol((yyvsp[-3].var))){
+                                                    if (is_constant((yyvsp[-3].var))){
+                                                        fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
+                                                    }
                                                     int adr_var = get_symbol_adress((yyvsp[-3].var));
                                                     int adr_result = pop_temp_table();
                                                     sprintf(instr, "COP %d %d", adr_var, adr_result);
@@ -1750,16 +1827,16 @@ yyreduce:
                                                         exit(1);
                                                     }
                                             }
-#line 1754 "y.tab.c"
+#line 1831 "y.tab.c"
     break;
 
   case 52:
-#line 335 "compiler.y"
+#line 394 "compiler.y"
                                         {
-                                            if (is_constant((yyvsp[-2].var))){
-                                                fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
-                                            }
                                             if(check_symbol((yyvsp[-2].var))){
+                                                if (is_constant((yyvsp[-2].var))){
+                                                    fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
+                                                }
                                                 int adr_var = get_symbol_adress((yyvsp[-2].var));
                                                 int adr_result = pop_temp_table();
                                                 sprintf(instr, "COP %d %d", adr_var, adr_result);
@@ -1769,16 +1846,16 @@ yyreduce:
                                                 exit(1);
                                             }
                                         }
-#line 1773 "y.tab.c"
+#line 1850 "y.tab.c"
     break;
 
   case 53:
-#line 350 "compiler.y"
+#line 409 "compiler.y"
                                         {
-                                            if (is_constant((yyvsp[-2].var))){
-                                                fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
-                                            }
                                             if(check_symbol((yyvsp[-2].var))){
+                                                if (is_constant((yyvsp[-2].var))){
+                                                    fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
+                                                }
                                                 int adr_var = get_symbol_adress((yyvsp[-2].var));
                                                 int adr_result = pop_temp_table();
                                                 sprintf(instr, "COP %d %d", adr_var, adr_result);
@@ -1788,23 +1865,23 @@ yyreduce:
                                                 exit(1);
                                             }
                                         }
-#line 1792 "y.tab.c"
+#line 1869 "y.tab.c"
     break;
 
   case 55:
-#line 369 "compiler.y"
+#line 428 "compiler.y"
             {printf("tPO\n");}
-#line 1798 "y.tab.c"
+#line 1875 "y.tab.c"
     break;
 
   case 56:
-#line 369 "compiler.y"
+#line 428 "compiler.y"
                                              {printf(" tPF\n");}
-#line 1804 "y.tab.c"
+#line 1881 "y.tab.c"
     break;
 
   case 57:
-#line 371 "compiler.y"
+#line 430 "compiler.y"
                                     {
                                         int adr1 = pop_temp_table();
                                         int adr2 = pop_temp_table();
@@ -1812,11 +1889,11 @@ yyreduce:
                                         sprintf(instr, "ADD %d %d %d",dest, adr1, adr2 );
                                         write_in_array(instr);
                                     }
-#line 1816 "y.tab.c"
+#line 1893 "y.tab.c"
     break;
 
   case 58:
-#line 379 "compiler.y"
+#line 438 "compiler.y"
                                      {
                                         int adr1 = pop_temp_table();
                                         int adr2 = pop_temp_table();
@@ -1824,11 +1901,11 @@ yyreduce:
                                         sprintf(instr, "SOU %d %d %d",dest, adr2, adr1 );
                                         write_in_array(instr);
                                     }
-#line 1828 "y.tab.c"
+#line 1905 "y.tab.c"
     break;
 
   case 59:
-#line 387 "compiler.y"
+#line 446 "compiler.y"
                                    {
                                         int adr1 = pop_temp_table();
                                         int adr2 = pop_temp_table();
@@ -1836,11 +1913,11 @@ yyreduce:
                                         sprintf(instr, "MUL %d %d %d",dest, adr1, adr2 );
                                         write_in_array(instr);
                                     }
-#line 1840 "y.tab.c"
+#line 1917 "y.tab.c"
     break;
 
   case 60:
-#line 395 "compiler.y"
+#line 454 "compiler.y"
                                    {
                                         int adr1 = pop_temp_table();
                                         int adr2 = pop_temp_table();
@@ -1848,124 +1925,129 @@ yyreduce:
                                         sprintf(instr, "DIV %d %d %d",dest, adr2, adr1 );
                                         write_in_array(instr);
                                     }
-#line 1852 "y.tab.c"
+#line 1929 "y.tab.c"
     break;
 
   case 61:
-#line 403 "compiler.y"
+#line 462 "compiler.y"
                           {
                             int adr1 = pop_temp_table();
                             int dest = queryAdress_temp_table();
-                            sprintf(instr,"SOU %d 0 %d", dest, adr1);
+                            // As in Comparaisons, we have to position a 0 somewhere.
+                            int adr_of_0 = queryAdress_temp_table();
+                            adr_of_0 = pop_temp_table();
+                            sprintf(instr,"AFC %d 0", adr_of_0);
+                            write_in_array(instr);
+                            sprintf(instr,"SOU %d %d %d", dest, adr_of_0, adr1);
                             write_in_array(instr);
                         }
-#line 1863 "y.tab.c"
+#line 1945 "y.tab.c"
     break;
 
   case 62:
-#line 410 "compiler.y"
+#line 474 "compiler.y"
                   {printf("on est dans une expression avec une variable%s",(yyvsp[0].var));}
-#line 1869 "y.tab.c"
+#line 1951 "y.tab.c"
     break;
 
   case 63:
-#line 410 "compiler.y"
+#line 474 "compiler.y"
                                                                                  {
                                         int dest = queryAdress_temp_table();
                                         int sym_adr = get_symbol_adress((yyvsp[-1].var));
                                         sprintf(instr, "COP %d @%d", dest, sym_adr);
                                         write_in_array(instr);
                                         }
-#line 1880 "y.tab.c"
+#line 1962 "y.tab.c"
     break;
 
   case 64:
-#line 417 "compiler.y"
-              {printf("on est dans une expression %d",(yyvsp[0].nb));}
-#line 1886 "y.tab.c"
+#line 481 "compiler.y"
+              {printf("on est dans une expression %d\n",(yyvsp[0].nb));}
+#line 1968 "y.tab.c"
     break;
 
   case 65:
-#line 417 "compiler.y"
-                                                            {
+#line 481 "compiler.y"
+                                                              {
                                     int adr = queryAdress_temp_table();
                                     sprintf(instr, "AFC %d %d", adr, (yyvsp[-1].nb) );
                                     write_in_array(instr);
                                 }
-#line 1896 "y.tab.c"
+#line 1978 "y.tab.c"
     break;
 
   case 66:
-#line 425 "compiler.y"
+#line 489 "compiler.y"
                 {printf("Parsed number, value is %d\n",(yyvsp[0].nb));}
-#line 1902 "y.tab.c"
+#line 1984 "y.tab.c"
     break;
 
   case 67:
-#line 425 "compiler.y"
+#line 489 "compiler.y"
                                                              {(yyval.nb)=(yyvsp[-1].nb);}
-#line 1908 "y.tab.c"
+#line 1990 "y.tab.c"
     break;
 
   case 68:
-#line 427 "compiler.y"
+#line 491 "compiler.y"
               {printf("Parsed number, value is %d\n",(yyvsp[0].nb));}
-#line 1914 "y.tab.c"
+#line 1996 "y.tab.c"
     break;
 
   case 69:
-#line 427 "compiler.y"
+#line 491 "compiler.y"
                                                            {(yyval.nb)=(yyvsp[-1].nb);}
-#line 1920 "y.tab.c"
+#line 2002 "y.tab.c"
     break;
 
   case 70:
-#line 429 "compiler.y"
+#line 493 "compiler.y"
                  {printf("Parsed number, value is %d\n",(yyvsp[0].nb));}
-#line 1926 "y.tab.c"
+#line 2008 "y.tab.c"
     break;
 
   case 71:
-#line 429 "compiler.y"
+#line 493 "compiler.y"
                                                               {(yyval.nb)=(yyvsp[-1].nb);}
-#line 1932 "y.tab.c"
+#line 2014 "y.tab.c"
     break;
 
   case 72:
-#line 433 "compiler.y"
+#line 497 "compiler.y"
                  {(yyval.typeInfos) = (yyvsp[0].typeInfos);}
-#line 1938 "y.tab.c"
+#line 2020 "y.tab.c"
     break;
 
   case 73:
-#line 435 "compiler.y"
+#line 499 "compiler.y"
                         { TypeInfos ans = {.type = (yyvsp[0].typeInfos).type, .ptr_level = (yyvsp[0].typeInfos).ptr_level, .constantness = true};
                             // Single line declaration, such as $$ = {...} doesnt work
                           (yyval.typeInfos) = ans; }
-#line 1946 "y.tab.c"
+#line 2028 "y.tab.c"
     break;
 
   case 74:
-#line 441 "compiler.y"
+#line 505 "compiler.y"
                           {TypeInfos ans = {.type = INT, .ptr_level = (yyvsp[0].nb), .constantness = false}; 
                           (yyval.typeInfos) = ans;}
-#line 1953 "y.tab.c"
+#line 2035 "y.tab.c"
     break;
 
   case 75:
-#line 446 "compiler.y"
+#line 510 "compiler.y"
                  {(yyval.nb)=0;}
-#line 1959 "y.tab.c"
+#line 2041 "y.tab.c"
     break;
 
   case 76:
-#line 448 "compiler.y"
+#line 512 "compiler.y"
                           {(yyval.nb) = 1 + (yyvsp[0].nb);}
-#line 1965 "y.tab.c"
+#line 2047 "y.tab.c"
     break;
 
 
-#line 1969 "y.tab.c"
+#line 2051 "y.tab.c"
 
       default: break;
     }
@@ -2197,7 +2279,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 451 "compiler.y"
+#line 515 "compiler.y"
 
 
 void yyerror(char * str){
@@ -2210,7 +2292,7 @@ int main(){
     init_instr_tab();
     if (yyparse() == 0){
         printf("Analyse reussie\n");}
-    printf("fini!!!");
+    printf("fini!!!\n");
     write_in_file();
     delete_instr_tab();
     delete_symbol_table();

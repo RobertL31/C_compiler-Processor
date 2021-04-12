@@ -1,6 +1,5 @@
 int main(){
-    int *i;
     int j;
-    const int **k;
-    j = -4;
+    j = 2;
+    j = - (3*j);
 }
