@@ -8,6 +8,5 @@ int main(){
         int k;
         printf(i);
     }
-    /* Comments lol */
     printf(j);
 }

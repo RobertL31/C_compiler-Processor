@@ -100,11 +100,9 @@ File:
     ;
 
 Fonctions:
-        BodyComments Fonctions
+        /* None */
     |
         Fonction Fonctions
-    | 
-        Fonction
     ;
 
 Fonction:
@@ -141,26 +139,11 @@ Body:
         {printf("Finished Body\n");}
     ;
 
-BodyComments:
-        tOpenC Comments tCloseC {printf("Parsed a comment\n");}
-    ;
-
-Comments:
-        /*None*/
-    |
-        Comment Comments
-    ;
-
-Comment:
-        tVariable
-    ;
     
 Declarations:
         /*None*/
     |
         Declaration Declarations
-    |
-        BodyComments Declarations
     ;
 
 Declaration:
@@ -185,8 +168,6 @@ Instructions:
         /*None*/
     |
         Instruction Instructions
-    |
-        BodyComments Instructions
     ;
 
 
