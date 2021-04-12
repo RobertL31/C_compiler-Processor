@@ -42,6 +42,10 @@
 %token tPF
 %token tAO
 %token tAF
+%token tOpenC
+%token tCloseC
+%token tMot
+
 
 %token tSpace
 %token tBackN
@@ -96,6 +100,8 @@ File:
     ;
 
 Fonctions:
+        BodyComments Fonctions
+    |
         Fonction Fonctions
     | 
         Fonction
@@ -135,11 +141,26 @@ Body:
         {printf("Finished Body\n");}
     ;
 
+BodyComments:
+        tOpenC Comments tCloseC {printf("Parsed a comment\n");}
+    ;
 
+Comments:
+        /*None*/
+    |
+        Comment Comments
+    ;
+
+Comment:
+        tVariable
+    ;
+    
 Declarations:
         /*None*/
     |
-        Declaration Declarations   
+        Declaration Declarations
+    |
+        BodyComments Declarations
     ;
 
 Declaration:
@@ -164,6 +185,8 @@ Instructions:
         /*None*/
     |
         Instruction Instructions
+    |
+        BodyComments Instructions
     ;
 
 
@@ -201,6 +224,8 @@ WhileInstruction:
             write_in_array(instr);
         }
 ;
+
+
 
 
 Print:
@@ -358,12 +383,12 @@ Comparaison:
 
 Affectation:
         tVariable tEqu Expression {
+                                    if (is_constant($1)){
+                                        fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
+                                    }
                                     printf("Parsed an affectation\n");
                                     printf("on parse la variable %s\n",$1);
                                     if(check_symbol($1)){
-                                        if (is_constant($1)){
-                                            fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
-                                        }
                                         int adr_var = get_symbol_adress($1);
                                         int adr_result = pop_temp_table();
                                         sprintf(instr, "COP %d %d", adr_var, adr_result);
@@ -376,10 +401,10 @@ Affectation:
             SuiteAffectations tPointVirg
     |
         tVariable tEqu Expression tPointVirg {
+                                                if (is_constant($1)){
+                                                    fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
+                                                }
                                                 if(check_symbol($1)){
-                                                    if (is_constant($1)){
-                                                        fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
-                                                    }
                                                     int adr_var = get_symbol_adress($1);
                                                     int adr_result = pop_temp_table();
                                                     sprintf(instr, "COP %d %d", adr_var, adr_result);
@@ -393,10 +418,10 @@ Affectation:
 
 SuiteAffectations:
         tVirg tVariable tEqu Expression {
+                                            if (is_constant($2)){
+                                                fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
+                                            }
                                             if(check_symbol($2)){
-                                                if (is_constant($2)){
-                                                    fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
-                                                }
                                                 int adr_var = get_symbol_adress($2);
                                                 int adr_result = pop_temp_table();
                                                 sprintf(instr, "COP %d %d", adr_var, adr_result);
@@ -408,10 +433,10 @@ SuiteAffectations:
                                         }
     |
         tVirg tVariable tEqu Expression {
+                                            if (is_constant($2)){
+                                                fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
+                                            }
                                             if(check_symbol($2)){
-                                                if (is_constant($2)){
-                                                    fprintf(stderr,"FATAL ERROR - tried to change value of constant variable\n");
-                                                }
                                                 int adr_var = get_symbol_adress($2);
                                                 int adr_result = pop_temp_table();
                                                 sprintf(instr, "COP %d %d", adr_var, adr_result);
@@ -479,7 +504,7 @@ Expression:
                                         write_in_array(instr);
                                         }
     |
-        Value {printf("on est dans une expression %d\n",$1);} {
+        Value {printf("on est dans une expression %d",$1);} {
                                     int adr = queryAdress_temp_table();
                                     sprintf(instr, "AFC %d %d", adr, $1 );
                                     write_in_array(instr);
@@ -525,7 +550,7 @@ int main(){
     init_instr_tab();
     if (yyparse() == 0){
         printf("Analyse reussie\n");}
-    printf("fini!!!\n");
+    printf("fini!!!");
     write_in_file();
     delete_instr_tab();
     delete_symbol_table();

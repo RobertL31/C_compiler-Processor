@@ -61,28 +61,31 @@ extern int yydebug;
     tPF = 267,
     tAO = 268,
     tAF = 269,
-    tSpace = 270,
-    tBackN = 271,
-    tBackT = 272,
-    tVirg = 273,
-    tPointVirg = 274,
-    tEsper = 275,
-    tPrintf = 276,
-    tIf = 277,
-    tElse = 278,
-    tWhile = 279,
-    tReturn = 280,
-    tLESS_THAN_OR_EQUAL_TO = 281,
-    tLESS_THAN = 282,
-    tGREATER_THAN_OR_EQUAL_TO = 283,
-    tGREATER_THAN = 284,
-    tDIFFERENT = 285,
-    tEQUALCOMPARISON = 286,
-    tNumber = 287,
-    tDecimal = 288,
-    tExpo = 289,
-    tVariable = 290,
-    ERROR = 291
+    tOpenC = 270,
+    tCloseC = 271,
+    tMot = 272,
+    tSpace = 273,
+    tBackN = 274,
+    tBackT = 275,
+    tVirg = 276,
+    tPointVirg = 277,
+    tEsper = 278,
+    tPrintf = 279,
+    tIf = 280,
+    tElse = 281,
+    tWhile = 282,
+    tReturn = 283,
+    tLESS_THAN_OR_EQUAL_TO = 284,
+    tLESS_THAN = 285,
+    tGREATER_THAN_OR_EQUAL_TO = 286,
+    tGREATER_THAN = 287,
+    tDIFFERENT = 288,
+    tEQUALCOMPARISON = 289,
+    tNumber = 290,
+    tDecimal = 291,
+    tExpo = 292,
+    tVariable = 293,
+    ERROR = 294
   };
 #endif
 /* Tokens.  */
@@ -98,28 +101,31 @@ extern int yydebug;
 #define tPF 267
 #define tAO 268
 #define tAF 269
-#define tSpace 270
-#define tBackN 271
-#define tBackT 272
-#define tVirg 273
-#define tPointVirg 274
-#define tEsper 275
-#define tPrintf 276
-#define tIf 277
-#define tElse 278
-#define tWhile 279
-#define tReturn 280
-#define tLESS_THAN_OR_EQUAL_TO 281
-#define tLESS_THAN 282
-#define tGREATER_THAN_OR_EQUAL_TO 283
-#define tGREATER_THAN 284
-#define tDIFFERENT 285
-#define tEQUALCOMPARISON 286
-#define tNumber 287
-#define tDecimal 288
-#define tExpo 289
-#define tVariable 290
-#define ERROR 291
+#define tOpenC 270
+#define tCloseC 271
+#define tMot 272
+#define tSpace 273
+#define tBackN 274
+#define tBackT 275
+#define tVirg 276
+#define tPointVirg 277
+#define tEsper 278
+#define tPrintf 279
+#define tIf 280
+#define tElse 281
+#define tWhile 282
+#define tReturn 283
+#define tLESS_THAN_OR_EQUAL_TO 284
+#define tLESS_THAN 285
+#define tGREATER_THAN_OR_EQUAL_TO 286
+#define tGREATER_THAN 287
+#define tDIFFERENT 288
+#define tEQUALCOMPARISON 289
+#define tNumber 290
+#define tDecimal 291
+#define tExpo 292
+#define tVariable 293
+#define ERROR 294
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -133,7 +139,7 @@ union YYSTYPE
     float fl_nb;
     TypeInfos typeInfos;
 
-#line 137 "y.tab.h"
+#line 143 "y.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

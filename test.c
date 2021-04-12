@@ -1,4 +1,6 @@
+
 int main(){
+
     int i;
     int j;
     i = 2, j = 3, i = 3;
@@ -6,5 +8,6 @@ int main(){
         int k;
         printf(i);
     }
+    /* Comments lol */
     printf(j);
 }
