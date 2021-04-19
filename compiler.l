@@ -11,7 +11,10 @@
 	void get_yylval(UNION_TYPE a);
 %}
 
-
+MOT [ -z]+
+OPENC [/]
+OPENCC [*]  
+COMMENT ({OPENC}{OPENCC}{MOT}{OPENCC}{OPENC})+   
 
 %%
 const 			{return tConst;}
@@ -66,6 +69,7 @@ return          {return tReturn;}
 
 .			{printf("\nEEEERRRRRRRROOOORRRR\n");}
 
+{COMMENT}	{ }
 
 %%
 
