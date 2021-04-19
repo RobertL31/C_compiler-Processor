@@ -12,6 +12,7 @@
 %}
 
 
+
 %%
 const 			{return tConst;}
 int				{return tInt;}
@@ -29,6 +30,7 @@ int				{return tInt;}
 " "				{/*return tSpace;*/}
 "\n"			{/*return tBackN;*/}
 "\t"			{/*return tBackT;*/}
+"/*.*/"			{/*return tComment;*/}
 ","				{return tVirg;}
 ";"				{return tPointVirg;}
 
@@ -48,8 +50,7 @@ return          {return tReturn;}
 ">"		        {return tGREATER_THAN; }
 "!="		    {return tDIFFERENT; }
 "=="		    {return tEQUALCOMPARISON; }
-"/*"			{return tOpenC;}
-"*/"			{return tCloseC;}
+
 
 [0-9]+ 			{	get_yylval(IS_NUMBER);
 					return tNumber;}	
@@ -62,7 +63,9 @@ return          {return tReturn;}
 [a-zA-Z][0-9A-Za-z_]*	{ get_yylval(IS_STRING);
 						return tVariable;}
 
+
 .			{printf("\nEEEERRRRRRRROOOORRRR\n");}
+
 
 %%
 

@@ -42,11 +42,9 @@
 %token tPF
 %token tAO
 %token tAF
-%token tOpenC
-%token tCloseC
 %token tMot
 
-
+%token tComment
 %token tSpace
 %token tBackN
 %token tBackT

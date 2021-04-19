@@ -1,6 +1,5 @@
-
+/*ceci est un commentaire*/
 int main(){
-
     int i;
     int j;
     i = 2, j = 3, i = 3;
