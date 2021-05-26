@@ -66,10 +66,12 @@ return          {return tReturn;}
 [a-zA-Z][0-9A-Za-z_]*	{ get_yylval(IS_STRING);
 						return tVariable;}
 
+{COMMENT}	{ }
+
 
 .			{printf("\nEEEERRRRRRRROOOORRRR\n");}
 
-{COMMENT}	{ }
+
 
 %%
 

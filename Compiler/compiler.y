@@ -393,6 +393,7 @@ Affectation:
                                                         exit(1);
                                                     }
                                             }
+
     ;
 
 SuiteAffectations:
@@ -430,7 +431,7 @@ SuiteAffectations:
 
 
 Expression:
-        tPO {printf("tPO\n");}Expression tPF {printf(" tPF\n");}
+        tPO Expression tPF 
     |
         Expression tPlus Expression {
                                         int adr1 = pop_temp_table();
@@ -476,18 +477,39 @@ Expression:
                             write_in_array(instr);
                         } 
     |
-        tVariable {printf("on est dans une expression avec une variable%s",$1);} {
-                                        int dest = queryAdress_temp_table();
-                                        int sym_adr = get_symbol_adress($1);
-                                        sprintf(instr, "COP %d @%d", dest, sym_adr);
-                                        write_in_array(instr);
-                                        }
+        tVariable {
+                    int dest = queryAdress_temp_table();
+                    int sym_adr = get_symbol_adress($1);
+                    sprintf(instr, "COP %d %d", dest, sym_adr);
+                    write_in_array(instr);
+                }
     |
-        Value {printf("on est dans une expression %d",$1);} {
-                                    int adr = queryAdress_temp_table();
-                                    sprintf(instr, "AFC %d %d", adr, $1 );
-                                    write_in_array(instr);
-                                }
+        Value {
+                int adr = queryAdress_temp_table();
+                sprintf(instr, "AFC %d %d", adr, $1 );
+                write_in_array(instr);
+            }
+    |
+        tEsper tVariable {
+                            int dest = queryAdress_temp_table();
+                            int var_adr = get_symbol_adress($2);
+                            sprintf(instr, "AFC %d %d", dest, var_adr);
+                            write_in_array(instr);
+                        }
+    |
+        tMul tVariable {    int unreferenced_value = queryAdress_temp_table();
+                            int dest = queryAdress_temp_table();
+                            int sym_adr = get_symbol_adress($2);
+                            // We copy the value at tVariable adress into temp table
+                            sprintf(instr, "COP %d %d", dest, sym_adr);
+                            write_in_array(instr);
+                            // We don't need dest anymore
+                            pop_temp_table();
+                            // And then, we COP in tempTable the value at the adress present in temp table
+                            sprintf(instr, "COP %d %d", unreferenced_value, dest);
+                            write_in_array(instr);
+                        }
+    
     ;
 
 Value:
